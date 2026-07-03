@@ -1,0 +1,49 @@
+name: Build & Validate
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - 'service/**'
+  pull_request:
+    branches: [main, master]
+    paths:
+      - 'service/**'
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validate & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Schema Validation
+        working-directory: ./service
+        run: node scripts/validate-schemas.js
+
+      - name: Run HTML Validation
+        working-directory: ./service
+        run: node scripts/validate-html.js
+
+      - name: Run Link Validation
+        working-directory: ./service
+        run: node scripts/validate-links.js
+
+      - name: Build
+        working-directory: ./service
+        run: node scripts/build.js
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: anthracitetech-build
+          path: service/dist/
+          retention-days: 7

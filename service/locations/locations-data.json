@@ -1,0 +1,315 @@
+{
+  "site": {
+    "baseUrl": "https://anthracitetechsolutions.com",
+    "brand": "Anthracite Tech Solutions",
+    "phone": "+1-717-555-0100",
+    "phoneDisplay": "(717) 555-0100",
+    "priceRange": "$$",
+    "paymentAccepted": "Cash, Credit Card, Debit Card, Apple Pay, Google Pay",
+    "currenciesAccepted": "USD",
+    "hoursWeekday": "09:00-19:00",
+    "hoursSaturday": "10:00-17:00",
+    "streetAddress": "321 Market St",
+    "addressRegion": "PA",
+    "addressCountry": "US",
+    "aggregateRating": { "ratingValue": "4.7", "reviewCount": "89" }
+  },
+  "locations": [
+    {
+      "id": "harrisburg",
+      "name": "Harrisburg",
+      "postalCode": "17101",
+      "lat": 40.2732,
+      "lon": -76.8867,
+      "email": "harrisburg@anthracitetechsolutions.com",
+      "headlineSuffix": "Harrisburg, PA",
+      "heroTagline": "Same-day repairs in Harrisburg, PA",
+      "heroSubtitle": "Your trusted local tech team for computer repair, phone repair, and IT support in Harrisburg and the Susquehanna Valley. Free diagnostics, transparent pricing, and fast turnaround from Midtown to Camp Hill.",
+      "localContext": "We are proud to be Harrisburg's local tech repair shop. Whether you're working near the Capitol Complex, living in Midtown, or running a business along the Carlisle Pike, our technicians come to you or welcome you at our downtown location.",
+      "localContext2": "Our Harrisburg team understands the needs of state workers, small business owners, and families across the Susquehanna Valley. We offer house calls throughout the region and emergency IT support for downtown offices.",
+      "areaServed": [
+        "Harrisburg, PA",
+        "Camp Hill, PA",
+        "Mechanicsburg, PA",
+        "Midtown Harrisburg, PA",
+        "Uptown Harrisburg, PA",
+        "Steelton, PA"
+      ],
+      "localAreas": ["Harrisburg", "Camp Hill", "Mechanicsburg", "Midtown", "Uptown", "Steelton"],
+      "searchKeywords": [
+        "Computer repair Harrisburg PA",
+        "Phone repair near Capitol Complex",
+        "IT support for small business Harrisburg",
+        "Laptop repair Camp Hill",
+        "iPhone screen repair Mechanicsburg",
+        "Same-day tech support near me"
+      ],
+      "faq": [
+        { "question": "Do you offer same-day repairs in Harrisburg?", "answer": "Yes! Most screen replacements, battery swaps, and diagnostics are completed within 1–2 hours at our Harrisburg location. Walk-ins are welcome during business hours (Mon–Fri 9–7, Sat 10–5)." },
+        { "question": "Is there a diagnostic fee?", "answer": "No — diagnostics are completely free. We'll inspect your device, explain the issue, and give you a firm quote before any work begins. No pressure, no hidden fees." },
+        { "question": "Do you make house calls in Harrisburg?", "answer": "Yes! We offer mobile repair service throughout Harrisburg, Camp Hill, Mechanicsburg, and the Susquehanna Valley. House call fees are tiered by distance starting at $35." },
+        { "question": "What types of phones do you repair?", "answer": "iPhone, Samsung Galaxy, Google Pixel, and most Android devices. Common repairs include screen replacement, battery replacement, charging port repair, and water damage assessment." },
+        { "question": "Do you offer any warranty?", "answer": "Yes — all repairs come with a 90-day warranty on parts and labor. If the same issue reoccurs, we'll make it right at no extra charge." }
+      ]
+    },
+    {
+      "id": "camp-hill",
+      "name": "Camp Hill",
+      "postalCode": "17011",
+      "lat": 40.2398,
+      "lon": -76.9199,
+      "email": "camphill@anthracitetechsolutions.com",
+      "headlineSuffix": "Camp Hill, PA",
+      "heroTagline": "Same-day repairs in Camp Hill, PA",
+      "heroSubtitle": "Fast computer repair, phone repair, and IT support in Camp Hill, PA. Free diagnostics for laptops, iPhones, Androids, and business networks. Serving Mechanicsburg, Harrisburg, and the West Shore.",
+      "localContext": "We proudly serve Camp Hill and the West Shore community. Whether you're shopping along Trindle Road, working from home near Willow Mill Park, or managing a business by the Camp Hill Shopping Center, our technicians deliver fast, reliable tech repairs and on-site IT support.",
+      "localContext2": "Our Camp Hill customers love our transparent pricing and quick turnaround. We offer house calls throughout the West Shore and emergency IT support for local offices and remote teams.",
+      "areaServed": [
+        "Camp Hill, PA",
+        "Mechanicsburg, PA",
+        "Harrisburg, PA",
+        "Lemoyne, PA",
+        "New Cumberland, PA",
+        "Enola, PA"
+      ],
+      "localAreas": ["Camp Hill", "Mechanicsburg", "Harrisburg", "Lemoyne", "New Cumberland", "Enola"],
+      "searchKeywords": [
+        "Computer repair Camp Hill PA",
+        "Phone repair Camp Hill",
+        "IT support West Shore PA",
+        "Laptop repair Mechanicsburg",
+        "iPhone screen repair Camp Hill",
+        "Same-day computer repair near me"
+      ],
+      "faq": [
+        { "question": "Do you offer same-day repairs in Camp Hill?", "answer": "Yes! Most screen replacements, battery swaps, and diagnostics are completed within 1–2 hours at our Camp Hill location. Walk-ins are welcome during business hours (Mon–Fri 9–7, Sat 10–5)." },
+        { "question": "Is there a diagnostic fee?", "answer": "No — diagnostics are completely free. We'll inspect your device, explain the issue, and give you a firm quote before any work begins. No pressure, no hidden fees." },
+        { "question": "Do you make house calls in Camp Hill?", "answer": "Yes! We offer mobile repair service throughout Camp Hill, Mechanicsburg, Harrisburg, and the West Shore. House call fees are tiered by distance starting at $35." },
+        { "question": "What types of phones do you repair?", "answer": "iPhone, Samsung Galaxy, Google Pixel, and most Android devices. Common repairs include screen replacement, battery replacement, charging port repair, and water damage assessment." },
+        { "question": "Do you offer any warranty?", "answer": "Yes — all repairs come with a 90-day warranty on parts and labor. If the same issue reoccurs, we'll make it right at no extra charge." }
+      ]
+    },
+    {
+      "id": "mechanicsburg",
+      "name": "Mechanicsburg",
+      "postalCode": "17055",
+      "lat": 40.2142,
+      "lon": -77.0086,
+      "email": "mechanicsburg@anthracitetechsolutions.com",
+      "headlineSuffix": "Mechanicsburg, PA",
+      "heroTagline": "Same-day repairs in Mechanicsburg, PA",
+      "heroSubtitle": "Expert computer repair, phone repair, and IT support in Mechanicsburg, PA. Free diagnostics, transparent pricing, and fast service for laptops, iPhones, business networks, and more. Serving Camp Hill, Harrisburg, and the West Shore.",
+      "localContext": "We are Mechanicsburg's trusted tech repair partner. Whether you're near Mechanicsburg Area School District, working along Simpson Ferry Road, or running a business in the borough, our team provides fast repairs and reliable IT support.",
+      "localContext2": "From home office setups to small business server support, our Mechanicsburg technicians understand the tech needs of this growing community. We offer on-site visits and remote support throughout the West Shore.",
+      "areaServed": [
+        "Mechanicsburg, PA",
+        "Camp Hill, PA",
+        "Harrisburg, PA",
+        "Silver Spring Township, PA",
+        "Upper Allen Township, PA",
+        "Shiremanstown, PA"
+      ],
+      "localAreas": ["Mechanicsburg", "Camp Hill", "Harrisburg", "Silver Spring", "Upper Allen", "Shiremanstown"],
+      "searchKeywords": [
+        "Computer repair Mechanicsburg PA",
+        "Phone repair Mechanicsburg",
+        "IT support Mechanicsburg",
+        "Laptop repair Camp Hill",
+        "iPhone screen repair Mechanicsburg",
+        "Small business IT support West Shore"
+      ],
+      "faq": [
+        { "question": "Do you offer same-day repairs in Mechanicsburg?", "answer": "Yes! Most screen replacements, battery swaps, and diagnostics are completed within 1–2 hours at our Mechanicsburg location. Walk-ins are welcome during business hours (Mon–Fri 9–7, Sat 10–5)." },
+        { "question": "Is there a diagnostic fee?", "answer": "No — diagnostics are completely free. We'll inspect your device, explain the issue, and give you a firm quote before any work begins. No pressure, no hidden fees." },
+        { "question": "Do you make house calls in Mechanicsburg?", "answer": "Yes! We offer mobile repair service throughout Mechanicsburg, Camp Hill, Harrisburg, and the West Shore. House call fees are tiered by distance starting at $35." },
+        { "question": "What types of phones do you repair?", "answer": "iPhone, Samsung Galaxy, Google Pixel, and most Android devices. Common repairs include screen replacement, battery replacement, charging port repair, and water damage assessment." },
+        { "question": "Do you offer any warranty?", "answer": "Yes — all repairs come with a 90-day warranty on parts and labor. If the same issue reoccurs, we'll make it right at no extra charge." }
+      ]
+    },
+    {
+      "id": "carlisle",
+      "name": "Carlisle",
+      "postalCode": "17013",
+      "lat": 40.2015,
+      "lon": -77.1882,
+      "email": "carlisle@anthracitetechsolutions.com",
+      "headlineSuffix": "Carlisle, PA",
+      "heroTagline": "Same-day repairs in Carlisle, PA",
+      "heroSubtitle": "Your trusted local tech team for computer repair, phone repair, and IT support in Carlisle, PA. Free diagnostics, transparent pricing, and fast turnaround across the historic Cumberland Valley.",
+      "localContext": "We proudly serve Carlisle and the surrounding communities. Whether you're near Dickinson College, working downtown along Hanover Street, or running a business near the Carlisle Barracks, our technicians deliver fast repairs and reliable on-site IT support.",
+      "localContext2": "Our Carlisle team understands the needs of military families, small business owners, and residents throughout the Cumberland Valley. We offer house calls throughout the region and emergency IT support for local offices and remote teams.",
+      "areaServed": [
+        "Carlisle, PA",
+        "Middlesex Township, PA",
+        "South Middleton Township, PA",
+        "Boiling Springs, PA",
+        "Mount Holly Springs, PA",
+        "Newville, PA"
+      ],
+      "localAreas": ["Carlisle", "Middlesex Township", "South Middleton Township", "Boiling Springs", "Mount Holly Springs", "Newville"],
+      "searchKeywords": [
+        "Computer repair Carlisle PA",
+        "Phone repair Carlisle",
+        "IT support Cumberland County PA",
+        "Laptop repair Carlisle",
+        "iPhone screen repair Carlisle PA",
+        "Same-day tech support near me"
+      ],
+      "faq": [
+        { "question": "Do you offer same-day repairs in Carlisle?", "answer": "Yes! Most screen replacements, battery swaps, and diagnostics are completed within 1–2 hours at our Carlisle location. Walk-ins are welcome during business hours (Mon–Fri 9–7, Sat 10–5)." },
+        { "question": "Is there a diagnostic fee?", "answer": "No — diagnostics are completely free. We'll inspect your device, explain the issue, and give you a firm quote before any work begins. No pressure, no hidden fees." },
+        { "question": "Do you make house calls in Carlisle?", "answer": "Yes! We offer mobile repair service throughout Carlisle, Boiling Springs, Mount Holly Springs, and the Cumberland Valley. House call fees are tiered by distance starting at $35." },
+        { "question": "What types of phones do you repair?", "answer": "iPhone, Samsung Galaxy, Google Pixel, and most Android devices. Common repairs include screen replacement, battery replacement, charging port repair, and water damage assessment." },
+        { "question": "Do you offer any warranty?", "answer": "Yes — all repairs come with a 90-day warranty on parts and labor. If the same issue reoccurs, we'll make it right at no extra charge." }
+      ]
+    },
+    {
+      "id": "lancaster",
+      "name": "Lancaster",
+      "postalCode": "17602",
+      "lat": 40.0379,
+      "lon": -76.3055,
+      "email": "lancaster@anthracitetechsolutions.com",
+      "headlineSuffix": "Lancaster, PA",
+      "heroTagline": "Same-day repairs in Lancaster, PA",
+      "heroSubtitle": "Your trusted local tech team for computer repair, phone repair, and IT support in Lancaster, PA. Free diagnostics, transparent pricing, and fast turnaround across the Red Rose City and Amish Country.",
+      "localContext": "We proudly serve Lancaster and the surrounding communities. Whether you're near Franklin & Marshall College, working downtown in the Central Market district, or running a business along Route 30, our technicians deliver fast repairs and reliable on-site IT support.",
+      "localContext2": "Our Lancaster team understands the needs of farmers market vendors, small business owners, and families throughout Lancaster County. We offer house calls throughout the region and emergency IT support for local offices and remote teams.",
+      "areaServed": [
+        "Lancaster, PA",
+        "Manheim Township, PA",
+        "Millersville, PA",
+        "Lititz, PA",
+        "Ephrata, PA",
+        "Elizabethtown, PA"
+      ],
+      "localAreas": ["Lancaster", "Manheim Township", "Millersville", "Lititz", "Ephrata", "Elizabethtown"],
+      "searchKeywords": [
+        "Computer repair Lancaster PA",
+        "Phone repair Lancaster",
+        "IT support Lancaster County PA",
+        "Laptop repair Lancaster",
+        "iPhone screen repair Lancaster PA",
+        "Same-day tech support near me"
+      ],
+      "faq": [
+        { "question": "Do you offer same-day repairs in Lancaster?", "answer": "Yes! Most screen replacements, battery swaps, and diagnostics are completed within 1–2 hours at our Lancaster location. Walk-ins are welcome during business hours (Mon–Fri 9–7, Sat 10–5)." },
+        { "question": "Is there a diagnostic fee?", "answer": "No — diagnostics are completely free. We'll inspect your device, explain the issue, and give you a firm quote before any work begins. No pressure, no hidden fees." },
+        { "question": "Do you make house calls in Lancaster?", "answer": "Yes! We offer mobile repair service throughout Lancaster, Lititz, Ephrata, Elizabethtown, and Lancaster County. House call fees are tiered by distance starting at $35." },
+        { "question": "What types of phones do you repair?", "answer": "iPhone, Samsung Galaxy, Google Pixel, and most Android devices. Common repairs include screen replacement, battery replacement, charging port repair, and water damage assessment." },
+        { "question": "Do you offer any warranty?", "answer": "Yes — all repairs come with a 90-day warranty on parts and labor. If the same issue reoccurs, we'll make it right at no extra charge." }
+      ]
+    },
+    {
+      "id": "lebanon",
+      "name": "Lebanon",
+      "postalCode": "17046",
+      "lat": 40.3409,
+      "lon": -76.4113,
+      "email": "lebanon@anthracitetechsolutions.com",
+      "headlineSuffix": "Lebanon, PA",
+      "heroTagline": "Same-day repairs in Lebanon, PA",
+      "heroSubtitle": "Your trusted local tech team for computer repair, phone repair, and IT support in Lebanon, PA. Free diagnostics, transparent pricing, and fast turnaround across Lebanon County.",
+      "localContext": "We proudly serve Lebanon and the surrounding communities. Whether you're near Lebanon Valley College, working downtown along Cumberland Street, or running a business along Route 422, our technicians deliver fast repairs and reliable on-site IT support.",
+      "localContext2": "Our Lebanon team understands the needs of local manufacturers, small business owners, and families throughout Lebanon County. We offer house calls throughout the region and emergency IT support for local offices and remote teams.",
+      "areaServed": [
+        "Lebanon, PA",
+        "North Lebanon Township, PA",
+        "South Lebanon Township, PA",
+        "Annville, PA",
+        "Palmyra, PA",
+        "Cornwall, PA"
+      ],
+      "localAreas": ["Lebanon", "North Lebanon Township", "South Lebanon Township", "Annville", "Palmyra", "Cornwall"],
+      "searchKeywords": [
+        "Computer repair Lebanon PA",
+        "Phone repair Lebanon",
+        "IT support Lebanon County PA",
+        "Laptop repair Lebanon",
+        "iPhone screen repair Lebanon PA",
+        "Same-day tech support near me"
+      ],
+      "faq": [
+        { "question": "Do you offer same-day repairs in Lebanon?", "answer": "Yes! Most screen replacements, battery swaps, and diagnostics are completed within 1–2 hours at our Lebanon location. Walk-ins are welcome during business hours (Mon–Fri 9–7, Sat 10–5)." },
+        { "question": "Is there a diagnostic fee?", "answer": "No — diagnostics are completely free. We'll inspect your device, explain the issue, and give you a firm quote before any work begins. No pressure, no hidden fees." },
+        { "question": "Do you make house calls in Lebanon?", "answer": "Yes! We offer mobile repair service throughout Lebanon, Annville, Palmyra, Cornwall, and Lebanon County. House call fees are tiered by distance starting at $35." },
+        { "question": "What types of phones do you repair?", "answer": "iPhone, Samsung Galaxy, Google Pixel, and most Android devices. Common repairs include screen replacement, battery replacement, charging port repair, and water damage assessment." },
+        { "question": "Do you offer any warranty?", "answer": "Yes — all repairs come with a 90-day warranty on parts and labor. If the same issue reoccurs, we'll make it right at no extra charge." }
+      ]
+    },
+    {
+      "id": "york",
+      "name": "York",
+      "postalCode": "17401",
+      "lat": 39.9626,
+      "lon": -76.7277,
+      "email": "york@anthracitetechsolutions.com",
+      "headlineSuffix": "York, PA",
+      "heroTagline": "Same-day repairs in York, PA",
+      "heroSubtitle": "Your trusted local tech team for computer repair, phone repair, and IT support in York, PA. Free diagnostics, transparent pricing, and fast turnaround across the White Rose City and beyond.",
+      "localContext": "We proudly serve York and the surrounding communities. Whether you're near York College, working downtown by Continental Square, or running a business along Route 30, our technicians deliver fast repairs and reliable on-site IT support.",
+      "localContext2": "Our York team understands the needs of manufacturers, small business owners, and families throughout York County. We offer house calls throughout the region and emergency IT support for local offices and remote teams.",
+      "areaServed": [
+        "York, PA",
+        "Springettsbury Township, PA",
+        "West Manchester Township, PA",
+        "Red Lion, PA",
+        "Dallastown, PA",
+        "Hanover, PA"
+      ],
+      "localAreas": ["York", "Springettsbury", "West Manchester", "Red Lion", "Dallastown", "Hanover"],
+      "searchKeywords": [
+        "Computer repair York PA",
+        "Phone repair York",
+        "IT support York County PA",
+        "Laptop repair York",
+        "iPhone screen repair York PA",
+        "Same-day tech support near me"
+      ],
+      "faq": [
+        { "question": "Do you offer same-day repairs in York?", "answer": "Yes! Most screen replacements, battery swaps, and diagnostics are completed within 1–2 hours at our York location. Walk-ins are welcome during business hours (Mon–Fri 9–7, Sat 10–5)." },
+        { "question": "Is there a diagnostic fee?", "answer": "No — diagnostics are completely free. We'll inspect your device, explain the issue, and give you a firm quote before any work begins. No pressure, no hidden fees." },
+        { "question": "Do you make house calls in York?", "answer": "Yes! We offer mobile repair service throughout York, Red Lion, Dallastown, Hanover, and York County. House call fees are tiered by distance starting at $35." },
+        { "question": "What types of phones do you repair?", "answer": "iPhone, Samsung Galaxy, Google Pixel, and most Android devices. Common repairs include screen replacement, battery replacement, charging port repair, and water damage assessment." },
+        { "question": "Do you offer any warranty?", "answer": "Yes — all repairs come with a 90-day warranty on parts and labor. If the same issue reoccurs, we'll make it right at no extra charge." }
+      ]
+    },
+    {
+      "id": "hershey",
+      "name": "Hershey",
+      "postalCode": "17033",
+      "lat": 40.2859,
+      "lon": -76.6502,
+      "email": "hershey@anthracitetechsolutions.com",
+      "headlineSuffix": "Hershey, PA",
+      "heroTagline": "Same-day repairs in Hershey, PA",
+      "heroSubtitle": "Your trusted local tech team for computer repair, phone repair, and IT support in Hershey, PA. Free diagnostics, transparent pricing, and fast turnaround across the Sweetest Place on Earth.",
+      "localContext": "We proudly serve Hershey and the surrounding communities. Whether you're near Hersheypark, working at the Penn State Health Medical Center, or running a business along Chocolate Avenue, our technicians deliver fast repairs and reliable on-site IT support.",
+      "localContext2": "Our Hershey team understands the needs of hospitality professionals, healthcare workers, small business owners, and families throughout Derry Township. We offer house calls throughout the region and emergency IT support for local offices and remote teams.",
+      "areaServed": [
+        "Hershey, PA",
+        "Derry Township, PA",
+        "Hummelstown, PA",
+        "Palmyra, PA",
+        "Annville, PA",
+        "Lebanon, PA"
+      ],
+      "localAreas": ["Hershey", "Derry Township", "Hummelstown", "Palmyra", "Annville", "Lebanon"],
+      "searchKeywords": [
+        "Computer repair Hershey PA",
+        "Phone repair Hershey",
+        "IT support Derry Township PA",
+        "Laptop repair Hershey",
+        "iPhone screen repair Hershey PA",
+        "Same-day tech support near me"
+      ],
+      "faq": [
+        { "question": "Do you offer same-day repairs in Hershey?", "answer": "Yes! Most screen replacements, battery swaps, and diagnostics are completed within 1–2 hours at our Hershey location. Walk-ins are welcome during business hours (Mon–Fri 9–7, Sat 10–5)." },
+        { "question": "Is there a diagnostic fee?", "answer": "No — diagnostics are completely free. We'll inspect your device, explain the issue, and give you a firm quote before any work begins. No pressure, no hidden fees." },
+        { "question": "Do you make house calls in Hershey?", "answer": "Yes! We offer mobile repair service throughout Hershey, Hummelstown, Palmyra, Annville, and Derry Township. House call fees are tiered by distance starting at $35." },
+        { "question": "What types of phones do you repair?", "answer": "iPhone, Samsung Galaxy, Google Pixel, and most Android devices. Common repairs include screen replacement, battery replacement, charging port repair, and water damage assessment." },
+        { "question": "Do you offer any warranty?", "answer": "Yes — all repairs come with a 90-day warranty on parts and labor. If the same issue reoccurs, we'll make it right at no extra charge." }
+      ]
+    }
+  ]
+}

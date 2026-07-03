@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How's your device doing? — Anthracite Tech Co.</title>
+  <!--
+    Anthracite Tech Co. — 3-Day Post-Service Follow-Up Email Template
+    Usage: Send this 72 hours after a repair or service is completed.
+    Variables to personalize before sending:
+      {{customer_name}}, {{device_type}}, {{service_performed}}, {{warranty_length}}
+  -->
+</head>
+<body style="margin:0;padding:0;background-color:#0c1524;font-family:'Inter',system-ui,-apple-system,sans-serif;color:#f8fafc;">
+
+  <!-- Outer wrapper -->
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color:#0c1524;">
+    <tr>
+      <td align="center" style="padding:40px 16px;">
+
+        <!-- Main content card -->
+        <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="max-width:600px;width:100%;background-color:#111d30;border-radius:16px;overflow:hidden;border:1px solid #1e293b;">
+
+          <!-- Header / Logo -->
+          <tr>
+            <td align="center" style="padding:32px 24px 24px;">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td style="padding-right:10px;">
+                    <!-- Wrench icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                  </td>
+                  <td style="font-family:'Outfit',system-ui,sans-serif;font-size:22px;font-weight:800;color:#f8fafc;">
+                    Anthracite Tech <span style="color:#3b82f6;">Repairs</span>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Hero greeting -->
+          <tr>
+            <td style="padding:0 32px 8px;">
+              <p style="margin:0;font-size:15px;color:#94a3b8;">Hi {{customer_name}},</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:8px 32px 16px;">
+              <h1 style="margin:0;font-family:'Outfit',system-ui,sans-serif;font-size:26px;font-weight:700;color:#f8fafc;line-height:1.3;">
+                How's your <span style="color:#3b82f6;">{{device_type}}</span> holding up?
+              </h1>
+            </td>
+          </tr>
+
+          <!-- Body copy -->
+          <tr>
+            <td style="padding:8px 32px 16px;">
+              <p style="margin:0 0 16px;font-size:15px;color:#cbd5e1;line-height:1.7;">
+                It's been a few days since we completed your <strong style="color:#f8fafc;">{{service_performed}}</strong>. We wanted to check in and make sure everything is running smoothly.
+              </p>
+              <p style="margin:0 0 16px;font-size:15px;color:#cbd5e1;line-height:1.7;">
+                If you notice <em>anything</em> unusual — a new sound, slower performance, or anything that doesn't feel quite right — just reply to this email or give us a call. We're here to help, no questions asked.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Warranty reminder box -->
+          <tr>
+            <td style="padding:8px 32px 16px;">
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.2);border-radius:12px;">
+                <tr>
+                  <td style="padding:20px 24px;">
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                      <tr>
+                        <td style="padding-right:12px;vertical-align:top;">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                        </td>
+                        <td>
+                          <p style="margin:0 0 4px;font-size:14px;font-weight:600;color:#f8fafc;">Your repair is protected</p>
+                          <p style="margin:0;font-size:13px;color:#94a3b8;line-height:1.6;">Every service includes a <strong style="color:#f8fafc;">{{warranty_length}}-day warranty</strong>. If the same issue resurfaces, we'll make it right — free of charge.</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Review CTA -->
+          <tr>
+            <td style="padding:16px 32px 8px;">
+              <h2 style="margin:0 0 8px;font-family:'Outfit',system-ui,sans-serif;font-size:18px;font-weight:700;color:#f8fafc;">
+                Happy with your repair?
+              </h2>
+              <p style="margin:0 0 20px;font-size:15px;color:#cbd5e1;line-height:1.7;">
+                Small businesses like ours thrive on word of mouth. If we earned your trust, a quick review goes a long way in helping other locals find reliable tech repair.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Review buttons -->
+          <tr>
+            <td style="padding:0 32px 24px;">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td style="padding-right:12px;">
+                    <a href="#" id="review-link-google" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:12px 24px;background-color:#3b82f6;color:#f8fafc;font-size:14px;font-weight:600;text-decoration:none;border-radius:9999px;">
+                      <!-- Google icon -->
+                      <svg style="display:inline-block;vertical-align:middle;margin-right:8px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#fff"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#fff"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#fff"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#fff"/></svg>
+                      Review us on Google
+                    </a>
+                  </td>
+                  <td>
+                    <a href="#" id="review-link-yelp" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:12px 24px;background-color:#1e293b;color:#f8fafc;font-size:14px;font-weight:600;text-decoration:none;border-radius:9999px;border:1px solid #334155;">
+                      <!-- Yelp icon -->
+                      <svg style="display:inline-block;vertical-align:middle;margin-right:8px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#FF1A1A"><path d="M12.079 14.726c-.918.226-1.858.458-2.39.977-.556.543-.635 1.432-.652 2.334-.025 1.286.158 2.854.475 3.937.189.645.437 1.082.898 1.224.23.07.519.063.842-.058.81-.301 1.755-.96 2.422-1.545.453-.397.793-.82.858-1.347.068-.557-.147-1.162-.469-1.798-.503-.994-1.316-2.131-2.084-3.724zM14.47 12.87c.726.61 1.492 1.19 2.203 1.338.754.159 1.478-.2 2.178-.733.986-.75 2.073-1.903 2.716-2.818.397-.566.588-1.047.42-1.499-.085-.226-.26-.443-.526-.648-.665-.513-1.655-.876-2.517-1.068-.585-.13-1.11-.103-1.546.208-.44.316-.721.867-.978 1.508-.403 1.003-.724 2.358-.95 2.712zM13.61 10.637c.24-.906.497-1.837.387-2.57-.118-.788-.7-1.312-1.39-1.748-.975-.617-2.357-1.11-3.375-1.357-.628-.152-1.131-.134-1.479.155-.175.145-.313.363-.402.653-.223.726-.23 1.78-.137 2.658.063.593.234 1.074.632 1.375.403.305.97.394 1.614.432 1.098.065 2.5-.1 4.15.602zM7.568 14.183c-.231-.91-.476-1.848-.966-2.39-.523-.578-1.302-.676-2.138-.707-1.178-.044-2.626.096-3.58.376-.59.173-.974.413-1.079.861-.052.225-.03.507.07.826.254.807.846 1.726 1.38 2.368.362.435.753.742 1.245.782.516.042 1.063-.18 1.647-.501.914-.506 1.939-1.36 3.42-1.615zM8.428 10.536c.252-1.976 1.42-3.67 3.062-4.582-.472-.154-.97-.24-1.49-.24-2.761 0-5 2.239-5 5 0 .687.139 1.341.39 1.935.73-.872 1.736-1.665 3.038-2.113z"/></svg>
+                      Review on Yelp
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Divider -->
+          <tr>
+            <td style="padding:0 32px;">
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                <tr><td style="border-top:1px solid #1e293b;"></td></tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Keep in touch / future services -->
+          <tr>
+            <td style="padding:24px 32px 8px;">
+              <h2 style="margin:0 0 8px;font-family:'Outfit',system-ui,sans-serif;font-size:18px;font-weight:700;color:#f8fafc;">
+                Need anything else?
+              </h2>
+              <p style="margin:0 0 16px;font-size:15px;color:#cbd5e1;line-height:1.7;">
+                From routine maintenance and cloud backups to upgrading your setup, we're just a message away. And if you know anyone juggling a cracked screen or a sluggish laptop, send them our way — we offer <strong style="color:#f8fafc;">free diagnostics</strong> on every visit.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Quick-contact row -->
+          <tr>
+            <td style="padding:8px 32px 24px;">
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color:#0c1524;border:1px solid #1e293b;border-radius:12px;">
+                <tr>
+                  <td style="padding:20px 24px;">
+                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tr>
+                        <td style="padding-bottom:10px;">
+                          <p style="margin:0 0 12px;font-size:13px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;">Get in touch</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td width="50%" style="padding-right:8px;vertical-align:top;">
+                          <p style="margin:0 0 4px;font-size:13px;color:#94a3b8;">Phone</p>
+                          <a href="tel:+15551234567" style="font-size:14px;color:#3b82f6;text-decoration:none;font-weight:600;">(555) 123-4567</a>
+                        </td>
+                        <td width="50%" style="padding-left:8px;vertical-align:top;">
+                          <p style="margin:0 0 4px;font-size:13px;color:#94a3b8;">Email</p>
+                          <a href="mailto:support@anthracitetechco.com" style="font-size:14px;color:#3b82f6;text-decoration:none;font-weight:600;">support@anthracitetechco.com</a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" style="padding-top:14px;">
+                          <p style="margin:0 0 4px;font-size:13px;color:#94a3b8;">Hours</p>
+                          <p style="margin:0;font-size:14px;color:#cbd5e1;">Mon – Fri: 9 AM – 7 PM &nbsp;|&nbsp; Sat: 10 AM – 5 PM &nbsp;|&nbsp; Sun: Closed</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" style="padding-top:14px;">
+                          <p style="margin:0 0 4px;font-size:13px;color:#94a3b8;">Visit us</p>
+                          <p style="margin:0;font-size:14px;color:#cbd5e1;">123 Tech Boulevard, San Jose, CA 94000</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Closing -->
+          <tr>
+            <td style="padding:8px 32px 32px;">
+              <p style="margin:0 0 8px;font-size:15px;color:#cbd5e1;line-height:1.7;">
+                Thanks for trusting us with your tech. We're here whenever you need us.
+              </p>
+              <p style="margin:0;font-size:15px;color:#f8fafc;font-weight:600;">
+                — The Anthracite Tech Co. Team
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding:20px 32px;background-color:#0c1524;border-top:1px solid #1e293b;text-align:center;">
+              <p style="margin:0 0 8px;font-size:12px;color:#64748b;">
+                © 2026 Anthracite Tech Co.. All rights reserved.
+              </p>
+              <p style="margin:0;font-size:12px;color:#64748b;">
+                123 Tech Boulevard, San Jose, CA 94000
+              </p>
+              <p style="margin:12px 0 0;font-size:12px;color:#475569;">
+                <a href="https://anthracitetechco.com" style="color:#64748b;text-decoration:underline;">anthracitetechco.com</a>
+                &nbsp;•&nbsp;
+                <a href="https://anthracitetechco.com/#book" style="color:#64748b;text-decoration:underline;">Book a repair</a>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+        <!-- /Main content card -->
+
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

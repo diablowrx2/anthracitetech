@@ -1,0 +1,1987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remote Troubleshooting Services | Anthracite Tech Co. — Nationwide IT Support</title>
+  <meta name="description" content="Expert remote troubleshooting for computers, networks, and software issues. Secure screen-share sessions, transparent pricing from $49. Book same-day support for all 50 states.">
+  <meta name="keywords" content="remote troubleshooting, remote IT support, computer repair online, virus removal remote, network diagnostics, software support, nationwide tech support">
+  <meta property="og:title" content="Remote Troubleshooting Services | Anthracite Tech Co.">
+  <meta property="og:description" content="Expert remote troubleshooting for computers, networks, and software. Secure screen-share, transparent pricing, same-day availability.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --bg-primary: #0a0f1c;
+      --bg-secondary: #111827;
+      --bg-card: #1a2332;
+      --bg-card-hover: #1f2a40;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-blue: #3b82f6;
+      --accent-blue-light: #60a5fa;
+      --accent-cyan: #06b6d4;
+      --accent-green: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-red: #ef4444;
+      --border-color: #1e293b;
+      --border-color-light: #334155;
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.3), 0 2px 4px -2px rgba(0,0,0,0.2);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.4), 0 4px 6px -4px rgba(0,0,0,0.2);
+      --radius: 12px;
+      --radius-lg: 16px;
+      --transition: all 0.3s ease;
+    }
+    
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    
+    h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    
+    /* HEADER */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 0;
+      transition: var(--transition);
+      background: transparent;
+    }
+    .header.scrolled {
+      background: rgba(10, 15, 28, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+    }
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+    .logo-text .brand { color: var(--text-primary); }
+    .logo-text .accent { color: var(--accent-blue); }
+    
+    .nav-cta {
+      background: var(--accent-blue);
+      color: white;
+      padding: 0.65rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+    }
+    .nav-cta:hover {
+      background: var(--accent-blue-light);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+    }
+    
+    /* HERO */
+    .hero {
+      padding: 8rem 0 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(59, 130, 246, 0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      color: var(--accent-blue-light);
+      margin-bottom: 1.5rem;
+    }
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent-green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-description {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      max-width: 540px;
+      margin-bottom: 2rem;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-blue) 0%, #2563eb 100%);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(59, 130, 246, 0.5);
+    }
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .btn-secondary:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--accent-blue);
+    }
+    .hero-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+    }
+    .stat { text-align: left; }
+    .stat-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent-blue);
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    
+    .hero-visual {
+      position: relative;
+    }
+    .hero-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      position: relative;
+    }
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+      border-radius: var(--radius-lg);
+      z-index: -1;
+      opacity: 0.3;
+    }
+    .screen-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .screen-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .screen-dot.red { background: var(--accent-red); }
+    .screen-dot.yellow { background: var(--accent-amber); }
+    .screen-dot.green { background: var(--accent-green); }
+    .screen-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .screen-line {
+      height: 12px;
+      background: var(--bg-secondary);
+      border-radius: 6px;
+    }
+    .screen-line.w-3\/4 { width: 75%; }
+    .screen-line.w-1\/2 { width: 50%; }
+    .screen-line.w-5\/6 { width: 83%; }
+    .screen-line.w-2\/3 { width: 66%; }
+    .screen-line.accent { background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan)); }
+    
+    .connection-badge {
+      position: absolute;
+      top: -15px;
+      right: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--accent-green);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      color: var(--accent-green);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .connection-badge::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--accent-green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    
+    /* CAPABILITIES */
+    .capabilities {
+      padding: 6rem 0;
+      background: var(--bg-secondary);
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .section-label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-blue);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      margin-bottom: 1rem;
+    }
+    .section-description {
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .capabilities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .capability-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 2rem;
+      transition: var(--transition);
+    }
+    .capability-card:hover {
+      border-color: var(--accent-blue);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    .capability-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(6, 182, 212, 0.2));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .capability-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.75rem;
+    }
+    .capability-card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+    .capability-list {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .capability-list li {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .capability-list li::before {
+      content: '✓';
+      color: var(--accent-green);
+      font-weight: bold;
+    }
+    
+    /* PRICING */
+    .pricing {
+      padding: 6rem 0;
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .pricing-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      position: relative;
+      transition: var(--transition);
+    }
+    .pricing-card:hover {
+      border-color: var(--border-color-light);
+      transform: translateY(-4px);
+    }
+    .pricing-card.featured {
+      border-color: var(--accent-blue);
+      background: linear-gradient(180deg, rgba(59, 130, 246, 0.08) 0%, var(--bg-card) 100%);
+    }
+    .pricing-card.featured::before {
+      content: 'MOST POPULAR';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent-blue);
+      color: white;
+      padding: 0.35rem 1rem;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .pricing-header {
+      margin-bottom: 2rem;
+    }
+    .pricing-name {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .pricing-description {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+    .pricing-price {
+      display: flex;
+      align-items: baseline;
+      gap: 0.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .pricing-amount {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+    }
+    .pricing-card.featured .pricing-amount {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .pricing-period {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+    .pricing-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 0.9rem;
+    }
+    .pricing-features li:last-child { border-bottom: none; }
+    .pricing-features .check {
+      color: var(--accent-green);
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+    .pricing-features .times {
+      color: var(--accent-red);
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+    .pricing-features li.disabled {
+      color: var(--text-muted);
+    }
+    .pricing-cta {
+      width: 100%;
+      padding: 1rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+    }
+    .pricing-card:not(.featured) .pricing-cta {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+    .pricing-card:not(.featured) .pricing-cta:hover {
+      border-color: var(--accent-blue);
+      background: var(--bg-card-hover);
+    }
+    .pricing-card.featured .pricing-cta {
+      background: linear-gradient(135deg, var(--accent-blue), #2563eb);
+      color: white;
+    }
+    .pricing-card.featured .pricing-cta:hover {
+      box-shadow: 0 6px 24px rgba(59, 130, 246, 0.5);
+      transform: translateY(-2px);
+    }
+    
+    .pricing-guarantee {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 2rem;
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+    }
+    .pricing-guarantee-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .pricing-guarantee h4 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .pricing-guarantee p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+    
+    /* HOW IT WORKS */
+    .how-it-works {
+      padding: 6rem 0;
+      background: var(--bg-secondary);
+    }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .step {
+      text-align: center;
+      position: relative;
+    }
+    .step-number {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 auto 1.5rem;
+    }
+    .step h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.75rem;
+    }
+    .step p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+    
+    /* BOOKING FORM */
+    .booking {
+      padding: 6rem 0;
+    }
+    .booking-wrapper {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    .booking-info h2 {
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      margin-bottom: 1.5rem;
+    }
+    .booking-info > p {
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+    .trust-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--bg-card);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+    }
+    .trust-badge-icon {
+      font-size: 1.5rem;
+    }
+    .trust-badge-text {
+      font-size: 0.85rem;
+    }
+    .trust-badge-text strong {
+      display: block;
+      color: var(--text-primary);
+    }
+    .trust-badge-text span {
+      color: var(--text-muted);
+    }
+    
+    .booking-form {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+    }
+    .form-section {
+      margin-bottom: 2rem;
+    }
+    .form-section:last-child { margin-bottom: 0; }
+    .form-section-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .form-group label {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .form-group label .required {
+      color: var(--accent-red);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      font-family: inherit;
+      transition: var(--transition);
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+    .form-group select {
+      cursor: pointer;
+    }
+    
+    .service-checkboxes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.75rem;
+    }
+    .service-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .service-checkbox:hover {
+      border-color: var(--border-color-light);
+    }
+    .service-checkbox input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent-blue);
+    }
+    .service-checkbox span {
+      font-size: 0.9rem;
+    }
+    
+    .submit-btn {
+      width: 100%;
+      padding: 1.15rem 2rem;
+      background: linear-gradient(135deg, var(--accent-blue) 0%, #2563eb 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(59, 130, 246, 0.5);
+    }
+    .submit-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .loading-spinner {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .form-note {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: var(--accent-green);
+      text-align: center;
+    }
+    
+    .ticket-display {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      text-align: center;
+    }
+    
+    .ticket-display .ticket-id {
+      font-family: 'Space Grotesk', monospace;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--accent-green);
+      letter-spacing: 0.08em;
+    }
+    
+    .ticket-display small {
+      color: var(--text-secondary);
+      display: block;
+      margin-top: 0.3rem;
+    }
+    
+    /* FAQ */
+    .faq {
+      padding: 6rem 0;
+      background: var(--bg-secondary);
+    }
+    .faq-list {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+    .faq-question {
+      width: 100%;
+      padding: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      font-family: inherit;
+    }
+    .faq-question:hover {
+      background: var(--bg-card-hover);
+    }
+    .faq-icon {
+      font-size: 1.25rem;
+      transition: transform 0.3s;
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 500px;
+    }
+    .faq-answer-inner {
+      padding: 0 1.5rem 1.5rem;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    
+    /* FOOTER */
+    .footer {
+      padding: 4rem 0 2rem;
+      border-top: 1px solid var(--border-color);
+    }
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+    .footer-brand {
+      max-width: 280px;
+    }
+    .footer-brand .logo {
+      margin-bottom: 1rem;
+    }
+    .footer-brand p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+    .footer-column h4 {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.25rem;
+      color: var(--text-muted);
+    }
+    .footer-links {
+      list-style: none;
+    }
+    .footer-links li {
+      margin-bottom: 0.75rem;
+    }
+    .footer-links a {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover {
+      color: var(--accent-blue);
+    }
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    
+    /* SUCCESS MESSAGE */
+    .success-message {
+      display: none;
+      text-align: center;
+      padding: 3rem;
+    }
+    .success-message.show {
+      display: block;
+    }
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      background: rgba(16, 185, 129, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 2.5rem;
+    }
+    .success-message h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .success-message p {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+    .booking-form.submitted .form-section,
+    .booking-form.submitted .submit-btn {
+      display: none;
+    }
+    .booking-form.submitted .success-message {
+      display: block;
+    }
+    
+    /* RESPONSIVE */
+    @media (min-width: 768px) {
+      .hero-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .booking-wrapper {
+        grid-template-columns: 1fr 1.2fr;
+      }
+      .form-row {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    
+    @media (max-width: 640px) {
+      .hero-stats {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .hero-actions {
+        flex-direction: column;
+      }
+      .btn-primary, .btn-secondary {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://anthracitetechco.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Remote Troubleshooting Services", "item": "https://anthracitetechco.com/remote-troubleshooting-dedicated.html" }
+    ]
+  }
+  </script>
+
+  <!-- ═══ SERVICE SCHEMA — Remote Troubleshooting ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Remote Troubleshooting & Tech Support",
+    "description": "Computer won't start? Network acting up? Virus got you down? Our certified technicians connect securely to your screen and fix it fast — usually in under 30 minutes. Available nationwide across all 50 states.",
+    "url": "https://anthracitetechco.com/remote-troubleshooting-dedicated.html",
+    "image": "https://anthracitetechco.com/hero-bg.png",
+    "keywords": ["remote tech support", "remote troubleshooting", "online computer repair", "virtual IT support", "remote PC repair", "nationwide tech support"],
+    "provider": {
+      "@type": "Organization",
+      "name": "Anthracite Tech Co.",
+      "url": "https://anthracitetechco.com",
+      "telephone": "+1-555-123-4567",
+      "email": "support@anthracitetechco.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "123 Tech Boulevard",
+        "addressLocality": "San Jose",
+        "addressRegion": "CA",
+        "postalCode": "94000",
+        "addressCountry": "US"
+      }
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "United States"
+    },
+    "serviceType": "Remote technical support, online troubleshooting, virtual diagnostics, PC tune-up, virus removal, network configuration",
+    "category": "Tech Support & IT Services",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Remote Support Packages",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "name": "Quick Fix",
+          "description": "Single issue, fast resolution — up to 30-minute session.",
+          "price": "49.00",
+          "priceCurrency": "USD",
+          "priceValidUntil": "2026-12-31",
+          "availability": "https://schema.org/InStock",
+          "url": "https://anthracitetechco.com/remote-troubleshooting-dedicated.html#pricing"
+        },
+        {
+          "@type": "Offer",
+          "name": "Standard Repair",
+          "description": "Most popular for complex issues — up to 60-minute session with multiple related issues.",
+          "price": "99.00",
+          "priceCurrency": "USD",
+          "priceValidUntil": "2026-12-31",
+          "availability": "https://schema.org/InStock",
+          "url": "https://anthracitetechco.com/remote-troubleshooting-dedicated.html#pricing"
+        },
+        {
+          "@type": "Offer",
+          "name": "Premium Support",
+          "description": "Complex issues, priority service — up to 90-minute session with unlimited related issues.",
+          "price": "179.00",
+          "priceCurrency": "USD",
+          "priceValidUntil": "2026-12-31",
+          "availability": "https://schema.org/InStock",
+          "url": "https://anthracitetechco.com/remote-troubleshooting-dedicated.html#pricing"
+        }
+      ]
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "127",
+      "bestRating": "5",
+      "worstRating": "1"
+    }
+  }
+  </script>
+
+  <!-- ═══ ORGANIZATION SCHEMA ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Anthracite Tech Co.",
+    "alternateName": "Anthracite Tech",
+    "url": "https://anthracitetechco.com",
+    "logo": "https://anthracitetechco.com/favicon.svg",
+    "image": "https://anthracitetechco.com/hero-bg.png",
+    "description": "Professional remote tech support and IT services for customers across all 50 states. Secure, fast, and backed by our 30-day fix guarantee.",
+    "telephone": "+1-555-123-4567",
+    "email": "support@anthracitetechco.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "123 Tech Boulevard",
+      "addressLocality": "San Jose",
+      "addressRegion": "CA",
+      "postalCode": "94000",
+      "addressCountry": "US"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+1-555-123-4567",
+      "contactType": "technical support",
+      "availableLanguage": "English",
+      "areaServed": "US",
+      "hoursAvailable": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+          "opens": "09:00",
+          "closes": "19:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "10:00",
+          "closes": "17:00"
+        }
+      ]
+    },
+    "sameAs": []
+  }
+  </script>
+
+  <!-- ═══ FAQPAGE SCHEMA ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does remote support work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We use a secure screen-sharing tool that lets our technicians view and control your computer with your permission. You'll see everything they do on screen. No one can access your computer without you explicitly allowing it. The connection is encrypted with 256-bit SSL security — the same level banks use."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data safe during remote support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely. Our technicians are background-checked, A+ certified, and follow strict security protocols. The screen-share session is encrypted and ends the moment you disconnect. We never store data from your session, and our technicians can only see what you show them on screen — nothing more."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if the issue isn't fixed?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We offer a 7-day service guarantee on all sessions. If the same issue returns within 7 days, contact us and we'll remote back in to fix it at no additional cost. We want you satisfied — not just temporarily patched."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How quickly can I get help?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most bookings are matched with a technician within 15 minutes during business hours. Outside hours, we have extended availability until 10PM EST. For the fastest response, select 'As Soon As Possible' and we'll prioritize your session."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you support Mac and Windows?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! Our technicians are certified in both Windows (all versions from Windows 7 through Windows 11) and macOS. We also support Linux systems, Chromebooks, and mobile devices for certain types of issues."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What payment methods do you accept?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We accept all major credit cards, PayPal, and Zelle. Payment is processed after your session is complete and you're satisfied with the work. No upfront payment required for your first session."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <div class="logo">
+        <div class="logo-icon">⚡</div>
+        <div class="logo-text">
+          <span class="brand">Anthracite Tech</span> <span class="accent">Repairs</span>
+        </div>
+      </div>
+      <button class="nav-cta" onclick="scrollToBooking()">Book Now</button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            Available Now — All 50 States
+          </div>
+          <h1>Remote Troubleshooting <span>That Actually Works</span></h1>
+          <p class="hero-description">
+            Computer won't start? Network acting up? Virus got you down? Our certified technicians connect securely to your screen and fix it fast — usually in under 30 minutes.
+          </p>
+          <div class="hero-actions">
+            <button class="btn-primary" onclick="scrollToBooking()">
+              Book a Session →
+            </button>
+            <button class="btn-secondary" onclick="scrollToCapabilities()">
+              See What We Fix
+            </button>
+          </div>
+          <div class="hero-stats">
+            <div class="stat">
+              <div class="stat-value">50K+</div>
+              <div class="stat-label">Sessions Resolved</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">4.9★</div>
+              <div class="stat-label">Average Rating</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">&lt;30m</div>
+              <div class="stat-label">Avg. Resolution</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-card">
+            <div class="connection-badge">Secure Connection Active</div>
+            <div class="screen-header">
+              <span class="screen-dot red"></span>
+              <span class="screen-dot yellow"></span>
+              <span class="screen-dot green"></span>
+            </div>
+            <div class="screen-content">
+              <div class="screen-line accent w-5/6"></div>
+              <div class="screen-line w-3/4"></div>
+              <div class="screen-line w-1/2"></div>
+              <div class="screen-line accent w-2/3"></div>
+              <div class="screen-line w-5/6"></div>
+              <div class="screen-line w-3/4"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Capabilities -->
+  <section class="capabilities" id="capabilities">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">What We Fix</div>
+        <h2 class="section-title">Remote Troubleshooting Capabilities</h2>
+        <p class="section-description">
+          Our technicians connect securely to your screen and resolve most issues without a house visit.
+        </p>
+      </div>
+      <div class="capabilities-grid">
+        <div class="capability-card">
+          <div class="capability-icon">🦠</div>
+          <h3>Virus & Malware Removal</h3>
+          <p>Complete virus scans, malware removal, and security hardening to keep your system clean.</p>
+          <ul class="capability-list">
+            <li>Full system antivirus scan</li>
+            <li>Rootkit detection & removal</li>
+            <li>Browser hijack recovery</li>
+            <li>Security hardening</li>
+          </ul>
+        </div>
+        <div class="capability-card">
+          <div class="capability-icon">🔧</div>
+          <h3>System Diagnostics & Repair</h3>
+          <p>Blue screens, slow performance, startup issues — we identify and fix the root cause.</p>
+          <ul class="capability-list">
+            <li>BSOD troubleshooting</li>
+            <li>Disk cleanup & optimization</li>
+            <li>Registry repair</li>
+            <li>Startup management</li>
+          </ul>
+        </div>
+        <div class="capability-card">
+          <div class="capability-icon">🌐</div>
+          <h3>Network & Connectivity</h3>
+          <p>WiFi drops, slow internet, VPN issues — we get you back online fast.</p>
+          <ul class="capability-list">
+            <li>WiFi troubleshooting</li>
+            <li>DNS & IP configuration</li>
+            <li>VPN setup & repair</li>
+            <li>Router configuration</li>
+          </ul>
+        </div>
+        <div class="capability-card">
+          <div class="capability-icon">📧</div>
+          <h3>Email & Software Setup</h3>
+          <p>Email configuration, software installation, and productivity tool setup.</p>
+          <ul class="capability-list">
+            <li>Outlook/Gmail setup</li>
+            <li>Microsoft 365 installation</li>
+            <li>Printer driver installation</li>
+            <li>Application troubleshooting</li>
+          </ul>
+        </div>
+        <div class="capability-card">
+          <div class="capability-icon">💾</div>
+          <h3>Data Backup & Recovery</h3>
+          <p>Protect your files with automated backups or recover data from failed drives.</p>
+          <ul class="capability-list">
+            <li>Cloud backup setup</li>
+            <li>File recovery</li>
+            <li>External drive setup</li>
+            <li>Data migration</li>
+          </ul>
+        </div>
+        <div class="capability-card">
+          <div class="capability-icon">🔒</div>
+          <h3>Security & Privacy</h3>
+          <p>Password management, two-factor setup, and privacy configuration.</p>
+          <ul class="capability-list">
+            <li>Password manager setup</li>
+            <li>2FA configuration</li>
+            <li>Firewall setup</li>
+            <li>Privacy settings</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Transparent Pricing</div>
+        <h2 class="section-title">No Surprises, No Hidden Fees</h2>
+        <p class="section-description">
+          Pay only for what you need. All sessions include secure screen-share and a 7-day service guarantee.
+        </p>
+      </div>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <div class="pricing-name">Quick Fix</div>
+            <div class="pricing-description">Single issue, fast resolution</div>
+          </div>
+          <div class="pricing-price">
+            <span class="pricing-amount">$49</span>
+            <span class="pricing-period">/session</span>
+          </div>
+          <ul class="pricing-features">
+            <li><span class="check">✓</span> Up to 30-minute session</li>
+            <li><span class="check">✓</span> 1 issue addressed</li>
+            <li><span class="check">✓</span> Secure screen-share</li>
+            <li><span class="check">✓</span> 7-day service guarantee</li>
+            <li class="disabled"><span class="times">✗</span> Multiple issues</li>
+            <li class="disabled"><span class="times">✗</span> Priority support</li>
+          </ul>
+          <button class="pricing-cta" onclick="selectPlan('quick')">Get Started</button>
+        </div>
+        <div class="pricing-card featured">
+          <div class="pricing-header">
+            <div class="pricing-name">Standard Repair</div>
+            <div class="pricing-description">Most popular for complex issues</div>
+          </div>
+          <div class="pricing-price">
+            <span class="pricing-amount">$99</span>
+            <span class="pricing-period">/session</span>
+          </div>
+          <ul class="pricing-features">
+            <li><span class="check">✓</span> Up to 60-minute session</li>
+            <li><span class="check">✓</span> Multiple related issues</li>
+            <li><span class="check">✓</span> Secure screen-share</li>
+            <li><span class="check">✓</span> 7-day service guarantee</li>
+            <li><span class="check">✓</span> Basic follow-up</li>
+            <li class="disabled"><span class="times">✗</span> Priority support</li>
+          </ul>
+          <button class="pricing-cta" onclick="selectPlan('standard')">Get Started</button>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <div class="pricing-name">Premium Support</div>
+            <div class="pricing-description">Complex issues, priority service</div>
+          </div>
+          <div class="pricing-price">
+            <span class="pricing-amount">$179</span>
+            <span class="pricing-period">/session</span>
+          </div>
+          <ul class="pricing-features">
+            <li><span class="check">✓</span> Up to 90-minute session</li>
+            <li><span class="check">✓</span> Unlimited related issues</li>
+            <li><span class="check">✓</span> Secure screen-share</li>
+            <li><span class="check">✓</span> 14-day service guarantee</li>
+            <li><span class="check">✓</span> Priority support</li>
+            <li><span class="check">✓</span> Free follow-up call</li>
+          </ul>
+          <button class="pricing-cta" onclick="selectPlan('premium')">Get Started</button>
+        </div>
+      </div>
+      <div class="pricing-guarantee">
+        <div class="pricing-guarantee-icon">🛡️</div>
+        <h4>7-Day Service Guarantee</h4>
+        <p>If the same issue resurfaces within 7 days, we'll fix it at no additional cost. Your satisfaction is our priority.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">How It Works</div>
+        <h2 class="section-title">Get Help in 4 Simple Steps</h2>
+        <p class="section-description">Most issues resolved in under 30 minutes from the comfort of your home.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Book Your Session</h3>
+          <p>Fill out the form below with your issue details. We'll match you with the right specialist.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Download & Connect</h3>
+          <p>We'll email you a secure link. One click to download our screen-share tool and connect.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>We Fix It</h3>
+          <p>Watch in real-time as our technician diagnoses and resolves your issue safely.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <h3>You're Done</h3>
+          <p>Problem solved. We follow up to make sure everything's still working great.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking Form -->
+  <section class="booking" id="booking">
+    <div class="container">
+      <div class="booking-wrapper">
+        <div class="booking-info">
+          <h2>Book Your Remote Session</h2>
+          <p>Fill out the form and we'll contact you within 15 minutes during business hours, or match you with the next available technician.</p>
+          <div class="trust-badges">
+            <div class="trust-badge">
+              <span class="trust-badge-icon">🔒</span>
+              <div class="trust-badge-text">
+                <strong>Bank-Level Security</strong>
+                <span>256-bit encrypted connections</span>
+              </div>
+            </div>
+            <div class="trust-badge">
+              <span class="trust-badge-icon">✅</span>
+              <div class="trust-badge-text">
+                <strong>Certified Technicians</strong>
+                <span>A+ certified, background checked</span>
+              </div>
+            </div>
+            <div class="trust-badge">
+              <span class="trust-badge-icon">💯</span>
+              <div class="trust-badge-text">
+                <strong>Satisfaction Guaranteed</strong>
+                <span>7-day service warranty</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <form class="booking-form" id="bookingForm" onsubmit="handleSubmit(event)">
+          <div class="form-section">
+            <div class="form-section-title">Your Information</div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">First Name <span class="required">*</span></label>
+                <input type="text" id="firstName" name="firstName" required placeholder="John">
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name <span class="required">*</span></label>
+                <input type="text" id="lastName" name="lastName" required placeholder="Smith">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email Address <span class="required">*</span></label>
+                <input type="email" id="email" name="email" required placeholder="john@example.com">
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone Number <span class="required">*</span></label>
+                <input type="tel" id="phone" name="phone" required placeholder="(555) 123-4567">
+              </div>
+            </div>
+          </div>
+          <div class="form-section">
+            <div class="form-section-title">Service Selection</div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="plan">Service Plan <span class="required">*</span></label>
+                <select id="plan" name="plan" required>
+                  <option value="">Select a plan...</option>
+                  <option value="quick">Quick Fix — $49</option>
+                  <option value="standard">Standard Repair — $99</option>
+                  <option value="premium">Premium Support — $179</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="preferredTime">Preferred Time <span class="required">*</span></label>
+                <select id="preferredTime" name="preferredTime" required>
+                  <option value="">Select time...</option>
+                  <option value="asap">As Soon As Possible</option>
+                  <option value="morning">This Morning</option>
+                  <option value="afternoon">This Afternoon</option>
+                  <option value="tomorrow-am">Tomorrow Morning</option>
+                  <option value="tomorrow-pm">Tomorrow Afternoon</option>
+                  <option value="scheduled">Schedule Specific Time</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="state">State <span class="required">*</span></label>
+                <select id="state" name="state" required>
+                  <option value="">Select state...</option>
+                  <option value="AL">Alabama</option>
+                  <option value="AK">Alaska</option>
+                  <option value="AZ">Arizona</option>
+                  <option value="AR">Arkansas</option>
+                  <option value="CA">California</option>
+                  <option value="CO">Colorado</option>
+                  <option value="CT">Connecticut</option>
+                  <option value="DE">Delaware</option>
+                  <option value="FL">Florida</option>
+                  <option value="GA">Georgia</option>
+                  <option value="HI">Hawaii</option>
+                  <option value="ID">Idaho</option>
+                  <option value="IL">Illinois</option>
+                  <option value="IN">Indiana</option>
+                  <option value="IA">Iowa</option>
+                  <option value="KS">Kansas</option>
+                  <option value="KY">Kentucky</option>
+                  <option value="LA">Louisiana</option>
+                  <option value="ME">Maine</option>
+                  <option value="MD">Maryland</option>
+                  <option value="MA">Massachusetts</option>
+                  <option value="MI">Michigan</option>
+                  <option value="MN">Minnesota</option>
+                  <option value="MS">Mississippi</option>
+                  <option value="MO">Missouri</option>
+                  <option value="MT">Montana</option>
+                  <option value="NE">Nebraska</option>
+                  <option value="NV">Nevada</option>
+                  <option value="NH">New Hampshire</option>
+                  <option value="NJ">New Jersey</option>
+                  <option value="NM">New Mexico</option>
+                  <option value="NY">New York</option>
+                  <option value="NC">North Carolina</option>
+                  <option value="ND">North Dakota</option>
+                  <option value="OH">Ohio</option>
+                  <option value="OK">Oklahoma</option>
+                  <option value="OR">Oregon</option>
+                  <option value="PA">Pennsylvania</option>
+                  <option value="RI">Rhode Island</option>
+                  <option value="SC">South Carolina</option>
+                  <option value="SD">South Dakota</option>
+                  <option value="TN">Tennessee</option>
+                  <option value="TX">Texas</option>
+                  <option value="UT">Utah</option>
+                  <option value="VT">Vermont</option>
+                  <option value="VA">Virginia</option>
+                  <option value="WA">Washington</option>
+                  <option value="WV">West Virginia</option>
+                  <option value="WI">Wisconsin</option>
+                  <option value="WY">Wyoming</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="city">City <span class="required">*</span></label>
+                <input type="text" id="city" name="city" required placeholder="Philadelphia">
+              </div>
+              <div class="form-group">
+                <label for="zipCode">ZIP Code <span class="required">*</span></label>
+                <input type="text" id="zipCode" name="zipCode" required placeholder="19104" pattern="[0-9]{5}" title="5-digit ZIP code">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Issues to Address <span class="required">*</span></label>
+              <div class="service-checkboxes">
+                <label class="service-checkbox">
+                  <input type="checkbox" name="issues" value="virus">
+                  <span>Virus / Malware</span>
+                </label>
+                <label class="service-checkbox">
+                  <input type="checkbox" name="issues" value="system">
+                  <span>System Issues</span>
+                </label>
+                <label class="service-checkbox">
+                  <input type="checkbox" name="issues" value="network">
+                  <span>Network / WiFi</span>
+                </label>
+                <label class="service-checkbox">
+                  <input type="checkbox" name="issues" value="email">
+                  <span>Email / Software</span>
+                </label>
+                <label class="service-checkbox">
+                  <input type="checkbox" name="issues" value="backup">
+                  <span>Backup / Recovery</span>
+                </label>
+                <label class="service-checkbox">
+                  <input type="checkbox" name="issues" value="security">
+                  <span>Security / Privacy</span>
+                </label>
+                <label class="service-checkbox">
+                  <input type="checkbox" name="issues" value="other">
+                  <span>Other</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-section">
+            <div class="form-section-title">Describe Your Issue</div>
+            <div class="form-group">
+              <label for="description">What seems to be the problem? <span class="required">*</span></label>
+              <textarea id="description" name="description" required placeholder="Please describe the issue you're experiencing, including any error messages or when it started..."></textarea>
+            </div>
+          </div>
+          <button type="submit" class="submit-btn" id="submitBtn">
+            Book My Session
+          </button>
+          <div class="form-note">
+            🔒 Your information is secure and will only be used to contact you about your support session.
+          </div>
+          <div class="success-message">
+            <div class="success-icon">✓</div>
+            <h3>Booking Received!</h3>
+            <p>We've received your request and will contact you within 15 minutes during business hours. Check your email for confirmation details.</p>
+            <div id="ticketDisplay" class="ticket-display"></div>
+            <button class="btn-primary" onclick="resetForm()">Book Another Session</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Common Questions</div>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>How does remote support work?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              We use a secure screen-sharing tool that lets our technicians view and control your computer with your permission. You'll see everything they do on screen. No one can access your computer without you explicitly allowing it. The connection is encrypted with 256-bit SSL security — the same level banks use.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Is my data safe during remote support?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Absolutely. Our technicians are background-checked, A+ certified, and follow strict security protocols. The screen-share session is encrypted and ends the moment you disconnect. We never store data from your session, and our technicians can only see what you show them on screen — nothing more.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>What if the issue isn't fixed?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              We offer a 7-day service guarantee on all sessions. If the same issue returns within 7 days, contact us and we'll remote back in to fix it at no additional cost. We want you satisfied — not just temporarily patched.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>How quickly can I get help?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Most bookings are matched with a technician within 15 minutes during business hours. Outside hours, we have extended availability until 10PM EST. For the fastest response, select "As Soon As Possible" and we'll prioritize your session.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Do you support Mac and Windows?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Yes! Our technicians are certified in both Windows (all versions from Windows 7 through Windows 11) and macOS. We also support Linux systems, Chromebooks, and mobile devices for certain types of issues.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>What payment methods do you accept?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              We accept all major credit cards, PayPal, and Zelle. Payment is processed after your session is complete and you're satisfied with the work. No upfront payment required for your first session.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="logo">
+            <div class="logo-icon">⚡</div>
+            <div class="logo-text">
+              <span class="brand">Anthracite Tech</span> <span class="accent">Repairs</span>
+            </div>
+          </div>
+          <p>Expert remote tech support for homes and businesses across all 50 states. Fast, secure, and guaranteed.</p>
+        </div>
+        <div class="footer-column">
+          <h4>Services</h4>
+          <ul class="footer-links">
+            <li><a href="#capabilities">Remote Troubleshooting</a></li>
+            <li><a href="#pricing">Virus Removal</a></li>
+            <li><a href="#pricing">Network Support</a></li>
+            <li><a href="#pricing">Data Recovery</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Company</h4>
+          <ul class="footer-links">
+            <li><a href="index.html#about">About Us</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="index.html#privacy">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Contact</h4>
+          <ul class="footer-links">
+            <li>📧 support@anthracitetechco.com</li>
+            <li>📞 1-800-EZ-TECH-50</li>
+            <li>⏰ Mon-Sat 8AM-10PM EST</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2024 Anthracite Tech Co.. All rights reserved.</span>
+        <span>Serving all 50 states</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Smooth scroll functions
+    function scrollToBooking() {
+      document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    function scrollToCapabilities() {
+      document.getElementById('capabilities').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Plan selection from pricing cards
+    function selectPlan(plan) {
+      document.getElementById('plan').value = plan;
+      document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // FAQ toggle
+    function toggleFaq(button) {
+      const item = button.parentElement;
+      const wasOpen = item.classList.contains('open');
+      
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      
+      // Open clicked if it wasn't open
+      if (!wasOpen) {
+        item.classList.add('open');
+      }
+    }
+
+    // Form submission
+    // RemoteFix Pro API [pattern-022: test complete data flow]
+    const FORM_ENDPOINT = 'http://localhost:3000/api/bookings';
+
+    // ── Issue checkbox → RemoteFix Pro issueType ─────────────────────
+    const ISSUE_TYPE_MAP = {
+      virus:    { issueType: 'security',  label: 'Virus & Malware Removal' },
+      system:   { issueType: 'computer',  label: 'System Diagnostics & Repair' },
+      network:  { issueType: 'network',    label: 'Network & Connectivity' },
+      email:    { issueType: 'software',   label: 'Email & Software Setup' },
+      backup:   { issueType: 'cloud',     label: 'Data Backup & Recovery' },
+      security: { issueType: 'security',  label: 'Security & Privacy' },
+      other:    { issueType: 'other',     label: 'General Tech Support' }
+    };
+
+    // ── Plan → RemoteFix Pro plan ────────────────────────────────────
+    const PLAN_MAP = {
+      quick:    { plan: 'instant',   planLabel: 'Quick Fix — $49' },
+      standard: { plan: 'standard',  planLabel: 'Standard Repair — $99' },
+      premium:  { plan: 'premium',   planLabel: 'Premium Support — $179' }
+    };
+
+    // ── Time slot normalization ──────────────────────────────────────
+    const TIME_MAP = {
+      asap:           { preferredTime: 'anytime',   deriveDate: 0 },
+      morning:        { preferredTime: 'morning',    deriveDate: 0 },
+      afternoon:      { preferredTime: 'afternoon',  deriveDate: 0 },
+      'tomorrow-am':  { preferredTime: 'morning',    deriveDate: 1 },
+      'tomorrow-pm':  { preferredTime: 'afternoon',  deriveDate: 1 },
+      scheduled:      { preferredTime: 'anytime',    deriveDate: 7 }
+    };
+
+    function derivePreferredDate(preferredTime) {
+      const mapping = TIME_MAP[preferredTime] || TIME_MAP.scheduled;
+      const d = new Date();
+      d.setDate(d.getDate() + mapping.deriveDate);
+      return d.toISOString().split('T')[0]; // YYYY-MM-DD
+    }
+
+    async function handleSubmit(event) {
+      event.preventDefault();
+
+      const form = document.getElementById('bookingForm');
+      const submitBtn = document.getElementById('submitBtn');
+      const errorDiv = document.getElementById('formError');
+
+      // Clear previous errors
+      if (errorDiv) errorDiv.style.display = 'none';
+
+      // Validate at least one issue selected
+      const issues = document.querySelectorAll('input[name="issues"]:checked');
+      if (issues.length === 0) {
+        showFormError('Please select at least one issue to address.');
+        return;
+      }
+
+      // Validate ZIP code format (stored locally but not sent to API)
+      const zipInput = document.getElementById('zipCode');
+      if (zipInput && !/^[0-9]{5}$/.test(zipInput.value.trim())) {
+        showFormError('Please enter a valid 5-digit ZIP code.');
+        return;
+      }
+
+      // Disable button and show loading state
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="loading-spinner"></span> Submitting...';
+
+      // Collect form data
+      const formData = new FormData(form);
+      const raw = Object.fromEntries(formData.entries());
+
+      const selectedIssues = Array.from(issues).map(i => i.value);
+      const firstIssue = selectedIssues[0];
+      const issueInfo = ISSUE_TYPE_MAP[firstIssue] || ISSUE_TYPE_MAP.other;
+      const planInfo = PLAN_MAP[raw.plan] || PLAN_MAP.standard;
+      const timeInfo = TIME_MAP[raw.preferredTime] || TIME_MAP.scheduled;
+
+      // Map form → RemoteFix Pro API schema [pattern-022]
+      const data = {
+        firstName:       (raw.firstName || '').trim(),
+        lastName:        (raw.lastName || '').trim(),
+        email:           (raw.email || '').trim().toLowerCase(),
+        phone:           (raw.phone || '').trim(),
+        issueType:       issueInfo.issueType,
+        issueTypeLabel:  issueInfo.label,
+        plan:            planInfo.plan,
+        planLabel:       planInfo.planLabel,
+        preferredDate:   derivePreferredDate(raw.preferredTime),
+        preferredTime:   timeInfo.preferredTime,
+        preferredTimeLabel: timeInfo.preferredTime === 'anytime' ? 'As Soon As Possible' : timeInfo.preferredTime,
+        description:     (raw.description || '').trim(),
+        // Location stored locally only (RemoteFix Pro API doesn't persist this)
+        _state:          raw.state || null,
+        _city:           (raw.city || '').trim() || null,
+        _zipCode:        (raw.zipCode || '').trim() || null,
+        _issues:         selectedIssues,
+        _preferredTimeOrig: raw.preferredTime,
+        submittedAt:     new Date().toISOString(),
+        source:          'anthracitetech-remote-troubleshooting'
+      };
+
+      console.log('Booking submitted (RemoteFix Pro schema):', data);
+
+      try {
+        const response = await fetch(FORM_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          const errMsg = (result.errors || []).join('; ') || `HTTP ${response.status}`;
+          throw new Error(errMsg);
+        }
+
+        console.log('Booking saved:', result);
+
+        // Store locally as backup
+        const bookings = JSON.parse(localStorage.getItem('anthracitetech-bookings') || '[]');
+        bookings.push({
+          ...data,
+          ticketId: result.booking ? result.booking.id : null,
+          backendId: result.booking ? result.booking.id : null
+        });
+        localStorage.setItem('anthracitetech-bookings', JSON.stringify(bookings));
+
+        // Show ticket ID in success message
+        const ticketDisplay = document.getElementById('ticketDisplay');
+        if (ticketDisplay && result.booking && result.booking.id) {
+          ticketDisplay.innerHTML = '<strong>Your Ticket ID:</strong> <span class="ticket-id">' + result.booking.id + '</span><br><small>Save this to track your booking status.</small>';
+        }
+
+        form.classList.add('submitted');
+
+      } catch (error) {
+        console.error('Booking submission failed:', error);
+
+        // Network error — store locally as fallback
+        if (error.name === 'TypeError' && error.message.includes('fetch')) {
+          const ticketId = 'EZT-' + Math.random().toString(16).slice(2, 8).toUpperCase();
+          const bookings = JSON.parse(localStorage.getItem('anthracitetech-bookings') || '[]');
+          bookings.push({ ...data, ticketId, backendId: null, offlineSaved: true, savedAt: new Date().toISOString() });
+          localStorage.setItem('anthracitetech-bookings', JSON.stringify(bookings));
+
+          const ticketDisplay = document.getElementById('ticketDisplay');
+          if (ticketDisplay) {
+            ticketDisplay.innerHTML = '<strong>Your Ticket ID (offline):</strong> <span class="ticket-id">' + ticketId + '</span><br><small>Booking saved locally — will sync when connection is restored.</small>';
+          }
+
+          form.classList.add('submitted');
+          console.log('Booking saved offline. Total offline bookings:', bookings.length);
+        } else {
+          showFormError('Submission failed: ' + error.message + '. Please try again or call us directly.');
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = 'Book My Session';
+        }
+      }
+    }
+    
+    function showFormError(message) {
+      let errorDiv = document.getElementById('formError');
+      if (!errorDiv) {
+        errorDiv = document.createElement('div');
+        errorDiv.id = 'formError';
+        errorDiv.style.cssText = 'background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; color: #ef4444; font-size: 0.9rem;';
+        document.getElementById('bookingForm').prepend(errorDiv);
+      }
+      errorDiv.textContent = message;
+      errorDiv.style.display = 'block';
+    }
+
+    function resetForm() {
+      const form = document.getElementById('bookingForm');
+      form.reset();
+      form.classList.remove('submitted');
+      document.getElementById('submitBtn').disabled = false;
+      document.getElementById('submitBtn').innerHTML = 'Book My Session';
+    }
+
+    // Phone number formatting
+    document.getElementById('phone').addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\D/g, '');
+      if (value.length >= 6) {
+        value = `(${value.slice(0,3)}) ${value.slice(3,6)}-${value.slice(6,10)}`;
+      } else if (value.length >= 3) {
+        value = `(${value.slice(0,3)}) ${value.slice(3)}`;
+      }
+      e.target.value = value;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emergency &amp; Same-Day Tech Repair | Anthracite Tech Co. — Silicon Valley</title>
+  <meta name="description" content="Urgent tech repair with transparent pricing: free diagnostics, rush charges, and after-hours rates. Same-day turnaround in San Jose, Santa Clara &amp; Mountain View. Call now for emergency service.">
+  <link rel="canonical" href="https://anthracitetechco.com/emergency-repair.html">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta property="og:title" content="Emergency &amp; Same-Day Tech Repair | Anthracite Tech Co.">
+  <meta property="og:description" content="Urgent tech repair with transparent pricing. Same-day turnaround, rush service, and after-hours support in Silicon Valley.">
+  <meta property="og:image" content="https://anthracitetechco.com/hero-bg.png">
+  <meta property="og:url" content="https://anthracitetechco.com/emergency-repair.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <!-- Plausible Analytics - privacy-friendly, no cookies -->
+  <script defer data-domain="poppy-quarry-nzmh.here.now" src="https://plausible.io/js/script.tagged-events.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --background: #0c1524;
+      --foreground: #f8fafc;
+      --card: #111d30;
+      --card-foreground: #f8fafc;
+      --primary: #3b82f6;
+      --primary-foreground: #f8fafc;
+      --secondary: #1e293b;
+      --secondary-foreground: #f8fafc;
+      --muted: #1e293b;
+      --muted-foreground: #94a3b8;
+      --border: #1e293b;
+      --input: #1e293b;
+      --ring: #3b82f6;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --font-heading: 'Outfit', system-ui, sans-serif;
+      --urgent: #ef4444;
+      --urgent-soft: rgba(239,68,68,.12);
+      --warning: #f59e0b;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--background);
+      color: var(--foreground);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 { font-family: var(--font-heading); }
+    a { color: inherit; text-decoration: none; }
+
+    /* HEADER */
+    .header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1rem 1.5rem;
+      transition: background .3s, border-color .3s, box-shadow .3s;
+      border-bottom: 1px solid transparent;
+    }
+    .header.scrolled {
+      background: rgba(12,21,36,.92);
+      border-bottom-color: var(--border);
+      box-shadow: 0 2px 24px rgba(0,0,0,.35);
+      backdrop-filter: blur(12px);
+    }
+    .header-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { display: flex; align-items: center; gap: .5rem; }
+    .logo svg { width: 28px; height: 28px; color: var(--primary); }
+    .logo-text { font-family: var(--font-heading); font-weight: 800; font-size: 1.25rem; }
+    .logo-text .brand { color: var(--foreground); }
+    .logo-text .sub { color: var(--primary); }
+
+    .nav-links {
+      display: none; list-style: none; gap: .5rem; align-items: center;
+    }
+    .nav-links a {
+      padding: .5rem 1rem; border-radius: 9999px; font-size: .9rem;
+      font-weight: 500; color: var(--muted-foreground);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--foreground); }
+    .nav-links .cta-btn {
+      background: var(--primary); color: var(--primary-foreground);
+      box-shadow: 0 4px 20px rgba(59,130,246,.4);
+      font-weight: 600;
+    }
+    .nav-links .cta-btn:hover { box-shadow: 0 6px 28px rgba(59,130,246,.55); }
+
+    .hamburger {
+      display: flex; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px; background: var(--foreground);
+      border-radius: 2px; transition: transform .3s, opacity .3s;
+    }
+    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none; flex-direction: column; gap: .25rem;
+      padding: 1rem 0; list-style: none;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      display: block; padding: .75rem 1rem; border-radius: .75rem;
+      font-weight: 500; color: var(--muted-foreground); transition: background .2s, color .2s;
+    }
+    .mobile-menu a:hover { background: var(--secondary); color: var(--foreground); }
+    .mobile-menu .cta-btn {
+      background: var(--primary); color: var(--primary-foreground);
+      text-align: center; margin-top: .5rem;
+      box-shadow: 0 4px 20px rgba(59,130,246,.4);
+    }
+
+    @media(min-width:768px) {
+      .nav-links { display: flex; }
+      .hamburger { display: none; }
+      .header { padding: .875rem 2rem; }
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 92vh; display: flex; align-items: center; justify-content: center;
+      position: relative; padding: 7rem 1.5rem 4rem; text-align: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(180deg, rgba(12,21,36,.3) 0%, rgba(12,21,36,.85) 55%, var(--background) 100%),
+        linear-gradient(135deg, rgba(239,68,68,.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 0%, rgba(59,130,246,.08) 0%, transparent 70%);
+      background-color: var(--background);
+    }
+    .hero-content { position: relative; max-width: 860px; margin: 0 auto; }
+
+    .badge-ping {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--secondary); border: 1px solid rgba(239,68,68,.3);
+      padding: .5rem 1.25rem; border-radius: 9999px; font-size: .85rem;
+      font-weight: 500; color: var(--muted-foreground); margin-bottom: 2rem;
+    }
+    .ping-dot { position: relative; width: 8px; height: 8px; }
+    .ping-dot span:first-child {
+      position: absolute; inset: 0; border-radius: 50%; background: var(--urgent);
+      animation: ping 1.5s cubic-bezier(0,0,.2,1) infinite;
+    }
+    .ping-dot span:last-child {
+      position: relative; display: block; width: 8px; height: 8px;
+      border-radius: 50%; background: var(--urgent);
+    }
+    @keyframes ping { 75%,100% { transform: scale(2.5); opacity: 0; } }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.2rem); font-weight: 800;
+      line-height: 1.08; margin-bottom: 1.25rem;
+    }
+    .hero h1 .gradient-text {
+      background: linear-gradient(135deg, var(--urgent), #f87171);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p.subtitle {
+      font-size: 1.15rem; color: var(--muted-foreground);
+      max-width: 640px; margin: 0 auto 2rem; line-height: 1.7;
+    }
+    .cta-group {
+      display: flex; gap: 1rem; justify-content: center;
+      flex-wrap: wrap; margin-bottom: 3rem;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .85rem 2rem; border-radius: 9999px; font-size: .95rem;
+      font-weight: 600; border: none; cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary {
+      background: var(--urgent); color: var(--primary-foreground);
+      box-shadow: 0 4px 20px rgba(239,68,68,.4);
+    }
+    .btn-primary:hover { box-shadow: 0 6px 28px rgba(239,68,68,.55); }
+    .btn-secondary {
+      background: var(--secondary); color: var(--secondary-foreground);
+      border: 1px solid var(--border);
+    }
+    .btn svg { width: 18px; height: 18px; }
+
+    .feature-badges {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    }
+    .feature-badge {
+      display: flex; align-items: center; gap: .5rem;
+      background: rgba(30,41,59,.6); border: 1px solid rgba(255,255,255,.06);
+      padding: .6rem 1.2rem; border-radius: 9999px; font-size: .85rem;
+      color: var(--muted-foreground); backdrop-filter: blur(4px);
+    }
+    .feature-badge svg { width: 16px; height: 16px; color: var(--urgent); flex-shrink: 0; }
+
+    /* URGENCY STRIP */
+    .urgency-strip {
+      padding: 3rem 1.5rem;
+      background: linear-gradient(135deg, rgba(239,68,68,.06), rgba(245,158,11,.04));
+      border-top: 1px solid rgba(239,68,68,.12);
+      border-bottom: 1px solid rgba(239,68,68,.12);
+    }
+    .urgency-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; flex-direction: column; align-items: center; gap: 1.5rem;
+      text-align: center;
+    }
+    @media(min-width:768px) {
+      .urgency-inner { flex-direction: row; justify-content: space-between; text-align: left; }
+    }
+    .urgency-text h3 {
+      font-size: 1.35rem; font-weight: 700; margin-bottom: .4rem;
+    }
+    .urgency-text p {
+      color: var(--muted-foreground); font-size: .95rem; max-width: 480px;
+    }
+    .urgency-stats {
+      display: flex; gap: 2rem;
+    }
+    .urgency-stat { text-align: center; }
+    .urgency-stat-value {
+      font-size: 1.6rem; font-weight: 800; color: var(--urgent);
+      font-family: var(--font-heading);
+    }
+    .urgency-stat-label {
+      font-size: .8rem; color: var(--muted-foreground); text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    /* SECTIONS COMMON */
+    .section-header {
+      text-align: center; max-width: 640px; margin: 0 auto 3rem;
+    }
+    .section-header h2 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 700; margin-bottom: .75rem;
+    }
+    .section-header p { color: var(--muted-foreground); font-size: 1.05rem; }
+
+    /* CAPABILITIES */
+    .capabilities {
+      padding: 6rem 1.5rem; position: relative;
+    }
+    .capabilities::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 60%; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--urgent), transparent);
+    }
+    .capabilities-grid {
+      display: grid; grid-template-columns: 1fr; gap: 1.25rem;
+      max-width: 1200px; margin: 0 auto;
+    }
+    @media(min-width:640px) { .capabilities-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media(min-width:1024px) { .capabilities-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .capability-card {
+      background: var(--card); border: 1px solid rgba(255,255,255,.05);
+      border-radius: 1rem; padding: 2rem 1.5rem; position: relative;
+      overflow: hidden; transition: transform .3s, box-shadow .3s;
+      opacity: 0; transform: translateY(30px);
+    }
+    .capability-card.visible {
+      opacity: 1; transform: translateY(0);
+      transition: opacity .6s ease, transform .6s ease, box-shadow .3s;
+    }
+    .capability-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 40px rgba(239,68,68,.10), 0 8px 32px rgba(0,0,0,.3);
+    }
+    .card-icon-box {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px; border-radius: .75rem;
+      background: var(--urgent-soft); margin-bottom: 1rem;
+    }
+    .card-icon-box svg { width: 24px; height: 24px; color: var(--urgent); }
+    .capability-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: .35rem; }
+    .capability-card .card-desc {
+      font-size: .875rem; color: var(--muted-foreground); margin-bottom: 1rem;
+    }
+    .capability-list { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+    .capability-list li {
+      display: flex; align-items: center; gap: .6rem; font-size: .9rem;
+      color: var(--muted-foreground);
+    }
+    .capability-list li svg { width: 16px; height: 16px; color: var(--urgent); flex-shrink: 0; }
+
+    /* PRICING */
+    .pricing {
+      padding: 6rem 1.5rem; position: relative;
+    }
+    .pricing::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 60%; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--urgent), transparent);
+    }
+    .pricing-grid {
+      display: grid; grid-template-columns: 1fr; gap: 1.25rem;
+      max-width: 1200px; margin: 0 auto;
+    }
+    @media(min-width:640px) { .pricing-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media(min-width:1024px) { .pricing-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .pricing-card {
+      background: var(--card); border: 1px solid rgba(255,255,255,.05);
+      border-radius: 1rem; padding: 2rem 1.5rem; position: relative;
+      overflow: hidden; transition: transform .3s, box-shadow .3s;
+      opacity: 0; transform: translateY(30px);
+      display: flex; flex-direction: column;
+    }
+    .pricing-card.visible {
+      opacity: 1; transform: translateY(0);
+      transition: opacity .6s ease, transform .6s ease, box-shadow .3s;
+    }
+    .pricing-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 40px rgba(239,68,68,.10), 0 8px 32px rgba(0,0,0,.3);
+    }
+    .pricing-card.featured {
+      border-color: rgba(239,68,68,.3);
+      box-shadow: 0 0 30px rgba(239,68,68,.08);
+    }
+    .pricing-card .badge {
+      position: absolute; top: 1rem; right: 1rem;
+      background: rgba(239,68,68,.15); color: var(--urgent);
+      font-size: .7rem; font-weight: 700; text-transform: uppercase;
+      padding: .3rem .75rem; border-radius: 9999px; letter-spacing: .05em;
+    }
+    .pricing-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: .25rem; }
+    .pricing-card .package-price {
+      font-size: 2.2rem; font-weight: 800; color: var(--urgent);
+      font-family: var(--font-heading); margin-bottom: .5rem;
+    }
+    .pricing-card .package-price span {
+      font-size: .9rem; font-weight: 500; color: var(--muted-foreground);
+    }
+    .pricing-card .package-desc {
+      font-size: .875rem; color: var(--muted-foreground); margin-bottom: 1.25rem;
+    }
+    .package-features { list-style: none; display: flex; flex-direction: column; gap: .6rem; margin-bottom: 1.5rem; flex-grow: 1; }
+    .package-features li {
+      display: flex; align-items: flex-start; gap: .5rem; font-size: .85rem; color: var(--muted-foreground);
+    }
+    .package-features li svg { width: 16px; height: 16px; color: #22c55e; flex-shrink: 0; margin-top: 2px; }
+    .package-btn {
+      width: 100%; text-align: center; padding: .7rem; border-radius: .75rem;
+      font-weight: 600; font-size: .9rem; border: 1px solid var(--border);
+      background: var(--secondary); color: var(--foreground);
+      cursor: pointer; transition: background .2s, border-color .2s; text-decoration: none; display: inline-block;
+    }
+    .package-btn:hover { background: var(--urgent); color: var(--primary-foreground); border-color: var(--urgent); }
+    .pricing-card.featured .package-btn { background: var(--urgent); color: var(--primary-foreground); border-color: var(--urgent); }
+    .pricing-card.featured .package-btn:hover { box-shadow: 0 4px 20px rgba(239,68,68,.4); }
+
+    /* TURNAROUND */
+    .turnaround {
+      padding: 6rem 1.5rem; position: relative;
+    }
+    .turnaround::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 60%; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    }
+    .turnaround-grid {
+      display: grid; grid-template-columns: 1fr; gap: 1.25rem;
+      max-width: 1200px; margin: 0 auto;
+    }
+    @media(min-width:640px) { .turnaround-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media(min-width:1024px) { .turnaround-grid { grid-template-columns: repeat(4, 1fr); } }
+    .turnaround-card {
+      background: var(--card); border: 1px solid rgba(255,255,255,.05);
+      border-radius: 1rem; padding: 2rem 1.5rem; text-align: center;
+      opacity: 0; transform: translateY(30px);
+      transition: transform .3s, box-shadow .3s;
+    }
+    .turnaround-card.visible {
+      opacity: 1; transform: translateY(0);
+      transition: opacity .6s ease, transform .6s ease, box-shadow .3s;
+    }
+    .turnaround-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 40px rgba(59,130,246,.10), 0 8px 32px rgba(0,0,0,.3);
+    }
+    .turnaround-card .time-value {
+      font-size: 2rem; font-weight: 800; color: var(--primary);
+      font-family: var(--font-heading); margin-bottom: .5rem;
+    }
+    .turnaround-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: .5rem; }
+    .turnaround-card p { font-size: .9rem; color: var(--muted-foreground); line-height: 1.7; }
+
+    /* CONTACT METHODS */
+    .contact-methods {
+      padding: 6rem 1.5rem; position: relative;
+      background: linear-gradient(180deg, rgba(239,68,68,.04), transparent);
+    }
+    .contact-methods::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 60%; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--urgent), transparent);
+    }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr; gap: 1.25rem;
+      max-width: 1200px; margin: 0 auto;
+    }
+    @media(min-width:640px) { .contact-grid { grid-template-columns: repeat(3, 1fr); } }
+    .contact-card {
+      background: var(--card); border: 1px solid rgba(255,255,255,.05);
+      border-radius: 1rem; padding: 2rem 1.5rem; text-align: center;
+      opacity: 0; transform: translateY(30px);
+      transition: transform .3s, box-shadow .3s;
+    }
+    .contact-card.visible {
+      opacity: 1; transform: translateY(0);
+      transition: opacity .6s ease, transform .6s ease, box-shadow .3s;
+    }
+    .contact-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 40px rgba(59,130,246,.10), 0 8px 32px rgba(0,0,0,.3);
+    }
+    .contact-card .contact-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--urgent-soft); margin-bottom: 1.25rem;
+    }
+    .contact-card .contact-icon svg { width: 28px; height: 28px; color: var(--urgent); }
+    .contact-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: .5rem; }
+    .contact-card p { font-size: .9rem; color: var(--muted-foreground); line-height: 1.7; margin-bottom: 1.25rem; }
+    .contact-card .contact-action {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .6rem 1.5rem; border-radius: 9999px;
+      font-weight: 600; font-size: .9rem;
+      background: var(--secondary); color: var(--foreground);
+      border: 1px solid var(--border); transition: all .2s;
+    }
+    .contact-card .contact-action:hover { background: var(--urgent); color: var(--primary-foreground); border-color: var(--urgent); }
+
+    /* BOOKING */
+    .booking {
+      padding: 6rem 1.5rem; position: relative; overflow: hidden;
+    }
+    .booking-glow {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(239,68,68,.10), transparent 70%);
+      filter: blur(80px); pointer-events: none;
+    }
+    .booking-inner { position: relative; max-width: 720px; margin: 0 auto; }
+
+    .glass-card {
+      background: rgba(17,29,48,.8); border: 1px solid rgba(255,255,255,.06);
+      border-radius: 1.5rem; padding: 2.5rem 2rem;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 20px 60px rgba(0,0,0,.4);
+    }
+    @media(min-width:640px) { .glass-card { padding: 3rem; } }
+
+    .form-grid {
+      display: grid; grid-template-columns: 1fr; gap: 1.25rem;
+    }
+    @media(min-width:640px) { .form-grid { grid-template-columns: repeat(2, 1fr); } }
+    .form-grid .full-width { grid-column: 1 / -1; }
+
+    .form-group label {
+      display: block; font-size: .875rem; font-weight: 500;
+      margin-bottom: .4rem; color: var(--muted-foreground);
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: .7rem 1rem;
+      background: var(--input); border: 1px solid var(--border);
+      border-radius: .75rem; color: var(--foreground);
+      font-family: var(--font-body); font-size: .9rem;
+      transition: border-color .2s, box-shadow .2s;
+      outline: none;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: var(--ring);
+      box-shadow: 0 0 0 3px rgba(59,130,246,.15);
+    }
+    .form-group select { cursor: pointer; }
+    .form-group select option { background: var(--card); color: var(--foreground); }
+    .form-group textarea { resize: vertical; }
+
+    .checkbox-group {
+      display: flex; align-items: flex-start; gap: .75rem;
+      padding-top: .25rem;
+    }
+    .checkbox-group input[type="checkbox"] {
+      width: 18px; height: 18px; margin-top: 3px;
+      accent-color: var(--primary); cursor: pointer; flex-shrink: 0;
+    }
+    .checkbox-group .check-label { font-size: .9rem; }
+    .checkbox-group .check-label strong { color: var(--foreground); }
+    .checkbox-group .check-desc { font-size: .8rem; color: var(--muted-foreground); margin-top: .15rem; }
+
+    .submit-btn {
+      width: 100%; padding: .85rem; border: none; border-radius: .75rem;
+      font-family: var(--font-body); font-size: 1rem; font-weight: 600;
+      color: var(--primary-foreground); cursor: pointer;
+      background: linear-gradient(135deg, var(--urgent), #dc2626);
+      box-shadow: 0 4px 20px rgba(239,68,68,.35);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .submit-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 28px rgba(239,68,68,.5);
+    }
+    .submit-btn:disabled {
+      opacity: .6; cursor: not-allowed;
+      transform: none !important;
+    }
+
+    /* INQUIRY / BOOKING FORM */
+    .inquiry-section {
+      padding: 6rem 1.5rem; position: relative;
+      background: linear-gradient(180deg, rgba(239,68,68,.04), transparent);
+    }
+    .inquiry-section::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 60%; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--urgent), transparent);
+    }
+
+    /* FAQ */
+    .faq {
+      padding: 6rem 1.5rem; position: relative;
+    }
+    .faq::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 60%; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    }
+    .faq-list {
+      max-width: 800px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: .75rem;
+    }
+    .faq-item {
+      background: var(--card); border: 1px solid rgba(255,255,255,.05);
+      border-radius: 1rem; overflow: hidden;
+      opacity: 0; transform: translateY(20px);
+    }
+    .faq-item.visible { opacity: 1; transform: translateY(0); transition: opacity .5s ease, transform .5s ease; }
+    .faq-question {
+      width: 100%; background: none; border: none;
+      padding: 1.25rem 1.5rem; text-align: left;
+      font-family: var(--font-body); font-size: .95rem; font-weight: 600;
+      color: var(--foreground); cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .faq-question svg {
+      width: 18px; height: 18px; color: var(--muted-foreground);
+      transition: transform .3s; flex-shrink: 0;
+    }
+    .faq-item.open .faq-question svg { transform: rotate(180deg); }
+    .faq-answer {
+      max-height: 0; overflow: hidden;
+      transition: max-height .3s ease, padding .3s ease;
+      padding: 0 1.5rem;
+      font-size: .9rem; color: var(--muted-foreground); line-height: 1.7;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+      padding: 0 1.5rem 1.25rem;
+    }
+
+    /* FOOTER */
+    .footer {
+      background: var(--card); border-top: 1px solid var(--border);
+      padding: 3rem 1.5rem 1.5rem;
+    }
+    .footer-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr; gap: 2rem;
+    }
+    @media(min-width:640px) { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media(min-width:768px) { .footer-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media(min-width:900px) { .footer-grid { grid-template-columns: repeat(4, 1fr); } }
+
+    .footer-col h4 {
+      font-size: 1rem; font-weight: 700; margin-bottom: .75rem;
+      color: var(--foreground);
+    }
+    .footer-col p, .footer-col li {
+      font-size: .9rem; color: var(--muted-foreground); line-height: 1.8;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col .logo-desc {
+      font-size: .9rem; color: var(--muted-foreground); margin-top: .75rem;
+      max-width: 280px; line-height: 1.7;
+    }
+    .footer-bottom {
+      max-width: 1200px; margin: 2rem auto 0; padding-top: 1.5rem;
+      border-top: 1px solid var(--border); text-align: center;
+      font-size: .85rem; color: var(--muted-foreground);
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 200;
+      background: #166534; color: #f0fdf4; padding: 1rem 1.5rem;
+      border-radius: .75rem; font-weight: 500; font-size: .95rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,.4);
+      transform: translateY(120%); opacity: 0;
+      transition: transform .4s ease, opacity .4s ease;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast--error { background: #991b1b; color: #fef2f2; }
+
+    /* UTILITIES */
+    .emergency-badge {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: rgba(239,68,68,.1); color: #f87171;
+      font-size: .75rem; font-weight: 600; padding: .35rem .7rem;
+      border-radius: 9999px; margin-bottom: 1rem;
+      border: 1px solid rgba(239,68,68,.2);
+    }
+    .emergency-badge svg { width: 14px; height: 14px; }
+
+    /* TICKET TRACKER */
+    .tracker {
+      padding: 4rem 1.5rem; position: relative;
+      background: linear-gradient(180deg, rgba(59,130,246,.04), transparent);
+    }
+    .tracker::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 60%; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    }
+    .tracker-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+    .tracker-input-group {
+      display: flex; gap: .75rem; margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .tracker-input-group input {
+      flex: 1; min-width: 200px; padding: .75rem 1rem;
+      background: var(--input); border: 1px solid var(--border);
+      border-radius: .75rem; color: var(--foreground);
+      font-family: var(--font-body); font-size: .9rem;
+      outline: none;
+    }
+    .tracker-input-group input:focus {
+      border-color: var(--ring);
+      box-shadow: 0 0 0 3px rgba(59,130,246,.15);
+    }
+    .tracker-btn {
+      padding: .75rem 1.5rem; border: none; border-radius: .75rem;
+      font-family: var(--font-body); font-size: .9rem; font-weight: 600;
+      color: var(--primary-foreground); cursor: pointer;
+      background: var(--primary);
+      transition: background .2s;
+    }
+    .tracker-btn:hover { background: #2563eb; }
+    .tracker-result {
+      margin-top: 1.5rem; text-align: left;
+      background: var(--card); border: 1px solid rgba(255,255,255,.05);
+      border-radius: 1rem; padding: 1.5rem;
+      display: none;
+    }
+    .tracker-result.visible { display: block; animation: fadeIn .3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .tracker-result .status-badge {
+      display: inline-block; padding: .35rem .85rem; border-radius: 9999px;
+      font-size: .8rem; font-weight: 600; margin-bottom: .75rem;
+    }
+    .status-received { background: rgba(59,130,246,.15); color: var(--primary); }
+    .status-confirmed { background: rgba(34,197,94,.15); color: #22c55e; }
+    .status-in-progress { background: rgba(245,158,11,.15); color: #f59e0b; }
+    .status-completed { background: rgba(16,185,129,.15); color: #10b981; }
+    .status-cancelled { background: rgba(239,68,68,.15); color: #ef4444; }
+
+    input[type="datetime-local"] { color-scheme: dark; }
+    input[type="datetime-local"]::-webkit-calendar-picker-indicator { filter: invert(1); cursor: pointer; }
+
+    /* AVAILABILITY NOTE */
+    .availability-note {
+      background: rgba(239,68,68,.08); border: 1px solid rgba(239,68,68,.15);
+      border-radius: .75rem; padding: 1rem 1.25rem; margin-bottom: 1.5rem;
+      display: flex; align-items: flex-start; gap: .75rem;
+    }
+    .availability-note svg { width: 20px; height: 20px; color: var(--urgent); flex-shrink: 0; margin-top: 2px; }
+    .availability-note p { font-size: .85rem; color: var(--muted-foreground); line-height: 1.6; margin: 0; }
+    .availability-note strong { color: var(--foreground); }
+  </style>
+
+  <!-- Service Schema for Emergency Repair -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Emergency & Same-Day Tech Repair",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Anthracite Tech Co.",
+      "url": "https://anthracitetechco.com",
+      "telephone": "+1-555-123-4567",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "123 Tech Boulevard",
+        "addressLocality": "San Jose",
+        "addressRegion": "CA",
+        "postalCode": "94000",
+        "addressCountry": "US"
+      }
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "San Jose",
+      "containedIn": { "@type": "State", "name": "California" }
+    },
+    "description": "Emergency and same-day tech repair services in Silicon Valley. Transparent pricing with diagnostic fees, rush charges, and after-hours rates. Same-day turnaround on most repairs.",
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Emergency Same-Day Repair",
+        "price": "65.00",
+        "priceCurrency": "USD",
+        "priceUnit": "per hour",
+        "description": "Standard same-day labor rate. Parts billed separately."
+      },
+      {
+        "@type": "Offer",
+        "name": "Rush Service Charge",
+        "price": "50.00",
+        "priceCurrency": "USD",
+        "description": "Priority queue skip for guaranteed same-day completion."
+      },
+      {
+        "@type": "Offer",
+        "name": "After-Hours Rate Surcharge",
+        "price": "75.00",
+        "priceCurrency": "USD",
+        "description": "Surcharge for repairs after 6pm weekdays and all weekend hours."
+      }
+    ],
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "serviceType": "Emergency Repair",
+      "servicePhone": { "@type": "ContactPoint", "telephone": "+1-555-123-4567", "contactType": "emergency", "availableLanguage": "English" },
+      "serviceSmsNumber": { "@type": "ContactPoint", "telephone": "+1-555-123-4567", "contactType": "text support" }
+    }
+  }
+  </script>
+
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://anthracitetechco.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Emergency Repair", "item": "https://anthracitetechco.com/emergency-repair.html" }
+    ]
+  }
+  </script>
+
+  <!-- ═══ ORGANIZATION SCHEMA ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Anthracite Tech Co.",
+    "alternateName": "Anthracite Tech",
+    "url": "https://anthracitetechco.com",
+    "logo": "https://anthracitetechco.com/favicon.svg",
+    "image": "https://anthracitetechco.com/hero-bg.png",
+    "description": "Professional tech repair and IT services in Silicon Valley and nationwide. Same-day repairs, remote support, and emergency service backed by our 90-day warranty.",
+    "telephone": "+1-555-123-4567",
+    "email": "support@anthracitetechco.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "123 Tech Boulevard",
+      "addressLocality": "San Jose",
+      "addressRegion": "CA",
+      "postalCode": "94000",
+      "addressCountry": "US"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+1-555-123-4567",
+      "contactType": "technical support",
+      "availableLanguage": "English",
+      "areaServed": "US",
+      "hoursAvailable": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+          "opens": "09:00",
+          "closes": "19:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "10:00",
+          "closes": "17:00"
+        }
+      ]
+    },
+    "sameAs": []
+  }
+  </script>
+
+  <!-- ═══ FAQPAGE SCHEMA ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What counts as an emergency repair?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Emergency repairs include critical device failures that prevent work or school, data loss situations, security breaches, and hardware damage that renders a device unusable. We prioritize these tickets for same-day service."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How quickly can you fix my device?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most same-day repairs are completed within 1–2 hours of drop-off or technician arrival. Complex issues like motherboard repair or data recovery may take 24–48 hours. We'll give you a firm timeline during the free diagnostic."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a diagnostic fee for emergency repairs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No — diagnostics are always free, even for emergency and same-day repairs. We'll inspect your device, explain the issue, and provide a firm quote before any work begins. No pressure, no hidden fees."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you offer after-hours emergency service?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. We offer after-hours repairs with a $75 surcharge for service after 6pm on weekdays and all weekend hours. Rush service ($50) skips the queue for guaranteed same-day completion during regular business hours."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is your warranty on emergency repairs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "All repairs come with a 90-day warranty on parts and labor. If the same issue reoccurs within 90 days, we'll make it right at no extra charge. This applies to emergency, same-day, and standard repairs alike."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        <span class="logo-text"><span class="brand">Anthracite Tech</span> <span class="sub">Repairs</span></span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="tech-guide.html">Tech Guide</a></li>
+          <li><a href="job-summary.html">Analytics</a></li>
+          <li><a href="repair-process.html">Repair Process</a></li>
+          <li><a href="emergency-repair.html" style="color:var(--foreground);">Emergency Repair</a></li>
+          <li><a href="nationwide-remote.html">Nationwide Remote</a></li>
+          <li><a href="nationwide-remote-troubleshooting.html">Remote Troubleshooting</a></li>
+          <li><a href="#book" class="cta-btn">Book Now</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <ul class="mobile-menu" id="mobileMenu">
+      <li><a href="index.html" class="mobile-link">Home</a></li>
+      <li><a href="tech-guide.html" class="mobile-link">Tech Guide</a></li>
+      <li><a href="job-summary.html" class="mobile-link">Analytics</a></li>
+      <li><a href="repair-process.html" class="mobile-link">Repair Process</a></li>
+      <li><a href="emergency-repair.html" class="mobile-link">Emergency Repair</a></li>
+      <li><a href="nationwide-remote.html" class="mobile-link">Nationwide Remote</a></li>
+      <li><a href="nationwide-remote-troubleshooting.html" class="mobile-link">Remote Troubleshooting</a></li>
+      <li><a href="#book" class="cta-btn mobile-link">Book Now</a></li>
+    </ul>
+  </header>
+
+  <main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="badge-ping">
+        <div class="ping-dot"><span></span><span></span></div>
+        Emergency technicians on standby
+      </div>
+      <h1>Tech Emergency? <br><span class="gradient-text">We Fix It Today.</span></h1>
+      <p class="subtitle">Same-day repair with transparent pricing in Silicon Valley. No hidden fees, no surprises — just fast, reliable service when you need it most. Free diagnostic included.</p>
+      <div class="cta-group">
+        <a href="tel:+15551234567" class="btn btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Call Now: (555) 123-4567
+        </a>
+        <a href="#book" class="btn btn-secondary">Book Emergency Repair</a>
+      </div>
+      <div class="feature-badges">
+        <div class="feature-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Same-Day Turnaround
+        </div>
+        <div class="feature-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Free Diagnostic
+        </div>
+        <div class="feature-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Rush Service Available
+        </div>
+        <div class="feature-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          After-Hours Support
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- URGENCY STRIP -->
+  <section class="urgency-strip">
+    <div class="urgency-inner">
+      <div class="urgency-text">
+        <h3>When Every Minute Counts</h3>
+        <p>Deadlines, presentations, and critical work cannot wait. Our emergency repair team is ready to get you back online fast.</p>
+      </div>
+      <div class="urgency-stats">
+        <div class="urgency-stat">
+          <div class="urgency-stat-value">&lt;30m</div>
+          <div class="urgency-stat-label">Avg. Callback</div>
+        </div>
+        <div class="urgency-stat">
+          <div class="urgency-stat-value">2-4h</div>
+          <div class="urgency-stat-label">House Call Window</div>
+        </div>
+        <div class="urgency-stat">
+          <div class="urgency-stat-value">90%</div>
+          <div class="urgency-stat-label">Same-Day Fix Rate</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPABILITIES -->
+  <section class="capabilities" id="capabilities">
+    <div class="section-header">
+      <h2>Emergency Repairs We Handle</h2>
+      <p>From cracked screens to data emergencies, our technicians are equipped to diagnose and fix urgent issues on the spot.</p>
+    </div>
+    <div class="capabilities-grid">
+      <div class="capability-card" data-animate>
+        <div class="card-icon-box">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+        </div>
+        <h3>Phone &amp; Tablet Screens</h3>
+        <p class="card-desc">Cracked glass, unresponsive touch, or display failure — fixed while you wait.</p>
+        <ul class="capability-list">
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>iPhone &amp; iPad screen replacement</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Android screen &amp; digitizer repair</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Same-day completion on most models</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Premium tempered glass install</li>
+        </ul>
+      </div>
+      <div class="capability-card" data-animate>
+        <div class="card-icon-box">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="2" x2="22" y1="21" y2="21"/></svg>
+        </div>
+        <h3>Laptop &amp; PC Emergencies</h3>
+        <p class="card-desc">Won't boot, blue screen, liquid spill, or critical data at risk — we act fast.</p>
+        <ul class="capability-list">
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Liquid damage assessment &amp; recovery</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Data recovery &amp; backup rescue</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Virus &amp; ransomware removal</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Power &amp; charging port repair</li>
+        </ul>
+      </div>
+      <div class="capability-card" data-animate>
+        <div class="card-icon-box">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Battery &amp; Power Issues</h3>
+        <p class="card-desc">Swollen battery, rapid drain, or no charge — replaced safely with quality parts.</p>
+        <ul class="capability-list">
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Same-day battery replacement</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Charging port cleaning &amp; repair</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Power adapter &amp; cable testing</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>90-day warranty on all batteries</li>
+        </ul>
+      </div>
+      <div class="capability-card" data-animate>
+        <div class="card-icon-box">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" x2="6" y1="12" y2="12"/><line x1="2" x2="6" y1="10" y2="10"/><line x1="2" x2="6" y1="14" y2="14"/><line x1="6" x2="6" y1="8" y2="16"/><line x1="18" x2="22" y1="12" y2="12"/><line x1="18" x2="22" y1="10" y2="10"/><line x1="18" x2="22" y1="14" y2="14"/><line x1="18" x2="18" y1="8" y2="16"/><path d="M6 8V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/><path d="M6 16v2a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-2"/></svg>
+        </div>
+        <h3>Game Console Repairs</h3>
+        <p class="card-desc">Overheating, disc read errors, HDMI issues, or controller drift — fixed fast.</p>
+        <ul class="capability-list">
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>HDMI port replacement</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Overheating &amp; thermal repair</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Joy-Con &amp; controller drift fix</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Disc drive repair &amp; cleaning</li>
+        </ul>
+      </div>
+      <div class="capability-card" data-animate>
+        <div class="card-icon-box">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+        </div>
+        <h3>Data Recovery &amp; Backup</h3>
+        <p class="card-desc">Accidental deletion, drive failure, or ransomware — we recover what matters most.</p>
+        <ul class="capability-list">
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Deleted file recovery</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Failed hard drive recovery</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Cloud backup setup &amp; rescue</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Emergency data migration</li>
+        </ul>
+      </div>
+      <div class="capability-card" data-animate>
+        <div class="card-icon-box">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Business IT Emergencies</h3>
+        <p class="card-desc">Server down, network outage, or security breach — on-site support for teams.</p>
+        <ul class="capability-list">
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Network outage diagnosis</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Server &amp; workstation recovery</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Security incident response</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Priority on-site dispatch</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing" id="pricing">
+    <div class="section-header">
+      <h2>Transparent Emergency Pricing</h2>
+      <p>No hidden fees. No surprise charges. You will know exactly what you are paying before we start any work.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card" data-animate>
+        <h3>Diagnostic Fee</h3>
+        <div class="package-price">$0<span>–$25</span></div>
+        <p class="package-desc">We inspect your device and explain the issue before any repair begins. No obligation.</p>
+        <ul class="package-features">
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Free in-shop diagnostic</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>$25 on-site / house call diagnostic</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Firm quote before work starts</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>No pressure, no obligation</li>
+        </ul>
+        <a href="#book" class="package-btn" data-plan="diagnostic">Book Diagnostic</a>
+      </div>
+      <div class="pricing-card featured" data-animate>
+        <div class="badge">Most Popular</div>
+        <h3>Standard Same-Day</h3>
+        <div class="package-price">$65<span>/hr</span></div>
+        <p class="package-desc">Our standard labor rate for same-day repairs. Most fixes completed in 1–2 hours.</p>
+        <ul class="package-features">
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Same-day completion</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Quality replacement parts</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>30-day repair warranty</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Parts billed at cost + 15%</li>
+        </ul>
+        <a href="#book" class="package-btn" data-plan="standard">Book Same-Day</a>
+      </div>
+      <div class="pricing-card" data-animate>
+        <h3>Rush Service</h3>
+        <div class="package-price">+$50</div>
+        <p class="package-desc">Skip the queue with guaranteed priority handling. Your repair goes to the front of the line.</p>
+        <ul class="package-features">
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Priority over standard repairs</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Guaranteed same-day finish</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Real-time status updates</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Added to any repair package</li>
+        </ul>
+        <a href="#book" class="package-btn" data-plan="rush">Add Rush</a>
+      </div>
+      <div class="pricing-card" data-animate>
+        <h3>After-Hours Rate</h3>
+        <div class="package-price">+$75</div>
+        <p class="package-desc">Need repair after 6pm on a weekday or anytime on the weekend? We have got you covered.</p>
+        <ul class="package-features">
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Weekdays after 6pm</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Saturday &amp; Sunday all day</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Emergency on-site: $150/hr</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Call or text anytime for availability</li>
+        </ul>
+        <a href="#book" class="package-btn" data-plan="after-hours">Request After-Hours</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TURNAROUND COMMITMENTS -->
+  <section class="turnaround" id="turnaround">
+    <div class="section-header">
+      <h2>Our Turnaround Commitments</h2>
+      <p>We know your time is valuable. Here is exactly what you can expect when you choose Anthracite Tech for emergency repair.</p>
+    </div>
+    <div class="turnaround-grid">
+      <div class="turnaround-card" data-animate>
+        <div class="time-value">&lt;30 min</div>
+        <h3>Initial Callback</h3>
+        <p>When you call or submit an emergency request, a technician will call you back within 30 minutes during business hours — guaranteed.</p>
+      </div>
+      <div class="turnaround-card" data-animate>
+        <div class="time-value">&lt;2 hrs</div>
+        <h3>In-Shop Drop-Off</h3>
+        <p>Drop off your device at our San Jose shop and most common repairs — screens, batteries, ports — are completed within 2 hours.</p>
+      </div>
+      <div class="turnaround-card" data-animate>
+        <div class="time-value">2-4 hrs</div>
+        <h3>House Call Arrival</h3>
+        <p>For urgent on-site service in Silicon Valley, our technician arrives within 2–4 hours of booking confirmation.</p>
+      </div>
+      <div class="turnaround-card" data-animate>
+        <div class="time-value">24 hrs</div>
+        <h3>Complex Repairs</h3>
+        <p>Data recovery, liquid damage, and board-level repairs that need parts ordered are completed within 24 hours or we keep you updated daily.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT METHODS -->
+  <section class="contact-methods" id="contact">
+    <div class="section-header">
+      <h2>Contact Us for Urgent Requests</h2>
+      <p>Multiple ways to reach us — choose what works best for your situation. All lines are monitored for emergencies.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card" data-animate>
+        <div class="contact-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <h3>Call Now</h3>
+        <p>Speak directly with a technician. Best for urgent issues that need immediate triage and scheduling.</p>
+        <a href="tel:+15551234567" class="contact-action">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          (555) 123-4567
+        </a>
+      </div>
+      <div class="contact-card" data-animate>
+        <div class="contact-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>Text / SMS</h3>
+        <p>Send a photo of the damage or a quick description. We reply fast with a quote and availability.</p>
+        <a href="sms:+15551234567" class="contact-action">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Text (555) 123-4567
+        </a>
+      </div>
+      <div class="contact-card" data-animate>
+        <div class="contact-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="2" x2="22" y1="21" y2="21"/></svg>
+        </div>
+        <h3>Emergency Form</h3>
+        <p>Book online and mark your request as critical. We prioritize emergency submissions and call back within 30 minutes.</p>
+        <a href="#book" class="contact-action">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+          Book Emergency Repair
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ EMERGENCY BOOKING FORM ═══ -->
+  <section class="inquiry-section" id="book">
+    <div class="section-header">
+      <h2>Request Emergency Repair</h2>
+      <p>Submit your urgent repair request and we will call you back within 30 minutes during business hours.</p>
+    </div>
+    <div class="glass-card" style="max-width:700px;margin:0 auto;">
+      <form id="emergencyForm" class="form-grid">
+        <div class="form-group">
+          <label for="urgency">Urgency Level *</label>
+          <select id="urgency" name="urgency" required>
+            <option value="">Select urgency...</option>
+            <option value="critical">Critical — Device unusable / Data emergency</option>
+            <option value="high">High — Need device today</option>
+            <option value="medium">Standard — Same-day is fine</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="device">Device Type *</label>
+          <select id="device" name="device" required>
+            <option value="">Select device...</option>
+            <option value="iphone">iPhone</option>
+            <option value="android">Android Phone</option>
+            <option value="laptop">Laptop</option>
+            <option value="desktop">Desktop PC</option>
+            <option value="tablet">Tablet / iPad</option>
+            <option value="gaming">Gaming Console</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="name">Your Name *</label>
+          <input type="text" id="name" name="name" placeholder="John Smith" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number *</label>
+          <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required>
+        </div>
+        <div class="form-group full-width">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="john@example.com">
+        </div>
+        <div class="form-group full-width">
+          <label for="issue">Describe the Issue *</label>
+          <textarea id="issue" name="issue" rows="4" placeholder="Cracked screen, device won't turn on, data recovery needed..." required></textarea>
+        </div>
+        <div class="checkbox-group full-width">
+          <input type="checkbox" id="agree" name="agree" required>
+          <label class="check-label" for="agree">
+            <strong>I understand the urgency level pricing and agree to be contacted within 30 minutes during business hours.</strong>
+          </label>
+        </div>
+        <div class="full-width">
+          <button type="submit" class="submit-btn" id="submitBtn">Submit Emergency Request</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  </main>
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="index.html" class="logo">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          <span class="logo-text"><span class="brand">Anthracite Tech</span> <span class="sub">Repairs</span></span>
+        </a>
+        <p class="logo-desc">Emergency and same-day tech repair with transparent pricing. Serving Silicon Valley, San Jose, Santa Clara, and Mountain View.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="nationwide-remote.html" style="color:var(--muted-foreground);">Nationwide Remote Support</a></li>
+          <li><a href="nationwide-remote-troubleshooting.html" style="color:var(--muted-foreground);">Remote Troubleshooting</a></li>
+          <li><a href="emergency-repair.html" style="color:var(--muted-foreground);">Emergency Repair</a></li>
+          <li><a href="index.html#pricing" style="color:var(--muted-foreground);">In-Store Repair</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="index.html" style="color:var(--muted-foreground);">Home</a></li>
+          <li><a href="index.html#testimonials" style="color:var(--muted-foreground);">Reviews</a></li>
+          <li><a href="index.html#faq" style="color:var(--muted-foreground);">FAQ</a></li>
+          <li><a href="#book" style="color:var(--muted-foreground);">Book Now</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li>📞 <a href="tel:+15551234567" style="color:var(--muted-foreground);">(555) 123-4567</a></li>
+          <li>✉️ <a href="mailto:support@anthracitetechco.com" style="color:var(--muted-foreground);">support@anthracitetechco.com</a></li>
+          <li>📍 123 Tech Boulevard<br>San Jose, CA 94000</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Anthracite Tech Co.. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ── HEADER SCROLL ─────────────────────────────────
+    var header = document.getElementById('header');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 20) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // ── MOBILE MENU ────────────────────────────────────
+    var hamburger = document.getElementById('hamburger');
+    var mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', function() {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('open');
+      });
+    });
+
+    // ── SCROLL ANIMATIONS ──────────────────────────────
+    var animateEls = document.querySelectorAll('[data-animate]');
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      animateEls.forEach(function(el) { observer.observe(el); });
+    } else {
+      animateEls.forEach(function(el) { el.classList.add('visible'); });
+    }
+
+    // ── SMOOTH SCROLL ─────────────────────────────────
+    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // ── EMERGENCY FORM SUBMISSION ─────────────────────
+    var emergencyForm = document.getElementById('emergencyForm');
+    var toast = document.getElementById('toast');
+    var submitBtn = document.getElementById('submitBtn');
+
+    function showToast(message, type) {
+      toast.textContent = message;
+      toast.className = 'toast' + (type ? ' toast--' + type : '');
+      toast.classList.add('show');
+      setTimeout(function() { toast.classList.remove('show'); }, 8000);
+    }
+
+    function mailtoFallback(data) {
+      var subject = 'Emergency Repair Request — ' + encodeURIComponent(data.fullName);
+      var body = 'Name: ' + encodeURIComponent(data.fullName) + '%0D%0A' +
+        'Phone: ' + encodeURIComponent(data.phone || '') + '%0D%0A' +
+        'Email: ' + encodeURIComponent(data.email || '') + '%0D%0A' +
+        'Device: ' + encodeURIComponent(data.device || '') + '%0D%0A' +
+        'Urgency: ' + encodeURIComponent(data.urgency || '') + '%0D%0A' +
+        'Issue: ' + encodeURIComponent(data.issue || '');
+      window.location.href = 'mailto:support@anthracitetechco.com?subject=' + subject + '&body=' + body;
+    }
+
+    if (emergencyForm) {
+      emergencyForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+
+        var payload = {
+          fullName: document.getElementById('name').value,
+          phone: document.getElementById('phone').value,
+          email: document.getElementById('email').value || null,
+          device: document.getElementById('device').value,
+          urgency: document.getElementById('urgency').value,
+          issue: document.getElementById('issue').value,
+          serviceType: 'in-store',
+          category: 'emergency-repair',
+          source: 'emergency-repair-page'
+        };
+
+        fetch('/api/book', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        })
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          if (data.success) {
+            if (window.plausible) { plausible('emergency_submit', { props: { device: payload.device, urgency: payload.urgency } }); }
+            showToast('\u2713 Emergency request submitted! Ticket: ' + data.ticketId + '. We\'ll call you back within 30 minutes.');
+            emergencyForm.reset();
+          } else {
+            showToast('Submission issue: ' + (data.errors ? data.errors.join(', ') : 'Please try again or use the mail fallback.'), 'error');
+            // Save to localStorage for retry / offline capture
+            payload.offlineSaved = true;
+            payload.savedAt = new Date().toISOString();
+            localStorage.setItem('emergencyRepairFallback_' + Date.now(), JSON.stringify(payload));
+            mailtoFallback(payload);
+          }
+        })
+        .catch(function(err) {
+          console.warn('[Anthracite Tech] Booking API unreachable:', err);
+          showToast('Unable to reach booking server. Opening email fallback...', 'error');
+          payload.offlineSaved = true;
+          payload.savedAt = new Date().toISOString();
+          localStorage.setItem('emergencyRepairFallback_' + Date.now(), JSON.stringify(payload));
+          mailtoFallback(payload);
+        })
+        .finally(function() {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit Emergency Request';
+        });
+      });
+    }
+  </script>
+</body>
+</html>

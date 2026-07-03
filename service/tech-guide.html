@@ -1,0 +1,4788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technician Repair Guide | Anthracite Tech Co.</title>
+  <meta name="description" content="Interactive repair workflow guide for Anthracite Tech technicians. Step-by-step diagnostics, repair procedures, and verification checklists for PCs, phones, consoles, and tablets.">
+  <link rel="canonical" href="https://anthracitetechco.com/tech-guide.html">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta property="og:title" content="Technician Repair Guide | Anthracite Tech Co.">
+  <meta property="og:description" content="Interactive repair workflow guide for Anthracite Tech technicians.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://anthracitetechco.com/tech-guide.html">
+  <meta property="og:image" content="https://anthracitetechco.com/hero-bg.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="vendor/jspdf.umd.min.js"></script>
+  <script src="vendor/html2canvas.min.js"></script>
+  <script src="js/jszip.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --background: #0c1524;
+      --foreground: #f8fafc;
+      --card: #111d30;
+      --card-foreground: #f8fafc;
+      --primary: #3b82f6;
+      --primary-foreground: #f8fafc;
+      --secondary: #1e293b;
+      --secondary-foreground: #f8fafc;
+      --muted: #1e293b;
+      --muted-foreground: #94a3b8;
+      --border: #1e293b;
+      --input: #1e293b;
+      --ring: #3b82f6;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --font-heading: 'Outfit', system-ui, sans-serif;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--background);
+      color: var(--foreground);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4 { font-family: var(--font-heading); }
+    a { color: inherit; text-decoration: none; }
+
+    /* HEADER */
+    .header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1rem 1.5rem;
+      transition: background .3s, border-color .3s, box-shadow .3s;
+      border-bottom: 1px solid transparent;
+      background: rgba(12,21,36,.92);
+      border-bottom-color: var(--border);
+      box-shadow: 0 2px 24px rgba(0,0,0,.35);
+      backdrop-filter: blur(12px);
+    }
+    .header-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { display: flex; align-items: center; gap: .5rem; }
+    .logo svg { width: 28px; height: 28px; color: var(--primary); }
+    .logo-text { font-family: var(--font-heading); font-weight: 800; font-size: 1.25rem; }
+    .logo-text .brand { color: var(--foreground); }
+    .logo-text .sub { color: var(--primary); }
+    .nav-links {
+      display: none; list-style: none; gap: .5rem; align-items: center;
+    }
+    .nav-links a {
+      padding: .5rem 1rem; border-radius: 9999px; font-size: .9rem;
+      font-weight: 500; color: var(--muted-foreground);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--foreground); }
+    .nav-links .cta-btn {
+      background: var(--primary); color: var(--primary-foreground);
+      box-shadow: 0 4px 20px rgba(59,130,246,.4); font-weight: 600;
+    }
+    @media(min-width:768px) {
+      .nav-links { display: flex; }
+    }
+
+    /* MAIN LAYOUT */
+    .main-wrap {
+      max-width: 1200px; margin: 0 auto;
+      padding: 6rem 1.5rem 3rem;
+      display: grid;
+      gap: 2rem;
+    }
+    @media(min-width:1024px) {
+      .main-wrap { grid-template-columns: 280px 1fr; align-items: start; }
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      position: sticky; top: 5rem;
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .sidebar-card {
+      background: var(--card); border: 1px solid rgba(255,255,255,.05);
+      border-radius: 1rem; padding: 1.25rem;
+    }
+    .sidebar-card h3 {
+      font-size: .85rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .06em; color: var(--muted-foreground); margin-bottom: 1rem;
+    }
+    .device-btn {
+      display: flex; align-items: center; gap: .75rem;
+      width: 100%; padding: .75rem 1rem;
+      background: transparent; border: 1px solid var(--border);
+      border-radius: .75rem; color: var(--foreground);
+      font-family: var(--font-body); font-size: .9rem; font-weight: 500;
+      cursor: pointer; transition: all .2s; margin-bottom: .5rem;
+      text-align: left;
+    }
+    .device-btn:hover {
+      background: rgba(59,130,246,.08); border-color: rgba(59,130,246,.3);
+    }
+    .device-btn.active {
+      background: rgba(59,130,246,.15); border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(59,130,246,.1);
+    }
+    .device-btn svg { width: 20px; height: 20px; color: var(--primary); flex-shrink: 0; }
+
+    .quick-ref-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: .5rem 0; border-bottom: 1px solid rgba(255,255,255,.04);
+      font-size: .85rem;
+    }
+    .quick-ref-item:last-child { border-bottom: none; }
+    .quick-ref-label { color: var(--muted-foreground); }
+    .quick-ref-value { font-weight: 600; color: var(--foreground); }
+
+    .urgency-pill {
+      display: inline-flex; align-items: center; gap: .3rem;
+      font-size: .75rem; font-weight: 600; padding: .2rem .55rem;
+      border-radius: 9999px; margin-top: .25rem;
+    }
+    .urgency-low { background: rgba(34,197,94,.12); color: #4ade80; border: 1px solid rgba(34,197,94,.2); }
+    .urgency-medium { background: rgba(245,158,11,.12); color: #fbbf24; border: 1px solid rgba(245,158,11,.2); }
+    .urgency-high { background: rgba(249,115,22,.12); color: #fb923c; border: 1px solid rgba(249,115,22,.2); }
+    .urgency-critical { background: rgba(239,68,68,.15); color: #f87171; border: 1px solid rgba(239,68,68,.25); }
+
+    /* CONTENT AREA */
+    .content-area { min-width: 0; }
+
+    .hero-mini {
+      padding: 2rem 0 1.5rem;
+    }
+    .hero-mini h1 {
+      font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 800; margin-bottom: .5rem;
+    }
+    .hero-mini h1 .gradient-text {
+      background: linear-gradient(135deg, var(--primary), #60a5fa);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-mini p { color: var(--muted-foreground); font-size: .95rem; }
+
+    /* WORKFLOW STEPS */
+    .workflow-card {
+      background: var(--card); border: 1px solid rgba(255,255,255,.05);
+      border-radius: 1rem; padding: 1.5rem; margin-bottom: 1rem;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .workflow-card:hover {
+      box-shadow: 0 0 40px rgba(59,130,246,.08), 0 8px 32px rgba(0,0,0,.3);
+    }
+    .workflow-header {
+      display: flex; align-items: center; gap: .75rem; margin-bottom: 1rem;
+    }
+    .step-number {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(59,130,246,.15); color: var(--primary);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-heading); font-weight: 700; font-size: .9rem;
+      flex-shrink: 0;
+    }
+    .workflow-header h3 {
+      font-size: 1.1rem; font-weight: 700;
+    }
+    .workflow-content { color: var(--muted-foreground); font-size: .9rem; }
+    .workflow-content ul { list-style: none; display: flex; flex-direction: column; gap: .4rem; margin-top: .5rem; }
+    .workflow-content li {
+      display: flex; align-items: flex-start; gap: .5rem;
+      padding: .35rem 0;
+    }
+    .workflow-content li svg {
+      width: 16px; height: 16px; color: var(--primary); flex-shrink: 0; margin-top: .15rem;
+    }
+
+    /* CHECKLIST */
+    .checklist { margin-top: .75rem; }
+    .check-item {
+      display: flex; align-items: flex-start; gap: .6rem;
+      padding: .5rem .6rem; border-radius: .5rem;
+      cursor: pointer; transition: background .15s;
+      user-select: none;
+    }
+    .check-item:hover { background: rgba(255,255,255,.03); }
+    .check-item input[type="checkbox"] {
+      appearance: none; width: 18px; height: 18px; border-radius: 4px;
+      border: 2px solid var(--border); background: var(--secondary);
+      cursor: pointer; flex-shrink: 0; margin-top: .1rem;
+      transition: all .2s; display: grid; place-items: center;
+    }
+    .check-item input[type="checkbox"]:checked {
+      background: var(--primary); border-color: var(--primary);
+    }
+    .check-item input[type="checkbox"]:checked::after {
+      content: '✓'; color: #fff; font-size: 11px; font-weight: 700;
+    }
+    .check-item.checked span { text-decoration: line-through; opacity: .5; }
+    .check-item span { font-size: .88rem; color: var(--foreground); }
+
+    /* SERVICE GRID */
+    .service-grid {
+      display: grid; grid-template-columns: 1fr; gap: .75rem;
+      margin-top: .75rem;
+    }
+    @media(min-width:640px) { .service-grid { grid-template-columns: repeat(2, 1fr); } }
+    .service-chip {
+      background: rgba(59,130,246,.08); border: 1px solid rgba(59,130,246,.15);
+      border-radius: .6rem; padding: .75rem 1rem;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: .85rem;
+    }
+    .service-chip .price { font-weight: 700; color: var(--primary); }
+
+    /* TABLE */
+    .data-table {
+      width: 100%; border-collapse: collapse; margin-top: .75rem;
+      font-size: .85rem;
+    }
+    .data-table th, .data-table td {
+      padding: .6rem .75rem; text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .data-table th {
+      font-weight: 600; color: var(--muted-foreground);
+      font-size: .75rem; text-transform: uppercase; letter-spacing: .04em;
+    }
+    .data-table td { color: var(--foreground); }
+    .data-table tr:last-child td { border-bottom: none; }
+
+    /* NOTES AREA */
+    .notes-area {
+      width: 100%; min-height: 80px;
+      background: var(--secondary); border: 1px solid var(--border);
+      border-radius: .75rem; padding: .75rem 1rem;
+      color: var(--foreground); font-family: var(--font-body); font-size: .9rem;
+      resize: vertical; outline: none; margin-top: .75rem;
+    }
+    .notes-area:focus { border-color: var(--ring); box-shadow: 0 0 0 3px rgba(59,130,246,.15); }
+    .notes-area::placeholder { color: var(--muted-foreground); }
+
+    /* STEP PHOTOS */
+    .step-photos { margin-top: .75rem; }
+    .photo-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: .5rem;
+      margin-bottom: .5rem;
+      min-height: 60px;
+      border-radius: .5rem;
+      transition: background .2s, border-color .2s, box-shadow .2s;
+      border: 2px dashed transparent;
+    }
+    .photo-list.drag-over {
+      background: rgba(59,130,246,.08);
+      border-color: rgba(59,130,246,.4);
+      box-shadow: inset 0 0 20px rgba(59,130,246,.06);
+    }
+    .photo-thumb {
+      position: relative;
+      border-radius: .5rem;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--secondary);
+      aspect-ratio: 1;
+      cursor: pointer;
+      transition: transform .2s, border-color .2s;
+    }
+    .photo-thumb:hover {
+      transform: scale(1.03);
+      border-color: var(--primary);
+    }
+    .photo-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .photo-remove {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(239,68,68,.9);
+      color: #fff;
+      border: none;
+      font-size: 14px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity .2s;
+    }
+    .photo-thumb:hover .photo-remove { opacity: 1; }
+    .photo-attach-area {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+    .photo-input { display: none; }
+    .photo-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+      padding: .4rem .75rem;
+      background: rgba(59,130,246,.1);
+      border: 1px solid rgba(59,130,246,.25);
+      border-radius: .5rem;
+      color: var(--primary);
+      font-family: var(--font-body);
+      font-size: .8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .photo-btn:hover { background: rgba(59,130,246,.2); }
+    .photo-hint {
+      font-size: .75rem;
+      color: var(--muted-foreground);
+    }
+    .photo-progress-wrap {
+      padding: .6rem .75rem;
+      background: rgba(59,130,246,.08);
+      border: 1px solid rgba(59,130,246,.2);
+      border-radius: .5rem;
+      margin-bottom: .5rem;
+      animation: photoProgressFadeIn .2s ease;
+    }
+    @keyframes photoProgressFadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .photo-progress-label {
+      font-size: .8rem;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: .35rem;
+    }
+    .photo-progress-bar-wrap {
+      background: var(--secondary);
+      border-radius: 9999px;
+      height: 5px;
+      overflow: hidden;
+    }
+    .photo-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), #60a5fa);
+      border-radius: 9999px;
+      transition: width .3s ease;
+    }
+    .photo-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(0,0,0,.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+      padding: 1rem;
+    }
+    .photo-lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: .5rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,.5);
+    }
+
+    /* PHOTO MANAGER */
+    .photo-manager-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: rgba(0,0,0,.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .photo-manager-overlay.hidden { display: none; }
+    .photo-manager-modal {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 1rem;
+      max-width: 960px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 60px rgba(0,0,0,.5);
+    }
+    .photo-manager-header {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem;
+      flex-wrap: wrap;
+    }
+    .photo-manager-header h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--foreground);
+      margin: 0;
+    }
+    .photo-manager-header .sub {
+      font-size: .8rem;
+      color: var(--muted-foreground);
+    }
+    .photo-manager-actions {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+    .photo-manager-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      padding: .4rem .75rem;
+      border-radius: .5rem;
+      border: 1px solid var(--border);
+      background: var(--secondary);
+      color: var(--foreground);
+      font-family: var(--font-body);
+      font-size: .8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .photo-manager-btn:hover { background: rgba(255,255,255,.08); }
+    .photo-manager-btn.primary { background: rgba(59,130,246,.15); border-color: rgba(59,130,246,.3); color: var(--primary); }
+    .photo-manager-btn.primary:hover { background: rgba(59,130,246,.25); }
+    .photo-manager-btn.danger { background: rgba(239,68,68,.15); border-color: rgba(239,68,68,.3); color: var(--danger); }
+    .photo-manager-btn.danger:hover { background: rgba(239,68,68,.25); }
+    .photo-manager-btn.warning { background: rgba(245,158,11,.15); border-color: rgba(245,158,11,.3); color: var(--warning); }
+    .photo-manager-btn.warning:hover { background: rgba(245,158,11,.25); }
+    .photo-manager-btn:disabled { opacity: .4; cursor: not-allowed; }
+    .photo-manager-body {
+      padding: 1rem 1.25rem;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .photo-manager-group {
+      margin-bottom: 1.25rem;
+    }
+    .photo-manager-group:last-child { margin-bottom: 0; }
+    .photo-manager-group-title {
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: .5rem;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .photo-manager-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: .6rem;
+    }
+    .photo-manager-item {
+      position: relative;
+      border-radius: .5rem;
+      overflow: hidden;
+      border: 2px solid var(--border);
+      background: var(--secondary);
+      aspect-ratio: 1;
+      cursor: pointer;
+      transition: border-color .2s, transform .2s;
+    }
+    .photo-manager-item:hover { transform: scale(1.02); }
+    .photo-manager-item.auto-selected { border-color: var(--warning); box-shadow: 0 0 0 3px rgba(245,158,11,.2); }
+    .photo-manager-item.auto-selected .pm-check { background: var(--warning); border-color: var(--warning); }
+    .photo-manager-item.auto-selected .pm-check::after { content: '✓'; color: #fff; font-size: 12px; font-weight: 700; }
+    .photo-manager-item.selected { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(59,130,246,.2); }
+    .photo-manager-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+    }
+    .photo-manager-item .pm-check {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      border: 2px solid rgba(255,255,255,.7);
+      background: rgba(0,0,0,.4);
+      display: grid;
+      place-items: center;
+      transition: all .2s;
+      z-index: 2;
+    }
+    .photo-manager-item.selected .pm-check {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+    .photo-manager-item.selected .pm-check::after {
+      content: '✓';
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .photo-manager-item .pm-reason {
+      position: absolute;
+      bottom: 4px;
+      left: 4px;
+      right: 4px;
+      background: rgba(0,0,0,.85);
+      color: #fff;
+      font-size: 10px;
+      padding: 4px 6px;
+      border-radius: 4px;
+      opacity: 0;
+      transition: opacity .2s;
+      pointer-events: none;
+      z-index: 3;
+      text-align: center;
+      line-height: 1.3;
+      word-break: break-word;
+    }
+    .photo-manager-item.auto-selected:hover .pm-reason { opacity: 1; }
+    .photo-manager-empty {
+      font-size: .85rem;
+      color: var(--muted-foreground);
+      font-style: italic;
+      padding: 1rem 0;
+    }
+    .storage-bar-wrap {
+      background: var(--secondary);
+      border-radius: 9999px;
+      height: 6px;
+      overflow: hidden;
+      margin-top: .5rem;
+    }
+    .storage-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--success), var(--warning), var(--danger));
+      background-size: 200% 100%;
+      border-radius: 9999px;
+      transition: width .4s ease;
+    }
+    .storage-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: .75rem;
+      color: var(--muted-foreground);
+      margin-top: .25rem;
+    }
+    .storage-warning {
+      font-size: .75rem;
+      color: var(--warning);
+      margin-top: .35rem;
+      display: flex;
+      align-items: center;
+      gap: .3rem;
+    }
+    .pm-storage-critical {
+      background: rgba(239,68,68,.15);
+      border: 1px solid rgba(239,68,68,.25);
+      color: #f87171;
+      font-size: .8rem;
+      font-weight: 600;
+      padding: .6rem .9rem;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      margin: 0 1.25rem;
+      border-radius: .5rem;
+      flex-wrap: wrap;
+    }
+    .pm-storage-critical-btn {
+      margin-left: auto;
+      background: rgba(239,68,68,.25);
+      border: 1px solid rgba(239,68,68,.4);
+      color: #f87171;
+      font-size: .75rem;
+      font-weight: 600;
+      padding: .35rem .7rem;
+      border-radius: .35rem;
+      cursor: pointer;
+      transition: background .15s;
+      white-space: nowrap;
+      font-family: var(--font-body);
+    }
+    .pm-storage-critical-btn:hover {
+      background: rgba(239,68,68,.4);
+    }
+
+    /* DELETE CONFIRM MODAL */
+    .delete-confirm-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 310;
+      background: rgba(0,0,0,.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .delete-confirm-overlay.hidden { display: none; }
+    .delete-confirm-modal {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 1rem;
+      max-width: 560px;
+      width: 100%;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 60px rgba(0,0,0,.5);
+    }
+    .delete-confirm-header {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem;
+    }
+    .delete-confirm-header h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--foreground);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .delete-confirm-header h3 svg {
+      color: var(--danger);
+    }
+    .delete-confirm-close {
+      background: transparent;
+      border: none;
+      color: var(--muted-foreground);
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: .2rem;
+      line-height: 1;
+      transition: color .2s;
+    }
+    .delete-confirm-close:hover { color: var(--foreground); }
+    .delete-confirm-body {
+      padding: 1rem 1.25rem;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .delete-confirm-sub {
+      font-size: .85rem;
+      color: var(--muted-foreground);
+      margin-bottom: .75rem;
+    }
+    .delete-confirm-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+      gap: .5rem;
+    }
+    .delete-confirm-item {
+      position: relative;
+      border-radius: .5rem;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--secondary);
+      aspect-ratio: 1;
+    }
+    .delete-confirm-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .delete-confirm-size {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: .2rem .35rem;
+      background: rgba(0,0,0,.65);
+      color: #fff;
+      font-size: .68rem;
+      font-weight: 600;
+      text-align: center;
+      backdrop-filter: blur(4px);
+    }
+    .delete-confirm-total {
+      margin-top: .75rem;
+      padding: .6rem .9rem;
+      background: rgba(239,68,68,.08);
+      border: 1px solid rgba(239,68,68,.15);
+      border-radius: .5rem;
+      font-size: .85rem;
+      color: var(--foreground);
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .delete-confirm-total .total-size {
+      font-weight: 700;
+      color: var(--danger);
+    }
+    .delete-confirm-footer {
+      padding: 1rem 1.25rem;
+      border-top: 1px solid rgba(255,255,255,.06);
+      display: flex;
+      justify-content: flex-end;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+    .delete-confirm-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      padding: .45rem 1rem;
+      border-radius: .5rem;
+      border: 1px solid var(--border);
+      background: var(--secondary);
+      color: var(--foreground);
+      font-family: var(--font-body);
+      font-size: .85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .delete-confirm-btn:hover { background: rgba(255,255,255,.08); }
+    .delete-confirm-btn.danger {
+      background: rgba(239,68,68,.15);
+      border-color: rgba(239,68,68,.3);
+      color: var(--danger);
+    }
+    .delete-confirm-btn.danger:hover { background: rgba(239,68,68,.25); }
+    .delete-confirm-btn.primary {
+      background: rgba(59,130,246,.15);
+      border-color: rgba(59,130,246,.3);
+      color: var(--primary);
+    }
+    .delete-confirm-btn.primary:hover { background: rgba(59,130,246,.25); }
+
+    /* PROGRESS BAR */
+    .progress-wrap {
+      background: var(--secondary); border-radius: 9999px; height: 6px;
+      overflow: hidden; margin: .5rem 0 1rem;
+    }
+    .progress-bar {
+      height: 100%; background: linear-gradient(90deg, var(--primary), #60a5fa);
+      border-radius: 9999px; transition: width .4s ease;
+    }
+    .progress-text {
+      font-size: .8rem; color: var(--muted-foreground); margin-bottom: .25rem;
+      display: flex; justify-content: space-between;
+    }
+
+    /* ZIP EXPORT PROGRESS */
+    .zip-progress-wrap {
+      margin-top: .5rem;
+      animation: zipProgressFadeIn .2s ease;
+    }
+    @keyframes zipProgressFadeIn {
+      from { opacity: 0; transform: translateY(-3px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .zip-progress-label {
+      font-size: .75rem;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: .25rem;
+      display: flex;
+      justify-content: space-between;
+    }
+    .zip-progress-bar-wrap {
+      background: var(--secondary);
+      border-radius: 9999px;
+      height: 5px;
+      overflow: hidden;
+    }
+    .zip-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), #60a5fa);
+    }
+    .zip-progress-eta {
+      font-size: .7rem;
+      font-weight: 500;
+      opacity: 0.85;
+      margin-left: .4rem;
+    }
+    .zip-progress-count {
+      font-size: .7rem;
+      font-weight: 500;
+      opacity: 0.85;
+      margin-left: .4rem;
+      color: var(--muted-foreground);
+    }
+    .zip-progress-abort {
+      font-size: .7rem;
+      font-weight: 600;
+      color: var(--destructive, #dc2626);
+      background: transparent;
+      border: 1px solid var(--destructive, #dc2626);
+      border-radius: 4px;
+      padding: .15rem .5rem;
+      margin-left: .5rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: background .15s ease, color .15s ease;
+    }
+    .zip-progress-abort:hover {
+      background: var(--destructive, #dc2626);
+      color: #fff;
+    }
+    .zip-progress-abort:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    /* TOGGLE SECTION */
+    .toggle-section { margin-bottom: 1rem; }
+    .toggle-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 1.25rem; background: var(--card);
+      border: 1px solid rgba(255,255,255,.05); border-radius: 1rem;
+      cursor: pointer; transition: background .2s;
+    }
+    .toggle-header:hover { background: rgba(255,255,255,.03); }
+    .toggle-header h3 { font-size: 1rem; font-weight: 700; }
+    .toggle-header .chevron {
+      width: 20px; height: 20px; color: var(--muted-foreground);
+      transition: transform .3s;
+    }
+    .toggle-header.open .chevron { transform: rotate(180deg); }
+    .toggle-body {
+      display: none; padding: 1rem 1.25rem;
+      border: 1px solid rgba(255,255,255,.05); border-top: none;
+      border-radius: 0 0 1rem 1rem; margin-top: -1rem;
+      background: var(--card);
+    }
+    .toggle-body.open { display: block; }
+
+    /* RESET BTN */
+    .reset-btn {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .5rem 1rem; background: var(--secondary);
+      border: 1px solid var(--border); border-radius: .6rem;
+      color: var(--muted-foreground); font-family: var(--font-body);
+      font-size: .85rem; font-weight: 500; cursor: pointer;
+      transition: all .2s;
+    }
+    .reset-btn:hover { color: var(--foreground); border-color: var(--muted-foreground); }
+
+    /* JOB TIMER */
+    .timer-card {
+      background: var(--card); border: 1px solid rgba(255,255,255,.05);
+      border-radius: 1rem; padding: 1.25rem;
+    }
+    .timer-card h3 {
+      font-size: .85rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .06em; color: var(--muted-foreground); margin-bottom: .75rem;
+    }
+    .ticket-input-wrap {
+      margin-bottom: .75rem;
+    }
+    .ticket-input-wrap label {
+      display: block; font-size: .75rem; color: var(--muted-foreground);
+      margin-bottom: .3rem;
+    }
+    .ticket-input {
+      width: 100%; padding: .5rem .75rem; background: var(--secondary);
+      border: 1px solid var(--border); border-radius: .5rem;
+      color: var(--foreground); font-family: var(--font-body); font-size: .85rem;
+    }
+    .ticket-input:focus { outline: none; border-color: var(--ring); }
+    .timer-display {
+      text-align: center; padding: 1rem;
+      background: var(--secondary); border-radius: .75rem;
+      margin-bottom: .75rem;
+      border: 2px solid transparent;
+      transition: background .3s, border-color .3s, box-shadow .3s;
+    }
+    .timer-display.warning {
+      background: rgba(245,158,11,.12);
+      border-color: rgba(245,158,11,.35);
+      animation: warningPulse 2s ease-in-out infinite;
+    }
+    @keyframes warningPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(245,158,11,.25); }
+      50% { box-shadow: 0 0 12px 2px rgba(245,158,11,.18); }
+    }
+    .timer-display.overtime {
+      background: rgba(239,68,68,.12);
+      border-color: rgba(239,68,68,.55);
+      animation: overtimePulse 1.2s ease-in-out infinite;
+    }
+    @keyframes overtimePulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,.35); }
+      50% { box-shadow: 0 0 18px 4px rgba(239,68,68,.25); }
+    }
+    .timer-time {
+      font-family: var(--font-heading); font-size: 2rem; font-weight: 700;
+      color: var(--foreground); letter-spacing: .02em;
+    }
+    .timer-time.overtime { color: var(--danger); }
+    .timer-time.warning { color: var(--warning); }
+    .timer-status {
+      font-size: .75rem; color: var(--muted-foreground); margin-top: .25rem;
+    }
+    .timer-controls {
+      display: flex; gap: .5rem; margin-bottom: .75rem;
+    }
+    .timer-btn {
+      flex: 1; padding: .5rem; border-radius: .5rem;
+      border: 1px solid var(--border); background: var(--secondary);
+      color: var(--foreground); font-family: var(--font-body);
+      font-size: .8rem; font-weight: 600; cursor: pointer; transition: all .2s;
+    }
+    .timer-btn:hover { background: rgba(255,255,255,.08); }
+    .timer-btn.start { background: rgba(34,197,94,.15); border-color: rgba(34,197,94,.3); color: #4ade80; }
+    .timer-btn.start:hover { background: rgba(34,197,94,.25); }
+    .timer-btn.pause { background: rgba(245,158,11,.15); border-color: rgba(245,158,11,.3); color: #fbbf24; }
+    .timer-btn.pause:hover { background: rgba(245,158,11,.25); }
+    .timer-btn.stop { background: rgba(239,68,68,.15); border-color: rgba(239,68,68,.3); color: #f87171; }
+    .timer-btn.stop:hover { background: rgba(239,68,68,.25); }
+    .timer-btn:disabled { opacity: .4; cursor: not-allowed; }
+    .turnaround-compare {
+      font-size: .75rem; padding: .6rem .75rem;
+      background: var(--secondary); border-radius: .5rem;
+      margin-bottom: .5rem;
+    }
+    .turnaround-compare .label { color: var(--muted-foreground); margin-bottom: .2rem; }
+    .turnaround-compare .value { font-weight: 600; }
+    .turnaround-compare .value.ok { color: var(--success); }
+    .turnaround-compare .value.warn { color: var(--warning); }
+    .turnaround-compare .value.over { color: var(--danger); }
+    .step-timer-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: .4rem 0; border-bottom: 1px solid rgba(255,255,255,.04);
+      font-size: .8rem;
+    }
+    .step-timer-row:last-child { border-bottom: none; }
+    .step-timer-row .step-name { color: var(--muted-foreground); }
+    .step-timer-row .step-time { font-weight: 600; font-variant-numeric: tabular-nums; }
+    .step-timer-row .step-time.active { color: var(--primary); }
+    .step-timer-row .step-time.done { color: var(--success); }
+    .step-timer-row.current-step { background: rgba(59,130,246,.08); margin: 0 -.75rem; padding: .4rem .75rem; border-radius: .4rem; }
+
+    /* STEP NAV */
+    .step-nav {
+      display: flex; gap: .5rem; margin-bottom: .75rem;
+    }
+    .step-nav-btn {
+      flex: 1; padding: .4rem .5rem; border-radius: .5rem;
+      border: 1px solid var(--border); background: var(--secondary);
+      color: var(--muted-foreground); font-family: var(--font-body);
+      font-size: .75rem; font-weight: 600; cursor: pointer; transition: all .2s;
+      display: flex; align-items: center; justify-content: center; gap: .3rem;
+    }
+    .step-nav-btn:hover { color: var(--foreground); border-color: var(--muted-foreground); }
+    .step-nav-btn:disabled { opacity: .35; cursor: not-allowed; }
+
+    /* TURNAROUND MATRIX */
+    .matrix-table {
+      width: 100%; border-collapse: collapse; margin-top: .5rem;
+      font-size: .78rem;
+    }
+    .matrix-table th, .matrix-table td {
+      padding: .4rem .5rem; text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+    .matrix-table th {
+      font-weight: 600; color: var(--muted-foreground);
+      font-size: .7rem; text-transform: uppercase; letter-spacing: .04em;
+    }
+    .matrix-table td { color: var(--foreground); }
+    .matrix-table tr:last-child td { border-bottom: none; }
+    .matrix-status {
+      display: inline-flex; align-items: center; gap: .25rem;
+      font-size: .7rem; font-weight: 600; padding: .15rem .4rem;
+      border-radius: 9999px;
+    }
+    .matrix-ok { background: rgba(34,197,94,.12); color: #4ade80; }
+    .matrix-warn { background: rgba(245,158,11,.12); color: #fbbf24; }
+    .matrix-over { background: rgba(239,68,68,.15); color: #f87171; }
+    .matrix-total-row td { font-weight: 700; border-top: 1px solid rgba(255,255,255,.1); }
+
+    /* SETTINGS */
+    .settings-btn {
+      background: transparent; border: 1px solid var(--border);
+      border-radius: .5rem; padding: .4rem;
+      color: var(--muted-foreground); cursor: pointer;
+      transition: all .2s; display: inline-flex; align-items: center; justify-content: center;
+    }
+    .settings-btn:hover { color: var(--foreground); border-color: var(--muted-foreground); }
+    .settings-btn.active { color: var(--primary); border-color: var(--primary); }
+    .settings-card {
+      background: var(--card); border: 1px solid rgba(255,255,255,.05);
+      border-radius: 1rem; padding: 1.25rem;
+    }
+    .settings-card h3 {
+      font-size: .85rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .06em; color: var(--muted-foreground); margin-bottom: .75rem;
+    }
+    .settings-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .5rem 0; border-bottom: 1px solid rgba(255,255,255,.04);
+      gap: .75rem;
+    }
+    .settings-row:last-child { border-bottom: none; }
+    .settings-row.column {
+      flex-direction: column; align-items: stretch; gap: .4rem;
+    }
+    .settings-label { font-size: .85rem; color: var(--foreground); }
+    .settings-desc { font-size: .75rem; color: var(--muted-foreground); }
+    .settings-toggle {
+      appearance: none; width: 40px; height: 22px; border-radius: 9999px;
+      background: var(--secondary); border: 1px solid var(--border);
+      position: relative; cursor: pointer; transition: all .2s; flex-shrink: 0;
+    }
+    .settings-toggle::after {
+      content: ''; position: absolute; top: 2px; left: 2px;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--muted-foreground); transition: all .2s;
+    }
+    .settings-toggle:checked { background: var(--primary); border-color: var(--primary); }
+    .settings-toggle:checked::after { left: 20px; background: #fff; }
+    .settings-slider {
+      width: 100%; -webkit-appearance: none; appearance: none;
+      height: 6px; border-radius: 9999px; background: var(--secondary); outline: none;
+    }
+    .settings-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 16px; height: 16px; border-radius: 50%; background: var(--primary);
+      cursor: pointer;
+    }
+    .settings-slider::-moz-range-thumb {
+      width: 16px; height: 16px; border-radius: 50%; background: var(--primary);
+      cursor: pointer; border: none;
+    }
+    .settings-input {
+      width: 70px; padding: .3rem .5rem; background: var(--secondary);
+      border: 1px solid var(--border); border-radius: .4rem;
+      color: var(--foreground); font-family: var(--font-body); font-size: .85rem;
+      text-align: center;
+    }
+    .settings-input:focus { outline: none; border-color: var(--ring); }
+    .settings-section-title {
+      font-size: .75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .06em; color: var(--muted-foreground);
+      margin-top: .75rem; margin-bottom: .25rem;
+    }
+    .settings-input.invalid {
+      border-color: var(--danger);
+      box-shadow: 0 0 0 3px rgba(239,68,68,.15);
+    }
+    .settings-error {
+      font-size: .75rem;
+      color: var(--danger);
+      min-height: 0;
+    }
+
+    /* PDF PREVIEW */
+    .pdf-preview-wrap {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: .75rem;
+      padding: .75rem;
+      margin-top: .25rem;
+    }
+    .pdf-preview-page {
+      background: #fff;
+      border-radius: .4rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,.25);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 160px;
+    }
+    .pdf-preview-header {
+      background: #0f172a;
+      padding: .5rem .6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      position: relative;
+      gap: .5rem;
+    }
+    .pdf-preview-header-accent {
+      position: absolute;
+      bottom: 0;
+      left: .6rem;
+      right: .6rem;
+      height: 2px;
+      background: #3b82f6;
+      border-radius: 1px;
+    }
+    .pdf-preview-logo {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: .72rem;
+      color: #fff;
+      line-height: 1.2;
+    }
+    .pdf-preview-title {
+      font-size: .58rem;
+      color: #fff;
+      line-height: 1.3;
+      margin-top: 1px;
+    }
+    .pdf-preview-dept {
+      font-size: .52rem;
+      color: #94a3b8;
+      line-height: 1.3;
+      margin-top: 1px;
+    }
+    .pdf-preview-header-right {
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .pdf-preview-ticket {
+      font-size: .52rem;
+      color: #94a3b8;
+      line-height: 1.3;
+    }
+    .pdf-preview-meta {
+      font-size: .5rem;
+      color: #94a3b8;
+      line-height: 1.3;
+      margin-top: 1px;
+    }
+    .pdf-preview-body {
+      flex: 1;
+      padding: .6rem .75rem;
+      display: flex;
+      flex-direction: column;
+      gap: .35rem;
+    }
+    .pdf-preview-line {
+      height: 5px;
+      background: #e2e8f0;
+      border-radius: 2px;
+    }
+    .pdf-preview-box {
+      height: 28px;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      border-radius: 3px;
+      margin: .15rem 0;
+    }
+    .pdf-preview-footer {
+      background: #0f172a;
+      padding: .4rem .6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      gap: .4rem;
+      min-height: 36px;
+    }
+    .pdf-preview-footer-accent {
+      position: absolute;
+      top: 0;
+      left: .6rem;
+      right: .6rem;
+      height: 2px;
+      background: #3b82f6;
+      border-radius: 1px;
+    }
+    .pdf-preview-footer-brand {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: .6rem;
+      color: #fff;
+      line-height: 1.2;
+    }
+    .pdf-preview-footer-generated {
+      font-size: .5rem;
+      color: #94a3b8;
+      line-height: 1.3;
+      margin-top: 1px;
+    }
+    .pdf-preview-footer-center {
+      font-size: .6rem;
+      color: #fff;
+      font-weight: 600;
+      text-align: center;
+      flex: 1;
+    }
+    .pdf-preview-footer-right {
+      font-size: .5rem;
+      color: #94a3b8;
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .pdf-preview-hidden { display: none !important; }
+
+    /* REPORT */
+    .report-btn {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .5rem 1rem; background: rgba(59,130,246,.15);
+      border: 1px solid rgba(59,130,246,.3); border-radius: .6rem;
+      color: var(--primary); font-family: var(--font-body);
+      font-size: .85rem; font-weight: 600; cursor: pointer;
+      transition: all .2s; width: 100%; justify-content: center;
+    }
+    .report-btn:hover { background: rgba(59,130,246,.25); }
+    .report-overlay {
+      position: fixed; inset: 0; z-index: 300;
+      background: rgba(0,0,0,.85);
+      display: flex; align-items: center; justify-content: center;
+      padding: 1rem;
+    }
+    .report-overlay.hidden { display: none; }
+    .report-modal {
+      background: #fff; color: #1e293b;
+      border-radius: .75rem; max-width: 900px; width: 100%;
+      max-height: 90vh; overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,.4);
+      display: flex; flex-direction: column;
+    }
+    .report-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; background: #fff; z-index: 1;
+    }
+    .report-header h2 {
+      font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700;
+      color: #0f172a; margin: 0;
+    }
+    .report-close {
+      background: #f1f5f9; border: none; border-radius: .4rem;
+      width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: #64748b; font-size: 1.1rem; line-height: 1;
+    }
+    .report-close:hover { background: #e2e8f0; color: #0f172a; }
+    .report-body { padding: 1.5rem; }
+    .report-section { margin-bottom: 1.5rem; }
+    .report-section:last-child { margin-bottom: 0; }
+    .report-section h3 {
+      font-family: var(--font-heading); font-size: 1rem; font-weight: 700;
+      color: #0f172a; margin-bottom: .75rem; padding-bottom: .4rem;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    .report-meta {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: .75rem; margin-bottom: 1rem;
+    }
+    .report-meta-item { background: #f8fafc; border-radius: .5rem; padding: .6rem .8rem; }
+    .report-meta-label { font-size: .75rem; color: #64748b; text-transform: uppercase; letter-spacing: .04em; }
+    .report-meta-value { font-weight: 600; color: #0f172a; font-size: .9rem; }
+    .report-step { margin-bottom: 1rem; padding: 1rem; background: #f8fafc; border-radius: .5rem; border: 1px solid #e2e8f0; }
+    .report-step-name { font-weight: 700; color: #0f172a; font-size: .9rem; margin-bottom: .5rem; }
+    .report-checklist { list-style: none; padding: 0; margin: 0 0 .5rem; }
+    .report-checklist li {
+      display: flex; align-items: flex-start; gap: .4rem;
+      padding: .25rem 0; font-size: .85rem; color: #334155;
+    }
+    .report-checklist li::before {
+      content: '☐'; color: #94a3b8; font-size: .9rem; flex-shrink: 0; margin-top: .05rem;
+    }
+    .report-checklist li.checked::before { content: '☑'; color: #16a34a; }
+    .report-notes {
+      background: #fff; border: 1px solid #e2e8f0; border-radius: .4rem;
+      padding: .6rem .8rem; font-size: .85rem; color: #334155; white-space: pre-wrap;
+      margin-top: .5rem;
+    }
+    .report-photos {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: .5rem; margin-top: .5rem;
+    }
+    .report-photo {
+      border-radius: .4rem; overflow: hidden; border: 1px solid #e2e8f0;
+      aspect-ratio: 1; background: #f1f5f9;
+    }
+    .report-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .report-timer-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: .5rem;
+    }
+    .report-timer-item { background: #f8fafc; border-radius: .4rem; padding: .5rem .75rem; }
+    .report-timer-label { font-size: .75rem; color: #64748b; }
+    .report-timer-value { font-weight: 700; color: #0f172a; font-size: .9rem; }
+    .report-empty { font-size: .85rem; color: #94a3b8; font-style: italic; }
+    .report-actions {
+      padding: 1rem 1.5rem; border-top: 1px solid #e2e8f0;
+      display: flex; gap: .5rem; justify-content: flex-end; position: sticky; bottom: 0; background: #fff;
+    }
+    .report-actions button {
+      padding: .5rem 1rem; border-radius: .5rem; font-family: var(--font-body);
+      font-size: .85rem; font-weight: 600; cursor: pointer; border: 1px solid #e2e8f0;
+      background: #f8fafc; color: #334155; transition: all .2s;
+    }
+    .report-actions button:hover { background: #f1f5f9; }
+    .report-actions button.primary { background: #3b82f6; color: #fff; border-color: #3b82f6; }
+    .report-actions button.primary:hover { background: #2563eb; }
+    .report-device-badge {
+      display: inline-block; padding: .15rem .5rem; border-radius: 9999px;
+      background: #eff6ff; color: #1d4ed8; font-size: .75rem; font-weight: 600;
+      margin-right: .3rem; margin-bottom: .3rem;
+    }
+
+    /* STORAGE TOAST */
+    .storage-toast {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 400;
+      background: var(--card);
+      border: 1px solid rgba(245,158,11,.35);
+      border-radius: .75rem;
+      padding: 1rem 1.25rem;
+      max-width: 380px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.45);
+      color: var(--foreground);
+      font-size: .9rem;
+      line-height: 1.5;
+      transform: translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform .35s ease, opacity .35s ease;
+    }
+    .storage-toast.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .storage-toast-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem;
+      margin-bottom: .4rem;
+    }
+    .storage-toast-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: .95rem;
+      color: var(--warning);
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .storage-toast-dismiss {
+      background: transparent;
+      border: none;
+      color: var(--muted-foreground);
+      cursor: pointer;
+      font-size: 1.1rem;
+      line-height: 1;
+      padding: .2rem;
+      border-radius: .3rem;
+      transition: color .2s, background .2s;
+    }
+    .storage-toast-dismiss:hover {
+      color: var(--foreground);
+      background: rgba(255,255,255,.06);
+    }
+    .storage-toast-body {
+      color: var(--muted-foreground);
+      font-size: .85rem;
+    }
+    .storage-toast-body a {
+      color: var(--primary);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .storage-toast-body a:hover {
+      color: #60a5fa;
+    }
+
+    /* CRITICAL STORAGE TOAST */
+    .storage-toast-critical {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 401;
+      background: var(--card);
+      border: 1px solid rgba(239,68,68,.55);
+      border-radius: .75rem;
+      padding: 1rem 1.25rem;
+      max-width: 380px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.45);
+      color: var(--foreground);
+      font-size: .9rem;
+      line-height: 1.5;
+      transform: translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform .35s ease, opacity .35s ease;
+    }
+    .storage-toast-critical.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .storage-toast-critical .storage-toast-title {
+      color: var(--danger);
+    }
+    .storage-toast-critical .storage-toast-body a {
+      color: var(--danger);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .storage-toast-critical .storage-toast-body a:hover {
+      color: #f87171;
+    }
+
+    /* PRINT */
+    @media print {
+      .header, .sidebar { display: none; }
+      .main-wrap { padding-top: 1rem; grid-template-columns: 1fr; }
+      .workflow-card { break-inside: avoid; }
+    }
+    @media print {
+      body { background: #fff; color: #1e293b; }
+      .report-modal { box-shadow: none; max-height: none; }
+      .report-header, .report-actions { display: none; }
+      .report-overlay { position: static; background: transparent; padding: 0; display: block; }
+      .report-body { padding: 0; }
+      .report-step { break-inside: avoid; }
+      .report-photo { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      <div class="logo-text"><span class="brand">Anthracite Tech</span><span class="sub">Repair Guide</span></div>
+    </a>
+    <div style="display:flex;align-items:center;gap:.5rem;">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tech-guide.html" style="color:var(--foreground);">Tech Guide</a></li>
+        <li><a href="job-summary.html">Analytics</a></li>
+        <li><a href="repair-process.html">Repair Process</a></li>
+        <li><a href="emergency-repair.html">Emergency Repair</a></li>
+        <li><a href="nationwide-remote.html">Nationwide Remote</a></li>
+        <li><a href="remote-troubleshooting.html">Remote Troubleshooting</a></li>
+        <li><a href="index.html#book" class="cta-btn">Book Repair</a></li>
+      </ul>
+      <button class="settings-btn" id="settingsToggleBtn" onclick="toggleSettings()" title="Alert Settings">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="main-wrap">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <h3>Select Device</h3>
+      <button class="device-btn active" data-device="universal" onclick="selectDevice('universal')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        Universal Workflow
+      </button>
+      <button class="device-btn" data-device="pc" onclick="selectDevice('pc')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        PC / Laptop
+      </button>
+      <button class="device-btn" data-device="phone" onclick="selectDevice('phone')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        Smartphones
+      </button>
+      <button class="device-btn" data-device="console" onclick="selectDevice('console')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><line x1="15" y1="13" x2="15.01" y2="13"/><line x1="18" y1="11" x2="18.01" y2="11"/><rect x="2" y="6" width="20" height="12" rx="2"/></svg>
+        Game Consoles
+      </button>
+      <button class="device-btn" data-device="tablet" onclick="selectDevice('tablet')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        Tablets & iPads
+      </button>
+      <button class="device-btn" data-device="remote" onclick="selectDevice('remote')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+        Remote Services
+      </button>
+    </div>
+
+    <div class="sidebar-card">
+      <h3>Quick Reference</h3>
+      <div class="quick-ref-item">
+        <span class="quick-ref-label">Diagnostics</span>
+        <span class="quick-ref-value" style="color:var(--success)">Free</span>
+      </div>
+      <div class="quick-ref-item">
+        <span class="quick-ref-label">Essential Warranty</span>
+        <span class="quick-ref-value">30 days</span>
+      </div>
+      <div class="quick-ref-item">
+        <span class="quick-ref-label">Complete Care</span>
+        <span class="quick-ref-value">90 days</span>
+      </div>
+      <div class="quick-ref-item">
+        <span class="quick-ref-label">Rush Fee</span>
+        <span class="quick-ref-value">+$25</span>
+      </div>
+      <div class="quick-ref-item">
+        <span class="quick-ref-label">House Call Travel</span>
+        <span class="quick-ref-value">from $35</span>
+      </div>
+      <div class="quick-ref-item" style="margin-top:.5rem;flex-direction:column;align-items:flex-start;gap:.25rem;">
+        <span class="quick-ref-label">Urgency Levels</span>
+        <div style="display:flex;flex-wrap:wrap;gap:.3rem;">
+          <span class="urgency-pill urgency-low">Low</span>
+          <span class="urgency-pill urgency-medium">Medium</span>
+          <span class="urgency-pill urgency-high">High</span>
+          <span class="urgency-pill urgency-critical">Critical</span>
+        </div>
+      </div>
+    </div>
+
+<!-- JOB TIMER -->
+    <div class="timer-card" id="timerCard">
+      <h3>Job Timer</h3>
+      <div class="ticket-input-wrap">
+        <label>Ticket ID (optional)</label>
+        <input type="text" class="ticket-input" id="ticketId" placeholder="EZT-XXXXXX" maxlength="10">
+      </div>
+      <div class="ticket-input-wrap">
+        <label>Technician</label>
+        <input type="text" class="ticket-input" id="technicianName" placeholder="Your name" maxlength="30">
+      </div>
+      <div class="timer-display">
+        <div class="timer-time" id="timerDisplay">00:00:00</div>
+        <div class="timer-status" id="timerStatus">Idle</div>
+      </div>
+      <div class="timer-controls">
+        <button class="timer-btn start" id="startBtn" onclick="startTimer()">Start</button>
+        <button class="timer-btn pause" id="pauseBtn" onclick="pauseTimer()" disabled>Pause</button>
+        <button class="timer-btn stop" id="stopBtn" onclick="stopTimer()" disabled>Stop</button>
+      </div>
+      <div class="turnaround-compare" id="turnaroundCompare">
+        <div class="label">Expected Turnaround</div>
+        <div class="value ok" id="turnaroundValue">—</div>
+      </div>
+      <div class="step-nav" id="stepNav">
+        <button class="step-nav-btn" id="prevStepBtn" onclick="prevStep()" disabled>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          Prev
+        </button>
+        <button class="step-nav-btn" id="nextStepBtn" onclick="nextStep()" disabled>
+          Next
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+      <div id="stepTimers"></div>
+      <div id="turnaroundMatrix"></div>
+    </div>
+
+    <div class="settings-card" id="settingsCard" style="display:none;">
+      <h3>Alert Settings</h3>
+      <div class="settings-row">
+        <div>
+          <div class="settings-label">Sound Alerts</div>
+          <div class="settings-desc">Play audio when overdue</div>
+        </div>
+        <input type="checkbox" class="settings-toggle" id="settingSound" onchange="saveSettings()">
+      </div>
+      <div class="settings-row">
+        <div>
+          <div class="settings-label">Browser Notifications</div>
+          <div class="settings-desc">Show desktop notification</div>
+        </div>
+        <input type="checkbox" class="settings-toggle" id="settingNotify" onchange="saveSettings()">
+      </div>
+      <div class="settings-row column">
+        <div class="settings-label">Alert Volume</div>
+        <input type="range" class="settings-slider" id="settingVolume" min="0" max="100" value="50" oninput="saveSettings()">
+      </div>
+      <div class="settings-section-title">Photo Settings</div>
+      <div class="settings-row">
+        <div>
+          <div class="settings-label">Auto-Save Photos</div>
+          <div class="settings-desc">Automatically persist photos to localStorage</div>
+        </div>
+        <input type="checkbox" class="settings-toggle" id="settingAutoSavePhotos" onchange="saveSettings()">
+      </div>
+      <div class="settings-section-title">Custom Thresholds (minutes)</div>
+      <div class="settings-row">
+        <span class="settings-label">PC / Laptop</span>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.2rem;">
+          <input type="number" class="settings-input" id="threshold_pc" min="1" value="120" onchange="validateThresholdSetting(this)">
+          <span class="settings-error" id="threshold_pc_error"></span>
+        </div>
+      </div>
+      <div class="settings-row">
+        <span class="settings-label">Smartphones</span>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.2rem;">
+          <input type="number" class="settings-input" id="threshold_phone" min="1" value="120" onchange="validateThresholdSetting(this)">
+          <span class="settings-error" id="threshold_phone_error"></span>
+        </div>
+      </div>
+      <div class="settings-row">
+        <span class="settings-label">Game Consoles</span>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.2rem;">
+          <input type="number" class="settings-input" id="threshold_console" min="1" value="1440" onchange="validateThresholdSetting(this)">
+          <span class="settings-error" id="threshold_console_error"></span>
+        </div>
+      </div>
+      <div class="settings-row">
+        <span class="settings-label">Tablets &amp; iPads</span>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.2rem;">
+          <input type="number" class="settings-input" id="threshold_tablet" min="1" value="120" onchange="validateThresholdSetting(this)">
+          <span class="settings-error" id="threshold_tablet_error"></span>
+        </div>
+      </div>
+      <div class="settings-row">
+        <span class="settings-label">Remote Services</span>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.2rem;">
+          <input type="number" class="settings-input" id="threshold_remote" min="1" value="1440" onchange="validateThresholdSetting(this)">
+          <span class="settings-error" id="threshold_remote_error"></span>
+        </div>
+      </div>
+      <div class="settings-section-title">Warning Pulse (% of threshold)</div>
+      <div class="settings-row">
+        <span class="settings-label">PC / Laptop</span>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.2rem;">
+          <input type="number" class="settings-input" id="warn_threshold_pc" min="1" max="100" value="80" onchange="validateWarnSetting(this)">
+          <span class="settings-error" id="warn_threshold_pc_error"></span>
+        </div>
+      </div>
+      <div class="settings-row">
+        <span class="settings-label">Smartphones</span>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.2rem;">
+          <input type="number" class="settings-input" id="warn_threshold_phone" min="1" max="100" value="80" onchange="validateWarnSetting(this)">
+          <span class="settings-error" id="warn_threshold_phone_error"></span>
+        </div>
+      </div>
+      <div class="settings-row">
+        <span class="settings-label">Game Consoles</span>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.2rem;">
+          <input type="number" class="settings-input" id="warn_threshold_console" min="1" max="100" value="80" onchange="validateWarnSetting(this)">
+          <span class="settings-error" id="warn_threshold_console_error"></span>
+        </div>
+      </div>
+      <div class="settings-row">
+        <span class="settings-label">Tablets &amp; iPads</span>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.2rem;">
+          <input type="number" class="settings-input" id="warn_threshold_tablet" min="1" max="100" value="80" onchange="validateWarnSetting(this)">
+          <span class="settings-error" id="warn_threshold_tablet_error"></span>
+        </div>
+      </div>
+      <div class="settings-row">
+        <span class="settings-label">Remote Services</span>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.2rem;">
+          <input type="number" class="settings-input" id="warn_threshold_remote" min="1" max="100" value="80" onchange="validateWarnSetting(this)">
+          <span class="settings-error" id="warn_threshold_remote_error"></span>
+        </div>
+      </div>
+      <div class="settings-section-title">PDF Report Header</div>
+      <div class="settings-row">
+        <div>
+          <div class="settings-label">Show Logo</div>
+          <div class="settings-desc">Include company name in PDF header</div>
+        </div>
+        <input type="checkbox" class="settings-toggle" id="settingHeaderLogo" onchange="saveSettings()">
+      </div>
+      <div class="settings-row">
+        <div>
+          <div class="settings-label">Show Document Title</div>
+          <div class="settings-desc">Include report title in PDF header</div>
+        </div>
+        <input type="checkbox" class="settings-toggle" id="settingHeaderTitle" onchange="saveSettings()">
+      </div>
+      <div class="settings-row">
+        <div>
+          <div class="settings-label">Show Department Name</div>
+          <div class="settings-desc">Include department name in PDF header</div>
+        </div>
+        <input type="checkbox" class="settings-toggle" id="settingHeaderDepartment" onchange="saveSettings()">
+      </div>
+      <div class="pdf-preview-wrap" style="margin-top:.5rem;margin-bottom:.25rem;">
+        <div class="pdf-preview-page" style="min-height:auto;">
+          <div class="pdf-preview-header" id="miniHeaderPreview">
+            <div class="pdf-preview-header-left">
+              <div class="pdf-preview-logo" id="miniHeaderLogo">Anthracite Tech Co.</div>
+              <div class="pdf-preview-title" id="miniHeaderTitle">Shift Handoff Report</div>
+              <div class="pdf-preview-dept" id="miniHeaderDept">Repair Department</div>
+            </div>
+            <div class="pdf-preview-header-right">
+              <div class="pdf-preview-ticket" id="miniHeaderTicket">Ticket: EZT-12345</div>
+              <div class="pdf-preview-meta" id="miniHeaderMeta">4/27/2026, 8:50 PM · Page 1 of 2</div>
+            </div>
+            <div class="pdf-preview-header-accent"></div>
+          </div>
+        </div>
+      </div>
+      <div class="settings-section-title">PDF Report Footer</div>
+      <div class="settings-row">
+        <div>
+          <div class="settings-label">Show Page Numbers</div>
+          <div class="settings-desc">Include page numbering in PDF footer</div>
+        </div>
+        <input type="checkbox" class="settings-toggle" id="settingFooterPageNumbers" onchange="saveSettings()">
+      </div>
+      <div class="settings-row">
+        <div>
+          <div class="settings-label">Show Timestamp</div>
+          <div class="settings-desc">Include generation timestamp in PDF footer</div>
+        </div>
+        <input type="checkbox" class="settings-toggle" id="settingFooterTimestamp" onchange="saveSettings()">
+      </div>
+      <div class="settings-row">
+        <div>
+          <div class="settings-label">Show Confidentiality Notice</div>
+          <div class="settings-desc">Include confidentiality line in PDF footer</div>
+        </div>
+        <input type="checkbox" class="settings-toggle" id="settingFooterConfidentiality" onchange="saveSettings()">
+      </div>
+      <div class="pdf-preview-wrap" style="margin-top:.5rem;margin-bottom:.25rem;">
+        <div class="pdf-preview-page" style="min-height:auto;">
+          <div class="pdf-preview-footer" id="miniFooterPreview">
+            <div class="pdf-preview-footer-accent"></div>
+            <div class="pdf-preview-footer-left">
+              <div class="pdf-preview-footer-brand">Anthracite Tech Co.</div>
+              <div class="pdf-preview-footer-generated" id="miniFooterGenerated">Generated: 4/27/2026, 8:50 PM</div>
+            </div>
+            <div class="pdf-preview-footer-center" id="miniFooterPageNum">Page 1 of 2</div>
+            <div class="pdf-preview-footer-right" id="miniFooterConfidential">Confidential — Internal Use Only</div>
+          </div>
+        </div>
+      </div>
+      <div class="settings-section-title">PDF Preview</div>
+      <div class="pdf-preview-wrap">
+        <div class="pdf-preview-page">
+          <div class="pdf-preview-header" id="pdfPreviewHeader">
+            <div class="pdf-preview-header-left">
+              <div class="pdf-preview-logo" id="pdfPreviewLogo">Anthracite Tech Co.</div>
+              <div class="pdf-preview-title" id="pdfPreviewTitle">Shift Handoff Report</div>
+              <div class="pdf-preview-dept" id="pdfPreviewDept">Repair Department</div>
+            </div>
+            <div class="pdf-preview-header-right">
+              <div class="pdf-preview-ticket" id="pdfPreviewTicket">Ticket: EZT-12345</div>
+              <div class="pdf-preview-meta" id="pdfPreviewMeta">4/27/2026, 8:50 PM · Page 1 of 2</div>
+            </div>
+            <div class="pdf-preview-header-accent"></div>
+          </div>
+          <div class="pdf-preview-body">
+            <div class="pdf-preview-line" style="width:75%"></div>
+            <div class="pdf-preview-line" style="width:60%"></div>
+            <div class="pdf-preview-line" style="width:85%"></div>
+            <div class="pdf-preview-line" style="width:50%"></div>
+            <div class="pdf-preview-line" style="width:70%"></div>
+            <div class="pdf-preview-box"></div>
+            <div class="pdf-preview-line" style="width:65%"></div>
+            <div class="pdf-preview-line" style="width:40%"></div>
+          </div>
+          <div class="pdf-preview-footer" id="pdfPreviewFooter">
+            <div class="pdf-preview-footer-accent"></div>
+            <div class="pdf-preview-footer-left">
+              <div class="pdf-preview-footer-brand">Anthracite Tech Co.</div>
+              <div class="pdf-preview-footer-generated" id="pdfPreviewGenerated">Generated: 4/27/2026, 8:50 PM</div>
+            </div>
+            <div class="pdf-preview-footer-center" id="pdfPreviewPageNum">Page 1 of 2</div>
+            <div class="pdf-preview-footer-right" id="pdfPreviewConfidential">Confidential — Internal Use Only</div>
+          </div>
+        </div>
+      </div>
+      <button class="reset-btn" style="margin-top:.75rem;width:100%;justify-content:center;" onclick="resetSettings()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 12"/><path d="M3 3v9h9"/></svg>
+        Reset to Defaults
+      </button>
+      <div style="display:flex;gap:.5rem;margin-top:.5rem;">
+        <button class="reset-btn" style="flex:1;justify-content:center;" onclick="exportSettings()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export Config
+        </button>
+        <button class="reset-btn" style="flex:1;justify-content:center;" onclick="document.getElementById('settingsImportInput').click()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Import Config
+        </button>
+        <input type="file" id="settingsImportInput" accept=".json,application/json" style="display:none;" onchange="importSettings(this.files[0])">
+      </div>
+    </div>
+
+    <div class="sidebar-card">
+      <h3>Shift Handoff</h3>
+      <button class="report-btn" onclick="generateReport()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Generate Handoff Report
+      </button>
+      <button class="report-btn" style="margin-top:.5rem;background:rgba(34,197,94,.15);border-color:rgba(34,197,94,.3);color:var(--success);" onclick="downloadReportPdf()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download PDF
+      </button>
+      <p style="font-size:.75rem;color:var(--muted-foreground);margin-top:.5rem;">Preview the report or download it directly as a PDF — no browser print dialog needed, works great on mobile.</p>
+    </div>
+
+    <div class="sidebar-card" id="photoStorageCard">
+      <h3>Photo Storage</h3>
+      <div class="storage-info">
+        <span id="storageUsed">0 KB used</span>
+        <span id="storageTotal">—</span>
+      </div>
+      <div class="storage-bar-wrap">
+        <div class="storage-bar" id="storageBar" style="width:0%"></div>
+      </div>
+      <div class="storage-warning" id="storageWarning" style="display:none;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <span>Storage is getting full</span>
+      </div>
+      <div style="display:flex;gap:.5rem;margin-top:.75rem;">
+        <button class="report-btn" style="flex:1;" onclick="openPhotoManager()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          Manage Photos
+        </button>
+      </div>
+    </div>
+
+    <div class="sidebar-card">
+      <h3>Quick Reference</h3>
+      <div class="quick-ref-item">
+        <span class="quick-ref-label">In-Store</span>
+        <span class="quick-ref-value">&lt; 2 hrs</span>
+      </div>
+      <div class="quick-ref-item">
+        <span class="quick-ref-label">House Call</span>
+        <span class="quick-ref-value">2–4 hrs</span>
+      </div>
+      <div class="quick-ref-item">
+        <span class="quick-ref-label">Mail-In</span>
+        <span class="quick-ref-value">3–5 days</span>
+      </div>
+      <div class="quick-ref-item">
+        <span class="quick-ref-label">Remote</span>
+        <span class="quick-ref-value">Same day</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content-area" id="contentArea">
+    <div class="hero-mini">
+      <h1><span class="gradient-text">Technician Repair Guide</span></h1>
+      <p>Select a device category to load the step-by-step workflow, diagnostic checklist, and repair procedures.</p>
+    </div>
+    <div id="guideContent"></div>
+  </main>
+
+</div>
+
+<!-- STORAGE TOAST -->
+<div class="storage-toast" id="storageToast">
+  <div class="storage-toast-header">
+    <div class="storage-toast-title">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      Storage Running Low
+    </div>
+    <button class="storage-toast-dismiss" onclick="dismissStorageToast()" title="Dismiss">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="storage-toast-body">
+    localStorage usage is above 80%. Photos may fail to save.
+    <a onclick="dismissStorageToast();openPhotoManager();">Open Photo Manager</a> to free up space.
+  </div>
+</div>
+
+<!-- CRITICAL STORAGE TOAST -->
+<div class="storage-toast-critical" id="storageToastCritical">
+  <div class="storage-toast-header">
+    <div class="storage-toast-title">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      Storage Critical — Uploads Blocked
+    </div>
+  </div>
+  <div class="storage-toast-body">
+    Usage is above 95%. Photo uploads are disabled until space is freed.
+    <a onclick="openPhotoManager();">Open Photo Manager</a> to delete or export photos.
+  </div>
+</div>
+
+<!-- DELETE CONFIRM MODAL -->
+<div class="delete-confirm-overlay hidden" id="deleteConfirmOverlay" onclick="if(event.target===this)closeDeleteConfirmModal()">
+  <div class="delete-confirm-modal">
+    <div class="delete-confirm-header">
+      <h3>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Delete Photos?
+      </h3>
+      <button class="delete-confirm-close" onclick="closeDeleteConfirmModal()" title="Close">&#10005;</button>
+    </div>
+    <div class="delete-confirm-body" id="deleteConfirmBody">
+      <div class="delete-confirm-sub" id="deleteConfirmSub"></div>
+      <div class="delete-confirm-grid" id="deleteConfirmGrid"></div>
+      <div class="delete-confirm-total" id="deleteConfirmTotal"></div>
+    </div>
+    <div class="delete-confirm-footer">
+      <button class="delete-confirm-btn" onclick="closeDeleteConfirmModal()">Cancel</button>
+      <button class="delete-confirm-btn danger" onclick="confirmDeletePhotos()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+        Delete Permanently
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- GENERIC MODAL -->
+<div class="delete-confirm-overlay hidden" id="genericModalOverlay" onclick="if(event.target===this)closeGenericModal()">
+  <div class="delete-confirm-modal" style="max-width:480px;">
+    <div class="delete-confirm-header">
+      <h3 id="genericModalTitle">Notice</h3>
+      <button class="delete-confirm-close" onclick="closeGenericModal()" title="Close">&#10005;</button>
+    </div>
+    <div class="delete-confirm-body">
+      <div class="delete-confirm-sub" id="genericModalMessage"></div>
+    </div>
+    <div class="delete-confirm-footer">
+      <button class="delete-confirm-btn" id="genericModalCancelBtn" onclick="resolveGenericModal(false)">Cancel</button>
+      <button class="delete-confirm-btn primary" id="genericModalOkBtn" onclick="resolveGenericModal(true)">OK</button>
+    </div>
+  </div>
+</div>
+
+<!-- PHOTO MANAGER MODAL -->
+<div class="photo-manager-overlay hidden" id="photoManagerOverlay" onclick="if(event.target===this)closePhotoManager()">
+  <div class="photo-manager-modal">
+    <div class="photo-manager-header">
+      <div style="min-width:0;">
+        <h3>Manage Stored Photos</h3>
+        <div class="sub" id="photoManagerSub">Select photos to export or delete</div>
+        <div class="storage-info" style="margin-top:.4rem;">
+          <span id="pmStorageUsed">—</span>
+          <span id="pmStorageTotal">—</span>
+        </div>
+        <div class="storage-bar-wrap" style="margin-top:.25rem;max-width:220px;">
+          <div class="storage-bar" id="pmStorageBar" style="width:0%"></div>
+        </div>
+        <div class="storage-warning" id="pmStorageWarning" style="display:none;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>Storage is getting full</span>
+        </div>
+        <div class="zip-progress-wrap" id="zipProgressWrap" style="display:none;">
+          <div class="zip-progress-label">
+            <span id="zipProgressText">Compressing photos…</span>
+            <span>
+              <span id="zipProgressPercent">0%</span><span id="zipProgressCount" class="zip-progress-count"></span><span id="zipProgressEta" class="zip-progress-eta"></span>
+              <button class="zip-progress-abort" id="zipProgressAbort" onclick="cancelZipExport()" title="Cancel ZIP generation">Abort</button>
+            </span>
+          </div>
+          <div class="zip-progress-bar-wrap">
+            <div class="zip-progress-bar" id="zipProgressBar" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="photo-manager-actions">
+        <button class="photo-manager-btn" onclick="toggleSelectAllPhotos()" id="selectAllBtn">Select All</button>
+        <button class="photo-manager-btn warning" onclick="clearAutoSelectedPhotos()" id="clearAutoBtn" title="Remove algorithm suggestions, keep manual selections">Clear Auto</button>
+        <button class="photo-manager-btn primary" onclick="exportSelectedPhotos()" id="exportBtn" disabled>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download ZIP
+        </button>
+        <button class="photo-manager-btn danger" onclick="openDeleteConfirmModal()" id="deleteBtn" disabled>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+          Delete
+        </button>
+        <button class="photo-manager-btn" onclick="closePhotoManager()" title="Close">✕</button>
+      </div>
+    </div>
+    <div class="pm-storage-critical" id="pmStorageCritical" style="display:none;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <span style="flex:1;">Storage is critically full (&gt;95%). Photo uploads are blocked until space is freed. Select and delete photos to restore uploads.</span>
+      <button class="pm-storage-critical-btn" onclick="autoSelectPhotosForDeletion()">Select photos for deletion</button>
+    </div>
+    <div class="photo-manager-body" id="photoManagerBody">
+      <div class="photo-manager-empty">No stored photos found.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const data = {
+  universal: {
+    title: 'Universal Repair Workflow',
+    subtitle: 'Every repair follows this 4-step process regardless of device type.',
+    steps: [
+      {
+        name: 'Intake & Free Diagnostic',
+        checklist: [
+          'Customer booked via web, phone, or walk-in',
+          'Perform free diagnostic (no obligation, no hidden fees)',
+          'Inspect device and identify issue',
+          'Provide firm quote before any work begins',
+          'Customer approves or declines — no pressure'
+        ]
+      },
+      {
+        name: 'Repair Authorization & Scheduling',
+        checklist: [
+          'If approved, queue repair by urgency and service type',
+          'In-store: log device with ticket ID (EZT-XXXXXX)',
+          'House call: dispatch tech within quoted window',
+          'Mail-in: send shipping instructions; log on receipt',
+          'Remote: email secure screen-share link to customer'
+        ]
+      },
+      {
+        name: 'Repair Execution',
+        checklist: [
+          'Use OEM or high-quality replacement parts only',
+          'In-store: customer can watch repair live',
+          'Remote: customer observes via screen-share',
+          'Mail-in / house call: send progress updates',
+          'Perform post-repair testing to verify functionality'
+        ]
+      },
+      {
+        name: 'Completion, Warranty & Follow-Up',
+        checklist: [
+          'Return device to customer (or end remote session)',
+          'Provide repair summary and warranty documentation',
+          'Essential Fix: 30 days | Complete Care: 90 days',
+          'Send post-service follow-up email for satisfaction',
+          'Update booking status in system'
+        ]
+      }
+    ],
+    services: [],
+    notes: 'Universal policies apply to all repairs. Always get written approval before beginning work.'
+  },
+  pc: {
+    title: 'PC / Laptop Repair',
+    subtitle: 'Hardware diagnosis, virus removal, screen replacement, data recovery, upgrades, and tune-ups.',
+    steps: [
+      {
+        name: 'Intake',
+        checklist: [
+          'Customer selected "PC / Laptop" as device type',
+          'Document symptoms: won\'t boot, slow, virus, physical damage',
+          'Confirm preferred service type: in-store, house call, mail-in, remote'
+        ]
+      },
+      {
+        name: 'Diagnostic',
+        checklist: [
+          'Boot device (or attempt to)',
+          'Run hardware diagnostics: drive health, RAM, thermals',
+          'Remote: check system logs, resource usage, startup items, network config',
+          'Mail-in: unbox and run same hardware diagnostic suite'
+        ]
+      },
+      {
+        name: 'Repair',
+        checklist: [
+          'Virus/Malware: full scan, threat removal, security hardening, browser cleanup',
+          'Screen Replacement: remove old panel, install new panel, test for dead pixels / touch',
+          'Data Recovery: attempt logical recovery first; quote physical damage after eval',
+          'Hardware Upgrades: RAM/SSD install, thermal paste replacement, component testing',
+          'Tune-Up: startup optimization, bloatware removal, disk cleanup, driver updates'
+        ]
+      },
+      {
+        name: 'Verification & Return',
+        checklist: [
+          'Stress-test device for stability',
+          'Notify customer for pickup, delivery (house call), or ship back (mail-in)'
+        ]
+      }
+    ],
+    services: [
+      { name: 'Hardware Diagnosis', price: 'Free' },
+      { name: 'Virus Removal', price: '$49' },
+      { name: 'Screen Replacement', price: 'from $89' },
+      { name: 'Data Recovery', price: 'from $99' },
+      { name: 'Hardware Upgrades', price: 'from $49' },
+      { name: 'PC Maintenance & Tune-Up', price: '$39' }
+    ],
+    bundle: { name: 'PC Refresh', price: '$129 (Save $30)', desc: 'Virus removal + cleanup + software upgrades + maintenance + data backup' },
+    turnaround: '< 2 hrs (common repairs)',
+    notes: 'PC Refresh bundle saves customer $30. Always back up data before major hardware work if possible.'
+  },
+  phone: {
+    title: 'Smartphone Repair',
+    subtitle: 'iPhone & Android screen replacement, battery swap, charging port repair, and water damage.',
+    steps: [
+      {
+        name: 'Intake',
+        checklist: [
+          'Customer selected "iPhone" or "Android Phone"',
+          'Document issue: cracked screen, battery drain, charging, water damage',
+          'Confirm walk-in or same-day service availability'
+        ]
+      },
+      {
+        name: 'Diagnostic',
+        checklist: [
+          'Visual inspection: screen cracks, frame bends, water indicators',
+          'Functional tests: touch response, battery health, charging amperage, speaker/mic',
+          'Water damage: open and inspect for corrosion; ultrasonic clean if needed'
+        ]
+      },
+      {
+        name: 'Repair',
+        checklist: [
+          'Screen Replacement: power down, remove old assembly, install new OEM-quality screen, set adhesives, test',
+          'Battery Replacement: safely remove old battery (adhesive strips or solvent), install new battery, calibrate',
+          'Charging Port: replace port module, solder or connect via flex cable, test charge rate and data transfer',
+          'Turnaround: 1–2 hours for most screen and battery replacements'
+        ]
+      },
+      {
+        name: 'Verification & Return',
+        checklist: [
+          'Full functional test: display, touch, cameras, Face ID / fingerprint, charging, audio',
+          'Clean device and return to customer'
+        ]
+      }
+    ],
+    services: [
+      { name: 'iPhone Screen Replacement', price: 'from $79' },
+      { name: 'Android Screen Replacement', price: 'from $59' },
+      { name: 'Battery Replacement', price: '$49' },
+      { name: 'Charging Port Repair', price: '$45' }
+    ],
+    bundle: { name: 'Phone Rescue', price: '$99 (Save $25)', desc: 'Screen replacement + battery swap + premium tempered glass install' },
+    turnaround: '1–2 hours',
+    notes: 'Phone Rescue bundle saves $25. Water damage cases: inspect thoroughly and quote after opening.'
+  },
+  console: {
+    title: 'Game Console Repair',
+    subtitle: 'Nintendo Switch, PlayStation 4/5, Xbox One / Series X|S.',
+    steps: [
+      {
+        name: 'Intake',
+        checklist: [
+          'Customer selected "Game Console"',
+          'Document symptoms: Joy-Con drift, no video, disc errors, overheating, loud fans'
+        ]
+      },
+      {
+        name: 'Diagnostic',
+        checklist: [
+          'Nintendo Switch: Joy-Con rail inspection, analog stick testing, dock/undock behavior',
+          'PlayStation / Xbox: HDMI output test (multiple cables/monitors), disc spin and laser check, thermal monitoring under load',
+          'Internal inspection: dust buildup, thermal paste condition, fan health'
+        ]
+      },
+      {
+        name: 'Repair',
+        checklist: [
+          'Joy-Con Drift: replace analog stick module (or clean contacts for minor cases), calibrate',
+          'HDMI Port: desolder damaged port, install new port, inspect pins under microscope',
+          'Disc Drive: clean or replace laser lens, lubricate drive mechanism, check firmware',
+          'Internal Cleaning: full teardown, dust removal, thermal paste replacement, fan cleaning',
+          'Turnaround: same-day to 24 hours for most repairs'
+        ]
+      },
+      {
+        name: 'Verification & Return',
+        checklist: [
+          'Stress-test console with actual games for 30+ minutes',
+          'Verify temperature and noise levels within spec',
+          'Return device or ship back'
+        ]
+      }
+    ],
+    services: [
+      { name: 'Switch Joy-Con Drift Fix', price: '$35' },
+      { name: 'PS/Xbox HDMI Port Repair', price: '$75' },
+      { name: 'Disc Drive Repair', price: 'from $75' },
+      { name: 'Internal Cleaning', price: '$45' }
+    ],
+    bundle: { name: 'Console Revival', price: '$109 (Save $35)', desc: 'Full teardown cleaning + thermal paste + Joy-Con drift fix' },
+    turnaround: 'Same day – 24 hrs',
+    notes: 'Console Revival bundle saves $35. Always test with actual game discs / cartridges after disc drive repair.'
+  },
+  tablet: {
+    title: 'Tablets & iPads',
+    subtitle: 'iPad (all models) and Android tablets. Screen, battery, and charging port repairs.',
+    steps: [
+      {
+        name: 'Intake',
+        checklist: [
+          'Customer selected "iPad / Tablet"',
+          'Document issue: cracked glass, unresponsive touch, battery not holding charge, charging issues'
+        ]
+      },
+      {
+        name: 'Diagnostic',
+        checklist: [
+          'Visual inspection: glass cracks, LCD/OLED damage, frame integrity',
+          'Check battery health via software; measure charging current',
+          'Test touch response across full screen area'
+        ]
+      },
+      {
+        name: 'Repair',
+        checklist: [
+          'Screen Replacement: heat device to soften adhesive, remove old screen, install new digitizer/LCD assembly, reapply adhesives, test',
+          'Battery Replacement: remove old battery (adhesive dissolution), install new battery, calibrate',
+          'Charging Port: replace port flex cable, solder or connect, test charge and data',
+          'Turnaround: 1–2 hours for common repairs; some iPad models need longer adhesive cure'
+        ]
+      },
+      {
+        name: 'Verification & Return',
+        checklist: [
+          'Test display, touch, cameras, charging, and audio',
+          'Return device to customer'
+        ]
+      }
+    ],
+    services: [
+      { name: 'iPad Screen Replacement', price: 'from $99' },
+      { name: 'Android Tablet Screen', price: 'from $79' },
+      { name: 'Battery Replacement', price: '$65' },
+      { name: 'Charging Port Repair', price: '$55' }
+    ],
+    bundle: null,
+    turnaround: '1–2 hours (adhesive cure varies)',
+    notes: 'iPad adhesive curing can take extra time. Warn customer if device needs to sit overnight.'
+  },
+  remote: {
+    title: 'Remote-Only Services',
+    subtitle: 'Software issues resolved via secure screen-share. No physical access required.',
+    steps: [
+      {
+        name: 'Book Your Session',
+        checklist: [
+          'Customer filled out remote booking form',
+          'Confirmed timezone and time slot selection',
+          'Same-day available for urgent issues'
+        ]
+      },
+      {
+        name: 'Connect Securely',
+        checklist: [
+          'Customer receives secure screen-share link via email or text',
+          'Confirm no permanent software download required',
+          'Verify TLS 1.3 end-to-end encryption',
+          'Customer explicitly approves connection; can disconnect instantly'
+        ]
+      },
+      {
+        name: 'Diagnose & Fix',
+        checklist: [
+          'See customer\'s screen and identify issue',
+          'Repair in real time while customer watches',
+          'Chat and answer questions throughout',
+          'If physical repair needed, quote in-store, house call, or mail-in service'
+        ]
+      },
+      {
+        name: 'Session Complete',
+        checklist: [
+          'Disconnect session; confirm nothing remains on customer computer',
+          'Send summary of fixes applied and prevention tips'
+        ]
+      }
+    ],
+    services: [
+      { name: 'Quick Fix (≤15 min)', price: '$25' },
+      { name: 'Standard Remote (up to 1 hr)', price: '$65/hr' },
+      { name: 'Business Remote IT', price: '$149/hr' }
+    ],
+    bundle: null,
+    turnaround: 'Same day – 24 hrs',
+    notes: 'Remote sessions are encrypted and never recorded. Customer data is never accessed without explicit permission.'
+  }
+};
+
+function selectDevice(key) {
+  currentDeviceKey = key;
+  document.querySelectorAll('.device-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.device-btn[data-device="${key}"]`).classList.add('active');
+  renderGuide(key);
+  restoreTimerState(key);
+}
+
+function renderGuide(key) {
+  const d = data[key];
+  const container = document.getElementById('guideContent');
+
+  let stepsHtml = '';
+  d.steps.forEach((step, idx) => {
+    const checkItems = step.checklist.map((item, i) => `
+      <label class="check-item" onchange="updateProgress('${key}')">
+        <input type="checkbox" data-step="${idx}" data-item="${i}">
+        <span>${item}</span>
+      </label>
+    `).join('');
+
+    stepsHtml += `
+      <div class="workflow-card">
+        <div class="workflow-header">
+          <div class="step-number">${idx + 1}</div>
+          <h3>${step.name}</h3>
+        </div>
+        <div class="checklist">${checkItems}</div>
+        <textarea class="notes-area" placeholder="Technician notes for Step ${idx + 1}..." data-step-notes="${idx}"></textarea>
+        <div class="step-photos">
+          <div class="photo-list" id="photoList-step-${idx}"></div>
+          <div class="photo-attach-area">
+            <input type="file" class="photo-input" accept="image/*" onchange="handlePhotoFile(this.files[0], '${key}', ${idx})">
+            <button class="photo-btn" onclick="this.parentElement.querySelector('.photo-input').click()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+              Attach Photo
+            </button>
+            <span class="photo-hint">or paste (Ctrl+V) / drag &amp; drop</span>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  let servicesHtml = '';
+  if (d.services && d.services.length) {
+    servicesHtml = `
+      <div class="workflow-card">
+        <div class="workflow-header">
+          <div class="step-number" style="background:rgba(34,197,94,.15);color:var(--success)">$</div>
+          <h3>Pricing Reference</h3>
+        </div>
+        <div class="service-grid">
+          ${d.services.map(s => `
+            <div class="service-chip"><span>${s.name}</span><span class="price">${s.price}</span></div>
+          `).join('')}
+        </div>
+        ${d.bundle ? `
+          <div style="margin-top:1rem;padding:1rem;background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.12);border-radius:.75rem;">
+            <strong style="color:var(--primary)">${d.bundle.name}</strong> — ${d.bundle.price}<br>
+            <span style="font-size:.85rem;color:var(--muted-foreground)">${d.bundle.desc}</span>
+          </div>
+        ` : ''}
+      </div>
+    `;
+  }
+
+  let turnaroundHtml = d.turnaround ? `
+    <div class="workflow-card">
+      <div class="workflow-header">
+        <div class="step-number" style="background:rgba(245,158,11,.12);color:var(--warning)">⏱</div>
+        <h3>Typical Turnaround</h3>
+      </div>
+      <p style="color:var(--muted-foreground);font-size:.9rem;">${d.turnaround}</p>
+    </div>
+  ` : '';
+
+  let urgencyTable = '';
+  if (key !== 'remote' && key !== 'universal') {
+    urgencyTable = `
+      <div class="workflow-card">
+        <div class="workflow-header">
+          <div class="step-number" style="background:rgba(239,68,68,.15);color:var(--danger)">!</div>
+          <h3>Urgency & Response Matrix</h3>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>Urgency</th><th>Label</th><th>Response</th><th>Completion</th></tr></thead>
+          <tbody>
+            <tr><td><span class="urgency-pill urgency-low">Low</span></td><td>Flexible</td><td>Within 4 hrs</td><td>3–5 days</td></tr>
+            <tr><td><span class="urgency-pill urgency-medium">Medium</span></td><td>This Week</td><td>Within 2 hrs</td><td>1–3 days</td></tr>
+            <tr><td><span class="urgency-pill urgency-high">High</span></td><td>ASAP / Same-Day</td><td>Within 1 hr</td><td>Same day</td></tr>
+            <tr><td><span class="urgency-pill urgency-critical">Critical</span></td><td>Device Unusable</td><td>Immediate</td><td>Priority; 1–2 hrs</td></tr>
+          </tbody>
+        </table>
+      </div>
+    `;
+  }
+
+  let progressHtml = `
+    <div style="margin-bottom:1rem;">
+      <div class="progress-text">
+        <span id="progressLabel">Progress</span>
+        <span id="progressPercent">0%</span>
+      </div>
+      <div class="progress-wrap"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
+      <button class="reset-btn" onclick="resetChecklist('${key}')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 12"/><path d="M3 3v9h9"/></svg>
+        Reset Checklist
+      </button>
+    </div>
+  `;
+
+  let deliveryHtml = '';
+  if (key !== 'remote') {
+    deliveryHtml = `
+      <div class="workflow-card">
+        <div class="workflow-header">
+          <div class="step-number" style="background:rgba(59,130,246,.15);color:var(--primary)">📦</div>
+          <h3>Service Delivery Methods</h3>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>Method</th><th>Best For</th><th>Fee</th><th>Turnaround</th></tr></thead>
+          <tbody>
+            <tr><td><strong>In-Store Drop-Off</strong></td><td>Local customers, fast</td><td>Free diagnostic</td><td>&lt; 2 hrs</td></tr>
+            <tr><td><strong>House Call</strong></td><td>Urgent, immobile setups</td><td>from $35 travel</td><td>2–4 hrs arrival</td></tr>
+            <tr><td><strong>Mail-In</strong></td><td>Nationwide, non-urgent</td><td>Customer pays ship</td><td>3–5 days</td></tr>
+            <tr><td><strong>Remote</strong></td><td>Software issues</td><td>$25–$149</td><td>Same day–24 hrs</td></tr>
+          </tbody>
+        </table>
+      </div>
+    `;
+  }
+
+  container.innerHTML = `
+    <div class="hero-mini">
+      <h1><span class="gradient-text">${d.title}</span></h1>
+      <p>${d.subtitle}</p>
+    </div>
+    ${progressHtml}
+    ${stepsHtml}
+    ${servicesHtml}
+    ${turnaroundHtml}
+    ${urgencyTable}
+    ${deliveryHtml}
+    <div class="workflow-card">
+      <div class="workflow-header">
+        <div class="step-number" style="background:rgba(168,85,247,.15);color:#c084fc">📝</div>
+        <h3>General Notes</h3>
+      </div>
+      <p style="color:var(--muted-foreground);font-size:.9rem;margin-bottom:.5rem;">${d.notes}</p>
+      <textarea class="notes-area" placeholder="Add your general notes here..." id="generalNotes"></textarea>
+      <div class="step-photos">
+        <div class="photo-list" id="photoList-general"></div>
+        <div class="photo-attach-area">
+          <input type="file" class="photo-input" accept="image/*" onchange="handlePhotoFile(this.files[0], '${key}', 'general')">
+          <button class="photo-btn" onclick="this.parentElement.querySelector('.photo-input').click()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+            Attach Photo
+          </button>
+          <span class="photo-hint">or paste (Ctrl+V) / drag &amp; drop</span>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Restore checkbox state from localStorage
+  const saved = JSON.parse(localStorage.getItem('anthracitetech_guide_' + key) || '[]');
+  container.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    const s = parseInt(cb.dataset.step);
+    const i = parseInt(cb.dataset.item);
+    if (saved.some(x => x.step === s && x.item === i)) {
+      cb.checked = true;
+      cb.closest('.check-item').classList.add('checked');
+    }
+    cb.addEventListener('change', () => {
+      cb.closest('.check-item').classList.toggle('checked', cb.checked);
+      saveChecklist(key);
+      updateProgress(key);
+    });
+  });
+
+  // Restore notes
+  const savedNotes = JSON.parse(localStorage.getItem('anthracitetech_guide_notes_' + key) || '{}');
+  container.querySelectorAll('textarea[data-step-notes]').forEach(ta => {
+    const s = ta.dataset.stepNotes;
+    if (savedNotes[s]) ta.value = savedNotes[s];
+    ta.addEventListener('input', () => saveNotes(key));
+  });
+  if (savedNotes.general && document.getElementById('generalNotes')) {
+    document.getElementById('generalNotes').value = savedNotes.general;
+  }
+  if (document.getElementById('generalNotes')) {
+    document.getElementById('generalNotes').addEventListener('input', () => saveNotes(key));
+  }
+
+  // Restore and setup photos
+  d.steps.forEach((_, idx) => {
+    renderPhotosForStep(key, idx);
+    const ta = container.querySelector(`textarea[data-step-notes="${idx}"]`);
+    if (ta) setupPhotoPaste(ta, key, idx);
+    const pl = document.getElementById(`photoList-step-${idx}`);
+    if (pl) setupPhotoDrop(pl, key, idx);
+  });
+  renderPhotosForStep(key, 'general');
+  const generalTa = document.getElementById('generalNotes');
+  if (generalTa) setupPhotoPaste(generalTa, key, 'general');
+  const generalPl = document.getElementById('photoList-general');
+  if (generalPl) setupPhotoDrop(generalPl, key, 'general');
+
+  updateProgress(key);
+}
+
+function saveChecklist(key) {
+  const checked = [];
+  document.querySelectorAll('#guideContent input[type="checkbox"]').forEach(cb => {
+    if (cb.checked) checked.push({ step: parseInt(cb.dataset.step), item: parseInt(cb.dataset.item) });
+  });
+  localStorage.setItem('anthracitetech_guide_' + key, JSON.stringify(checked));
+}
+
+function saveNotes(key) {
+  const notes = {};
+  document.querySelectorAll('#guideContent textarea[data-step-notes]').forEach(ta => {
+    notes[ta.dataset.stepNotes] = ta.value;
+  });
+  const general = document.getElementById('generalNotes');
+  if (general) notes.general = general.value;
+  localStorage.setItem('anthracitetech_guide_notes_' + key, JSON.stringify(notes));
+}
+
+function getPhotos(key) {
+  try {
+    return JSON.parse(localStorage.getItem('anthracitetech_guide_photos_' + key) || '{}');
+  } catch (e) { return {}; }
+}
+
+function setPhotos(key, photos) {
+  localStorage.setItem('anthracitetech_guide_photos_' + key, JSON.stringify(photos));
+}
+
+function getLocalStorageByteSize() {
+  let size = 0;
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (k) {
+      const v = localStorage.getItem(k) || '';
+      size += (k.length + v.length) * 2;
+    }
+  }
+  return size;
+}
+
+async function getStorageQuotaInfo() {
+  let total = 5242880; // 5 MB conservative fallback
+  let used = getLocalStorageByteSize();
+  if (navigator.storage && navigator.storage.estimate) {
+    try {
+      const est = await navigator.storage.estimate();
+      if (est.quota) total = est.quota;
+      if (est.usage) used = est.usage;
+    } catch (e) { /* ignore */ }
+  }
+  return { total, used, available: Math.max(0, total - used) };
+}
+
+function formatBytes(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / 1048576).toFixed(1) + ' MB';
+}
+
+function estimateBatchSize(files) {
+  return files.reduce((sum, f) => sum + ((f.size || 0) * 1.5), 0);
+}
+
+async function confirmIfBatchExceedsQuota(files) {
+  if (!files || files.length === 0) return true;
+  const batchSize = estimateBatchSize(files);
+  if (batchSize < 512000) return true; // < 500 KB: no warning
+  const info = await getStorageQuotaInfo();
+  if (batchSize > info.available) {
+    return await showConfirmModal(
+      `This batch (~${formatBytes(batchSize)}) exceeds available storage (~${formatBytes(info.available)}). ` +
+      `Some images may not be saved, causing data loss. Continue anyway?`,
+      'Storage Warning'
+    );
+  }
+  if (batchSize > info.available * 0.5) {
+    return await showConfirmModal(
+      `This batch (~${formatBytes(batchSize)}) uses a large portion of remaining storage (~${formatBytes(info.available)}). ` +
+      `Continue anyway?`,
+      'Storage Warning'
+    );
+  }
+  return true;
+}
+
+function handlePhotoFile(file, key, stepIdx) {
+  return new Promise(async (resolve) => {
+    if (!file || !file.type.startsWith('image/')) {
+      resolve();
+      return;
+    }
+    if (await isStorageCritical()) {
+      console.warn('Photo upload blocked: storage critical (>95%)');
+      resolve();
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        addPhoto(key, stepIdx, e.target.result);
+        resolve();
+      } catch (err) {
+        console.error('Failed to save photo (quota exceeded?):', file.name, err);
+        resolve();
+      }
+    };
+    reader.onerror = () => resolve();
+    reader.readAsDataURL(file);
+  });
+}
+
+function getPhotoProgressEl(photoListEl) {
+  let indicator = photoListEl.nextElementSibling;
+  if (indicator && indicator.classList.contains('photo-progress-wrap')) return indicator;
+  indicator = document.createElement('div');
+  indicator.className = 'photo-progress-wrap';
+  indicator.innerHTML = `
+    <div class="photo-progress-label"></div>
+    <div class="photo-progress-bar-wrap"><div class="photo-progress-bar" style="width:0%"></div></div>
+  `;
+  photoListEl.parentNode.insertBefore(indicator, photoListEl.nextSibling);
+  return indicator;
+}
+
+function removePhotoProgressEl(photoListEl) {
+  const indicator = photoListEl.nextElementSibling;
+  if (indicator && indicator.classList.contains('photo-progress-wrap')) {
+    indicator.remove();
+  }
+}
+
+function addPhoto(key, stepIdx, dataUrl) {
+  const photos = getPhotos(key);
+  const arr = photos[stepIdx] || [];
+  arr.push(dataUrl);
+  photos[stepIdx] = arr;
+  setPhotos(key, photos);
+  renderPhotosForStep(key, stepIdx);
+  updatePhotoStorageCard();
+}
+
+function removePhoto(key, stepIdx, photoIdx) {
+  const photos = getPhotos(key);
+  if (!photos[stepIdx]) return;
+  photos[stepIdx].splice(photoIdx, 1);
+  if (photos[stepIdx].length === 0) delete photos[stepIdx];
+  setPhotos(key, photos);
+  renderPhotosForStep(key, stepIdx);
+  updatePhotoStorageCard();
+}
+
+function renderPhotosForStep(key, stepIdx) {
+  const containerId = stepIdx === 'general' ? 'photoList-general' : `photoList-step-${stepIdx}`;
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const photos = getPhotos(key);
+  const arr = photos[stepIdx] || [];
+  if (arr.length === 0) {
+    container.innerHTML = '';
+    return;
+  }
+  container.innerHTML = arr.map((url, i) => `
+    <div class="photo-thumb" onclick="openLightbox('${url.replace(/'/g, "\\'")}')">
+      <img src="${url}" alt="Photo ${i + 1}" loading="lazy">
+      <button class="photo-remove" onclick="event.stopPropagation(); removePhoto('${key}', '${stepIdx}', ${i})" title="Remove photo">&times;</button>
+    </div>
+  `).join('');
+}
+
+function setupPhotoPaste(element, key, stepIdx) {
+  element.addEventListener('paste', async (e) => {
+    const items = e.clipboardData?.items;
+    if (!items) return;
+    const blobs = [];
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].type.indexOf('image') !== -1) {
+        e.preventDefault();
+        const blob = items[i].getAsFile();
+        if (blob) blobs.push(blob);
+      }
+    }
+    if (!blobs.length) return;
+    if (await isStorageCritical()) {
+      await showAlertModal('Storage is critically full (>95%). Photo uploads are blocked until space is freed.', 'Storage Full');
+      return;
+    }
+    const proceed = await confirmIfBatchExceedsQuota(blobs);
+    if (!proceed) return;
+    for (let i = 0; i < blobs.length; i++) {
+      try {
+        await handlePhotoFile(blobs[i], key, stepIdx);
+      } catch (err) {
+        console.error('Photo paste failed for item:', i, err);
+      }
+    }
+  });
+}
+
+function setupPhotoDrop(element, key, stepIdx) {
+  let dragCounter = 0;
+
+  element.addEventListener('dragenter', (e) => {
+    e.preventDefault();
+    dragCounter++;
+    if (e.dataTransfer.types.includes('Files')) {
+      element.classList.add('drag-over');
+    }
+  });
+
+  element.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    if (e.dataTransfer.types.includes('Files')) {
+      e.dataTransfer.dropEffect = 'copy';
+      element.classList.add('drag-over');
+    }
+  });
+
+  element.addEventListener('dragleave', (e) => {
+    e.preventDefault();
+    dragCounter--;
+    if (dragCounter <= 0) {
+      element.classList.remove('drag-over');
+      dragCounter = 0;
+    }
+  });
+
+  element.addEventListener('drop', async (e) => {
+    e.preventDefault();
+    dragCounter = 0;
+    element.classList.remove('drag-over');
+    const files = Array.from(e.dataTransfer.files || []).filter(f => f.type.startsWith('image/'));
+    if (!files.length) return;
+
+    if (await isStorageCritical()) {
+      await showAlertModal('Storage is critically full (>95%). Photo uploads are blocked until space is freed.', 'Storage Full');
+      return;
+    }
+
+    const proceed = await confirmIfBatchExceedsQuota(files);
+    if (!proceed) return;
+
+    let errorCount = 0;
+
+    if (files.length > 1) {
+      const progressEl = getPhotoProgressEl(element);
+      progressEl.querySelector('.photo-progress-label').textContent = `Processing 0 of ${files.length} images…`;
+      progressEl.querySelector('.photo-progress-bar').style.width = '0%';
+    }
+
+    for (let i = 0; i < files.length; i++) {
+      try {
+        await handlePhotoFile(files[i], key, stepIdx);
+      } catch (err) {
+        errorCount++;
+        console.error('Photo drop failed for file:', files[i].name, err);
+      }
+      if (files.length > 1) {
+        const progressEl = getPhotoProgressEl(element);
+        const label = progressEl.querySelector('.photo-progress-label');
+        const baseText = `Processing ${i + 1} of ${files.length} images…`;
+        label.textContent = errorCount > 0 ? `${baseText} (${errorCount} failed)` : baseText;
+        progressEl.querySelector('.photo-progress-bar').style.width = `${((i + 1) / files.length) * 100}%`;
+      }
+    }
+
+    if (files.length > 1) {
+      removePhotoProgressEl(element);
+    }
+  });
+}
+
+function openLightbox(url) {
+  const box = document.createElement('div');
+  box.className = 'photo-lightbox';
+  box.innerHTML = `<img src="${url}" alt="Full size">`;
+  box.onclick = () => box.remove();
+  document.addEventListener('keydown', function esc(e) {
+    if (e.key === 'Escape') { box.remove(); document.removeEventListener('keydown', esc); }
+  });
+  document.body.appendChild(box);
+}
+
+/* PHOTO MANAGER */
+
+function getAllPhotos() {
+  const devices = ['universal', 'pc', 'phone', 'console', 'tablet', 'remote'];
+  const result = [];
+  devices.forEach(key => {
+    const photos = getPhotos(key);
+    Object.entries(photos).forEach(([stepIdx, arr]) => {
+      if (Array.isArray(arr)) {
+        arr.forEach((url, i) => {
+          result.push({ key, stepIdx, index: i, url, id: `${key}-${stepIdx}-${i}` });
+        });
+      }
+    });
+  });
+  return result;
+}
+
+function getPhotoManagerLabel(key, stepIdx) {
+  const deviceLabels = {
+    universal: 'Universal',
+    pc: 'PC / Laptop',
+    phone: 'Smartphones',
+    console: 'Game Consoles',
+    tablet: 'Tablets & iPads',
+    remote: 'Remote Services'
+  };
+  const device = deviceLabels[key] || key;
+  if (stepIdx === 'general') return `${device} — General`;
+  const stepNum = parseInt(stepIdx, 10);
+  const stepName = data[key]?.steps[stepNum]?.name || `Step ${stepNum + 1}`;
+  return `${device} — ${stepName}`;
+}
+
+function openPhotoManager() {
+  renderPhotoManager();
+  updatePhotoStorageCard();
+  const overlay = document.getElementById('photoManagerOverlay');
+  if (overlay) overlay.classList.remove('hidden');
+  document.addEventListener('keydown', handlePhotoManagerKey);
+}
+
+function closePhotoManager() {
+  const overlay = document.getElementById('photoManagerOverlay');
+  if (overlay) overlay.classList.add('hidden');
+  document.removeEventListener('keydown', handlePhotoManagerKey);
+}
+
+function handlePhotoManagerKey(e) {
+  if (e.key === 'Escape') closePhotoManager();
+}
+
+function renderPhotoManager() {
+  const body = document.getElementById('photoManagerBody');
+  const sub = document.getElementById('photoManagerSub');
+  const allPhotos = getAllPhotos();
+  if (!body) return;
+
+  if (allPhotos.length === 0) {
+    body.innerHTML = '<div class="photo-manager-empty">No stored photos found.</div>';
+    if (sub) sub.textContent = '0 photos stored';
+    updateManagerActionButtons();
+    return;
+  }
+
+  if (sub) sub.textContent = `${allPhotos.length} photo${allPhotos.length === 1 ? '' : 's'} stored — click to select`;
+
+  // Group by key+stepIdx
+  const groups = {};
+  allPhotos.forEach(p => {
+    const groupKey = `${p.key}::${p.stepIdx}`;
+    if (!groups[groupKey]) groups[groupKey] = { key: p.key, stepIdx: p.stepIdx, photos: [] };
+    groups[groupKey].photos.push(p);
+  });
+
+  let html = '';
+  Object.values(groups).forEach(g => {
+    html += `
+      <div class="photo-manager-group">
+        <div class="photo-manager-group-title">${escapeHtml(getPhotoManagerLabel(g.key, g.stepIdx))} <span style="color:var(--muted-foreground);font-weight:500;">(${g.photos.length})</span></div>
+        <div class="photo-manager-grid">
+          ${g.photos.map(p => `
+            <div class="photo-manager-item" data-id="${escapeHtml(p.id)}" onclick="togglePhotoSelection('${escapeHtml(p.id)}')">
+              <div class="pm-check"></div>
+              <div class="pm-reason"></div>
+              <img src="${p.url}" alt="Photo" loading="lazy">
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  });
+
+  body.innerHTML = html;
+  updateManagerActionButtons();
+}
+
+function togglePhotoSelection(id) {
+  const items = document.querySelectorAll('.photo-manager-item');
+  for (let i = 0; i < items.length; i++) {
+    if (items[i].dataset.id === id) {
+      items[i].classList.remove('auto-selected');
+      const reasonEl = items[i].querySelector('.pm-reason');
+      if (reasonEl) reasonEl.textContent = '';
+      items[i].classList.toggle('selected');
+      break;
+    }
+  }
+  updateManagerActionButtons();
+}
+
+function getSelectedPhotoIds() {
+  return Array.from(document.querySelectorAll('.photo-manager-item.selected, .photo-manager-item.auto-selected')).map(el => el.dataset.id);
+}
+
+function updateManagerActionButtons() {
+  const selected = getSelectedPhotoIds().length;
+  const exportBtn = document.getElementById('exportBtn');
+  const deleteBtn = document.getElementById('deleteBtn');
+  if (exportBtn) {
+    exportBtn.disabled = selected === 0;
+    exportBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download ZIP${selected > 0 ? ' (' + selected + ')' : ''}`;
+  }
+  if (deleteBtn) {
+    deleteBtn.disabled = selected === 0;
+    deleteBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg> Delete${selected > 0 ? ' (' + selected + ')' : ''}`;
+  }
+  const selectAllBtn = document.getElementById('selectAllBtn');
+  const allItems = document.querySelectorAll('.photo-manager-item');
+  if (selectAllBtn && allItems.length > 0) {
+    const allSelected = Array.from(allItems).every(el => el.classList.contains('selected') || el.classList.contains('auto-selected'));
+    selectAllBtn.textContent = allSelected ? 'Deselect All' : 'Select All';
+  }
+}
+
+function toggleSelectAllPhotos() {
+  const items = document.querySelectorAll('.photo-manager-item');
+  if (items.length === 0) return;
+  const allSelected = Array.from(items).every(el => el.classList.contains('selected') || el.classList.contains('auto-selected'));
+  items.forEach(el => {
+    el.classList.remove('auto-selected');
+    const reasonEl = el.querySelector('.pm-reason');
+    if (reasonEl) reasonEl.textContent = '';
+    el.classList.toggle('selected', !allSelected);
+  });
+  updateManagerActionButtons();
+}
+
+async function computeBlurScore(imgUrl) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      try {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const size = 64;
+        canvas.width = size;
+        canvas.height = size;
+        ctx.drawImage(img, 0, 0, size, size);
+        const imgData = ctx.getImageData(0, 0, size, size);
+        const data = imgData.data;
+        const gray = new Float32Array(size * size);
+        for (let i = 0; i < size * size; i++) {
+          gray[i] = data[i * 4] * 0.299 + data[i * 4 + 1] * 0.587 + data[i * 4 + 2] * 0.114;
+        }
+        let sum = 0, sumSq = 0, count = 0;
+        for (let y = 1; y < size - 1; y++) {
+          for (let x = 1; x < size - 1; x++) {
+            const i = y * size + x;
+            const laplacian = 4 * gray[i] - gray[i - 1] - gray[i + 1] - gray[i - size] - gray[i + size];
+            sum += laplacian;
+            sumSq += laplacian * laplacian;
+            count++;
+          }
+        }
+        const mean = sum / count;
+        const variance = sumSq / count - mean * mean;
+        resolve(variance);
+      } catch (e) {
+        resolve(Infinity);
+      }
+    };
+    img.onerror = () => resolve(Infinity);
+    img.src = imgUrl;
+  });
+}
+
+function findDuplicatePhotos(photos) {
+  const seen = {};
+  const duplicates = new Set();
+  photos.forEach(p => {
+    const base64 = (p.url || '').split(',')[1] || p.url;
+    if (seen[base64]) {
+      duplicates.add(p.id);
+      duplicates.add(seen[base64]);
+    } else {
+      seen[base64] = p.id;
+    }
+  });
+  return duplicates;
+}
+
+async function autoSelectPhotosForDeletion() {
+  const allPhotos = getAllPhotos();
+  if (allPhotos.length === 0) return;
+
+  const info = await getStorageQuotaInfo();
+  const total = info.total;
+  const currentUsed = info.used;
+
+  // Target: bring usage down to 90% to give breathing room below the 95% critical threshold
+  const targetUsed = total > 0 ? total * 0.90 : currentUsed * 0.85;
+  let needToFree = Math.max(0, currentUsed - targetUsed);
+  // Always try to free at least 5% of total or 10% of current usage, whichever is larger
+  const minFree = Math.max(total > 0 ? total * 0.05 : 0, currentUsed * 0.10);
+  const goalFree = Math.max(needToFree, minFree);
+
+  const deviceOrder = ['universal', 'pc', 'phone', 'console', 'tablet', 'remote'];
+
+  // Find exact duplicates
+  const duplicateIds = findDuplicatePhotos(allPhotos);
+
+  // Compute blur scores sequentially to avoid canvas contention
+  const blurScores = {};
+  let computed = 0;
+  for (const p of allPhotos) {
+    try {
+      blurScores[p.id] = await computeBlurScore(p.url);
+    } catch (e) {
+      blurScores[p.id] = Infinity;
+    }
+    computed++;
+    if (computed % 5 === 0) await new Promise(r => setTimeout(r, 0));
+  }
+
+  const BLUR_THRESHOLD = 80;
+
+  // Estimate size and age, flag duplicates/blur for each photo
+  const photosWithMeta = allPhotos.map(p => {
+    const estimatedBytes = (p.url || '').length * 2;
+    const dOrder = deviceOrder.indexOf(p.key);
+    const ageScore = (dOrder >= 0 ? dOrder : 99) * 10000 + (parseInt(p.stepIdx, 10) || 0) * 100 + (p.index || 0);
+    const isDuplicate = duplicateIds.has(p.id);
+    const blurScore = blurScores[p.id] || Infinity;
+    const isBlurry = blurScore < BLUR_THRESHOLD;
+    const rankScore = (isDuplicate ? 2 : 0) + (isBlurry ? 1 : 0);
+    return { ...p, estimatedBytes, ageScore, isDuplicate, isBlurry, blurScore, rankScore };
+  });
+
+  // Sort: rank desc (duplicates > blurry > normal), then size desc, then age asc
+  photosWithMeta.sort((a, b) => {
+    if (b.rankScore !== a.rankScore) return b.rankScore - a.rankScore;
+    if (b.estimatedBytes !== a.estimatedBytes) return b.estimatedBytes - a.estimatedBytes;
+    return a.ageScore - b.ageScore;
+  });
+
+  let freed = 0;
+  const toSelect = [];
+  const reasons = {};
+  for (const p of photosWithMeta) {
+    toSelect.push(p.id);
+    const parts = [];
+    if (p.isDuplicate) parts.push('Duplicate detected');
+    if (p.isBlurry) parts.push(`Blurry (score: ${Math.round(p.blurScore)})`);
+    if (p.estimatedBytes > 500000) parts.push(`Large file (${formatBytes(p.estimatedBytes)})`);
+    parts.push('Older photo');
+    reasons[p.id] = 'Auto-selected: ' + parts.join(' • ');
+    freed += p.estimatedBytes;
+    if (freed >= goalFree) break;
+  }
+
+  // Apply selection in the DOM
+  const items = document.querySelectorAll('.photo-manager-item');
+  items.forEach(el => {
+    el.classList.remove('auto-selected');
+    el.classList.toggle('selected', toSelect.includes(el.dataset.id));
+    const reasonEl = el.querySelector('.pm-reason');
+    if (reasonEl) reasonEl.textContent = '';
+  });
+  items.forEach(el => {
+    if (toSelect.includes(el.dataset.id)) {
+      el.classList.add('auto-selected');
+      const reasonEl = el.querySelector('.pm-reason');
+      if (reasonEl) reasonEl.textContent = reasons[el.dataset.id] || '';
+    }
+  });
+
+  updateManagerActionButtons();
+
+  // Scroll the first selected photo into view
+  const firstSelected = document.querySelector('.photo-manager-item.auto-selected, .photo-manager-item.selected');
+  if (firstSelected) {
+    firstSelected.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+let zipAbortController = null;
+
+function cancelZipExport() {
+  if (zipAbortController) {
+    zipAbortController.abort();
+    zipAbortController = null;
+  }
+}
+
+/**
+ * Wrapper around JSZip generation that actually honours an AbortController.
+ * JSZip's generateAsync ignores the signal option in the shipped build,
+ * so we use generateInternalStream + accumulate and inject an AbortError
+ * into the worker when the signal fires.
+ */
+function generateAsyncWithAbort(zip, options, updateCallback, signal) {
+  const stream = zip.generateInternalStream(options);
+  const promise = stream.accumulate(updateCallback);
+
+  if (signal) {
+    const doAbort = () => {
+      if (stream && stream._worker) {
+        stream._worker.error(new DOMException('The user aborted a request.', 'AbortError'));
+      }
+    };
+    if (signal.aborted) {
+      doAbort();
+    } else {
+      signal.addEventListener('abort', doAbort, { once: true });
+    }
+  }
+
+  return promise;
+}
+
+async function exportSelectedPhotos() {
+  const selectedIds = getSelectedPhotoIds();
+  if (selectedIds.length === 0) return;
+
+  const allPhotos = getAllPhotos();
+  const selectedPhotos = allPhotos.filter(p => selectedIds.includes(p.id));
+
+  // Fallback to individual downloads if JSZip is not available
+  if (typeof JSZip === 'undefined') {
+    let exported = 0;
+    selectedPhotos.forEach((p, i) => {
+      setTimeout(() => {
+        const a = document.createElement('a');
+        const ext = p.url.includes('/jpeg') || p.url.includes('/jpg') ? 'jpg' : 'png';
+        const stepLabel = p.stepIdx === 'general' ? 'general' : `step${parseInt(p.stepIdx,10)+1}`;
+        a.href = p.url;
+        a.download = `anthracitetech-${p.key}-${stepLabel}-photo${p.index+1}.${ext}`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        exported++;
+        if (exported === selectedPhotos.length) {
+          document.querySelectorAll('.photo-manager-item.selected, .photo-manager-item.auto-selected').forEach(el => {
+            el.classList.remove('selected');
+            el.classList.remove('auto-selected');
+            const reasonEl = el.querySelector('.pm-reason');
+            if (reasonEl) reasonEl.textContent = '';
+          });
+          updateManagerActionButtons();
+        }
+      }, i * 250);
+    });
+    return;
+  }
+
+  const zip = new JSZip();
+  const folder = zip.folder('anthracitetech-photos');
+
+  selectedPhotos.forEach(p => {
+    const ext = p.url.includes('/jpeg') || p.url.includes('/jpg') ? 'jpg' : 'png';
+    const stepLabel = p.stepIdx === 'general' ? 'general' : `step${parseInt(p.stepIdx,10)+1}`;
+    const filename = `anthracitetech-${p.key}-${stepLabel}-photo${p.index+1}.${ext}`;
+    const base64 = p.url.split(',')[1];
+    if (base64) {
+      folder.file(filename, base64, { base64: true });
+    }
+  });
+
+  const exportBtn = document.getElementById('exportBtn');
+  const zipProgressWrap = document.getElementById('zipProgressWrap');
+  const zipProgressBar = document.getElementById('zipProgressBar');
+  const zipProgressPercent = document.getElementById('zipProgressPercent');
+  const zipProgressText = document.getElementById('zipProgressText');
+  const zipProgressEta = document.getElementById('zipProgressEta');
+  const zipProgressCount = document.getElementById('zipProgressCount');
+  const zipProgressAbort = document.getElementById('zipProgressAbort');
+  const totalFiles = selectedPhotos.length;
+  const seenFiles = new Set();
+  const zipStartTime = Date.now();
+
+  zipAbortController = new AbortController();
+
+  if (exportBtn) exportBtn.disabled = true;
+  if (zipProgressWrap) zipProgressWrap.style.display = '';
+  if (zipProgressBar) zipProgressBar.style.width = '0%';
+  if (zipProgressPercent) zipProgressPercent.textContent = '0%';
+  if (zipProgressText) zipProgressText.textContent = 'Compressing photos…';
+  if (zipProgressEta) zipProgressEta.textContent = '';
+  if (zipProgressCount) zipProgressCount.textContent = '';
+  if (zipProgressAbort) zipProgressAbort.disabled = false;
+
+  try {
+    const content = await generateAsyncWithAbort(zip, { type: 'blob' }, function updateCallback(metadata) {
+      const pct = Math.round(metadata.percent || 0);
+      if (metadata.currentFile) seenFiles.add(metadata.currentFile);
+      const currentFileNum = Math.min(seenFiles.size || Math.max(1, Math.round((pct / 100) * totalFiles)), totalFiles);
+      if (zipProgressBar) zipProgressBar.style.width = pct + '%';
+      if (zipProgressPercent) zipProgressPercent.textContent = pct + '%';
+      if (zipProgressCount) zipProgressCount.textContent = totalFiles > 1 ? `(${currentFileNum}/${totalFiles})` : '';
+      if (zipProgressText) {
+        if (metadata.currentFile) {
+          zipProgressText.textContent = 'Compressing: ' + metadata.currentFile;
+        } else {
+          zipProgressText.textContent = 'Compressing photos…';
+        }
+      }
+      if (zipProgressEta && pct > 1 && pct < 100) {
+        const elapsed = Date.now() - zipStartTime;
+        const totalEstimated = elapsed / (pct / 100);
+        const remaining = Math.max(0, Math.round((totalEstimated - elapsed) / 1000));
+        let etaText = '';
+        if (remaining >= 60) {
+          const m = Math.floor(remaining / 60);
+          const s = remaining % 60;
+          etaText = `≈ ${m}m ${s}s remaining`;
+        } else {
+          etaText = `≈ ${remaining}s remaining`;
+        }
+        zipProgressEta.textContent = etaText;
+      } else if (zipProgressEta) {
+        zipProgressEta.textContent = '';
+      }
+    }, zipAbortController.signal);
+    const url = URL.createObjectURL(content);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `anthracitetech-photos-${new Date().toISOString().slice(0,10)}.zip`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  } catch (err) {
+    if (err && err.name === 'AbortError') {
+      if (zipProgressText) zipProgressText.textContent = 'Cancelled';
+      if (zipProgressBar) zipProgressBar.style.width = '0%';
+      if (zipProgressPercent) zipProgressPercent.textContent = '';
+      if (zipProgressCount) zipProgressCount.textContent = '';
+      if (zipProgressEta) zipProgressEta.textContent = '';
+      // Short delay so the user sees the cancelled state before hiding
+      await new Promise(r => setTimeout(r, 600));
+      return;
+    }
+    console.error('ZIP generation failed:', err);
+    await showAlertModal('Failed to generate ZIP. Falling back to individual downloads.', 'ZIP Error');
+    if (zipProgressText) zipProgressText.textContent = 'ZIP failed — falling back…';
+    // Trigger fallback
+    if (typeof JSZip === 'undefined') {
+      // Already checked above, but keep for safety
+    } else {
+      // Re-run without JSZip by temporarily hiding it
+      const jszip = window.JSZip;
+      window.JSZip = undefined;
+      await exportSelectedPhotos();
+      window.JSZip = jszip;
+    }
+    return;
+  } finally {
+    zipAbortController = null;
+    if (zipProgressWrap) zipProgressWrap.style.display = 'none';
+    if (exportBtn) exportBtn.disabled = false;
+    if (zipProgressEta) zipProgressEta.textContent = '';
+    if (zipProgressCount) zipProgressCount.textContent = '';
+    if (zipProgressAbort) zipProgressAbort.disabled = true;
+  }
+
+  // Deselect after export
+  document.querySelectorAll('.photo-manager-item.selected, .photo-manager-item.auto-selected').forEach(el => {
+    el.classList.remove('selected');
+    el.classList.remove('auto-selected');
+    const reasonEl = el.querySelector('.pm-reason');
+    if (reasonEl) reasonEl.textContent = '';
+  });
+  updateManagerActionButtons();
+}
+
+function clearAutoSelectedPhotos() {
+  const autoItems = document.querySelectorAll('.photo-manager-item.auto-selected');
+  if (autoItems.length === 0) return;
+  autoItems.forEach(el => {
+    el.classList.remove('auto-selected');
+    const reasonEl = el.querySelector('.pm-reason');
+    if (reasonEl) reasonEl.textContent = '';
+  });
+  updateManagerActionButtons();
+}
+
+function openDeleteConfirmModal() {
+  const selectedIds = getSelectedPhotoIds();
+  if (selectedIds.length === 0) return;
+
+  const allPhotos = getAllPhotos();
+  const selectedSet = new Set(selectedIds);
+  const selectedPhotos = allPhotos.filter(p => selectedSet.has(p.id));
+  const count = selectedPhotos.length;
+  const estimatedBytes = selectedPhotos.reduce((sum, p) => sum + ((p.url || '').length * 2), 0);
+
+  const sub = document.getElementById('deleteConfirmSub');
+  const grid = document.getElementById('deleteConfirmGrid');
+  const total = document.getElementById('deleteConfirmTotal');
+
+  if (sub) {
+    sub.textContent = `You are about to permanently delete ${count} photo${count === 1 ? '' : 's'}. This action cannot be undone.`;
+  }
+
+  if (grid) {
+    grid.innerHTML = selectedPhotos.map(p => {
+      const bytes = (p.url || '').length * 2;
+      return `
+        <div class="delete-confirm-item">
+          <img src="${p.url}" alt="Photo" loading="lazy">
+          <div class="delete-confirm-size">${formatBytes(bytes)}</div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  if (total) {
+    total.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Total space to be freed: <span class="total-size">${formatBytes(estimatedBytes)}</span>`;
+    total.style.display = estimatedBytes > 0 ? 'flex' : 'none';
+  }
+
+  const overlay = document.getElementById('deleteConfirmOverlay');
+  if (overlay) {
+    overlay.classList.remove('hidden');
+    document.addEventListener('keydown', handleDeleteConfirmKey);
+  }
+}
+
+function closeDeleteConfirmModal() {
+  const overlay = document.getElementById('deleteConfirmOverlay');
+  if (overlay) overlay.classList.add('hidden');
+  document.removeEventListener('keydown', handleDeleteConfirmKey);
+}
+
+function handleDeleteConfirmKey(e) {
+  if (e.key === 'Escape') closeDeleteConfirmModal();
+}
+
+let genericModalResolve = null;
+
+function openGenericModal(title, message, type) {
+  const overlay = document.getElementById('genericModalOverlay');
+  const titleEl = document.getElementById('genericModalTitle');
+  const messageEl = document.getElementById('genericModalMessage');
+  const cancelBtn = document.getElementById('genericModalCancelBtn');
+  const okBtn = document.getElementById('genericModalOkBtn');
+  if (titleEl) titleEl.textContent = title;
+  if (messageEl) messageEl.textContent = message;
+  if (cancelBtn) cancelBtn.style.display = type === 'confirm' ? '' : 'none';
+  if (okBtn) {
+    okBtn.classList.remove('danger');
+    okBtn.classList.add('primary');
+  }
+  if (overlay) {
+    overlay.classList.remove('hidden');
+    document.addEventListener('keydown', handleGenericModalKey);
+  }
+}
+
+function openGenericDangerModal(title, message, type) {
+  const overlay = document.getElementById('genericModalOverlay');
+  const titleEl = document.getElementById('genericModalTitle');
+  const messageEl = document.getElementById('genericModalMessage');
+  const cancelBtn = document.getElementById('genericModalCancelBtn');
+  const okBtn = document.getElementById('genericModalOkBtn');
+  if (titleEl) titleEl.textContent = title;
+  if (messageEl) messageEl.textContent = message;
+  if (cancelBtn) cancelBtn.style.display = type === 'confirm' ? '' : 'none';
+  if (okBtn) {
+    okBtn.classList.remove('primary');
+    okBtn.classList.add('danger');
+  }
+  if (overlay) {
+    overlay.classList.remove('hidden');
+    document.addEventListener('keydown', handleGenericModalKey);
+  }
+}
+
+function closeGenericModal() {
+  const overlay = document.getElementById('genericModalOverlay');
+  if (overlay) overlay.classList.add('hidden');
+  document.removeEventListener('keydown', handleGenericModalKey);
+  if (genericModalResolve) {
+    genericModalResolve(false);
+    genericModalResolve = null;
+  }
+}
+
+function handleGenericModalKey(e) {
+  if (e.key === 'Escape') closeGenericModal();
+}
+
+function resolveGenericModal(value) {
+  closeGenericModal();
+  if (genericModalResolve) {
+    genericModalResolve(value);
+    genericModalResolve = null;
+  }
+}
+
+function showAlertModal(message, title) {
+  return new Promise((resolve) => {
+    genericModalResolve = resolve;
+    openGenericModal(title || 'Notice', message, 'alert');
+  });
+}
+
+function showConfirmModal(message, title) {
+  return new Promise((resolve) => {
+    genericModalResolve = resolve;
+    openGenericModal(title || 'Confirm', message, 'confirm');
+  });
+}
+
+function showDangerConfirmModal(message, title) {
+  return new Promise((resolve) => {
+    genericModalResolve = resolve;
+    openGenericDangerModal(title || 'Confirm', message, 'confirm');
+  });
+}
+
+function confirmDeletePhotos() {
+  closeDeleteConfirmModal();
+  executeDeleteSelectedPhotos();
+}
+
+function executeDeleteSelectedPhotos() {
+  const selectedIds = getSelectedPhotoIds();
+  if (selectedIds.length === 0) return;
+
+  const allPhotos = getAllPhotos();
+  const toDelete = new Set(selectedIds);
+
+  // Group deletions by device key, then step, storing indices to remove
+  const deletions = {};
+  allPhotos.forEach(p => {
+    if (toDelete.has(p.id)) {
+      if (!deletions[p.key]) deletions[p.key] = {};
+      if (!deletions[p.key][p.stepIdx]) deletions[p.key][p.stepIdx] = [];
+      deletions[p.key][p.stepIdx].push(p.index);
+    }
+  });
+
+  // Process each device: sort indices descending so splicing doesn't shift remaining indices
+  Object.entries(deletions).forEach(([key, steps]) => {
+    const photos = getPhotos(key);
+    Object.entries(steps).forEach(([stepIdx, indices]) => {
+      if (photos[stepIdx]) {
+        indices.sort((a, b) => b - a);
+        indices.forEach(idx => {
+          photos[stepIdx].splice(idx, 1);
+        });
+        if (photos[stepIdx].length === 0) {
+          delete photos[stepIdx];
+        }
+      }
+    });
+    setPhotos(key, photos);
+    // Re-render current device photos if visible
+    if (key === currentDeviceKey) {
+      Object.keys(steps).forEach(si => renderPhotosForStep(key, si));
+    }
+  });
+
+  updatePhotoStorageCard();
+  renderPhotoManager();
+}
+
+// Storage toast state
+let storageToastVisible = false;
+let storageToastDismissed = false;
+let storageToastCriticalVisible = false;
+
+function showStorageToast() {
+  if (storageToastDismissed || storageToastVisible) return;
+  const toast = document.getElementById('storageToast');
+  if (!toast) return;
+  toast.classList.add('show');
+  storageToastVisible = true;
+}
+
+function dismissStorageToast() {
+  const toast = document.getElementById('storageToast');
+  if (toast) toast.classList.remove('show');
+  storageToastVisible = false;
+  storageToastDismissed = true;
+}
+
+function showStorageToastCritical() {
+  if (storageToastCriticalVisible) return;
+  const toast = document.getElementById('storageToastCritical');
+  if (!toast) return;
+  toast.classList.add('show');
+  storageToastCriticalVisible = true;
+  // Hide the normal toast when critical is shown
+  const normalToast = document.getElementById('storageToast');
+  if (normalToast) normalToast.classList.remove('show');
+  storageToastVisible = false;
+}
+
+function dismissStorageToastCritical() {
+  const toast = document.getElementById('storageToastCritical');
+  if (toast) toast.classList.remove('show');
+  storageToastCriticalVisible = false;
+}
+
+async function isStorageCritical() {
+  const info = await getStorageQuotaInfo();
+  const pct = info.total > 0 ? (info.used / info.total) * 100 : 0;
+  return pct > 95;
+}
+
+async function updatePhotoStorageCard() {
+  const usedEl = document.getElementById('storageUsed');
+  const totalEl = document.getElementById('storageTotal');
+  const bar = document.getElementById('storageBar');
+  const warning = document.getElementById('storageWarning');
+
+  const pmUsedEl = document.getElementById('pmStorageUsed');
+  const pmTotalEl = document.getElementById('pmStorageTotal');
+  const pmBar = document.getElementById('pmStorageBar');
+  const pmWarning = document.getElementById('pmStorageWarning');
+  const pmCritical = document.getElementById('pmStorageCritical');
+
+  const info = await getStorageQuotaInfo();
+  const used = info.used;
+  const total = info.total;
+  const pct = total > 0 ? (used / total) * 100 : 0;
+
+  if (usedEl) usedEl.textContent = formatBytes(used) + ' used';
+  if (totalEl) totalEl.textContent = total > 0 ? formatBytes(total) + ' total' : '—';
+  if (bar) bar.style.width = Math.min(pct, 100) + '%';
+  if (warning) warning.style.display = pct > 80 ? 'flex' : 'none';
+
+  if (pmUsedEl) pmUsedEl.textContent = formatBytes(used) + ' used';
+  if (pmTotalEl) pmTotalEl.textContent = total > 0 ? formatBytes(total) + ' total' : '—';
+  if (pmBar) pmBar.style.width = Math.min(pct, 100) + '%';
+  if (pmWarning) pmWarning.style.display = pct > 80 ? 'flex' : 'none';
+  if (pmCritical) {
+    pmCritical.style.display = pct > 95 ? 'flex' : 'none';
+    if (pct > 95) {
+      const span = pmCritical.querySelector('span');
+      if (span) span.textContent = `Storage is critically full (${pct.toFixed(1)}%). Photo uploads are blocked until space is freed. Select and delete photos to restore uploads.`;
+    }
+  }
+
+  if (pct > 95) {
+    showStorageToastCritical();
+  } else {
+    dismissStorageToastCritical();
+    if (pct > 80) {
+      showStorageToast();
+    } else {
+      storageToastDismissed = false;
+    }
+  }
+}
+
+function updateProgress(key) {
+  const total = document.querySelectorAll('#guideContent input[type="checkbox"]').length;
+  const checked = document.querySelectorAll('#guideContent input[type="checkbox"]:checked').length;
+  const pct = total ? Math.round((checked / total) * 100) : 0;
+  const bar = document.getElementById('progressBar');
+  const label = document.getElementById('progressPercent');
+  if (bar) bar.style.width = pct + '%';
+  if (label) label.textContent = pct + '%';
+}
+
+async function resetChecklist(key) {
+  if (!await showConfirmModal('Reset all checkboxes, notes, and photos for this workflow?', 'Reset Workflow')) return;
+  document.querySelectorAll('#guideContent input[type="checkbox"]').forEach(cb => {
+    cb.checked = false;
+    cb.closest('.check-item').classList.remove('checked');
+  });
+  document.querySelectorAll('#guideContent textarea').forEach(ta => ta.value = '');
+  localStorage.removeItem('anthracitetech_guide_' + key);
+  localStorage.removeItem('anthracitetech_guide_notes_' + key);
+  localStorage.removeItem('anthracitetech_guide_photos_' + key);
+  updateProgress(key);
+  updatePhotoStorageCard();
+}
+
+// Timer state
+let timerInterval = null;
+let timerSeconds = 0;
+let timerPaused = false;
+let timerStarted = false;
+let currentStepIndex = 0;
+let stepTimes = [];
+let currentDeviceKey = 'universal';
+let overtimeAlerted = false;
+
+// Turnaround thresholds in seconds (for comparison)
+const turnaroundMap = {
+  universal: null,
+  pc: 2 * 3600,        // 2 hrs
+  phone: 2 * 3600,     // 2 hrs
+  console: 24 * 3600,  // 24 hrs
+  tablet: 2 * 3600,    // 2 hrs
+  remote: 24 * 3600    // 24 hrs
+};
+
+// Warning ratio threshold map (0–1) per device type
+const warningRatioMap = {
+  universal: 0.8,
+  pc: 0.8,
+  phone: 0.8,
+  console: 0.8,
+  tablet: 0.8,
+  remote: 0.8
+};
+
+// Per-step expected times in minutes (for the turnaround matrix)
+const stepExpectations = {
+  universal: [],
+  pc: [15, 30, 60, 15],
+  phone: [10, 15, 45, 5],
+  console: [15, 30, 90, 15],
+  tablet: [15, 20, 60, 10],
+  remote: [5, 10, 30, 5]
+};
+
+function formatTime(seconds) {
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  const s = seconds % 60;
+  return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+}
+
+function getTurnaroundText(key) {
+  const t = turnaroundMap[key];
+  if (!t) return null;
+  if (key === 'pc' || key === 'phone' || key === 'tablet') return '1–2 hours';
+  if (key === 'console' || key === 'remote') return 'Same day – 24 hrs';
+  return null;
+}
+
+function playAlertSound() {
+  try {
+    const settings = loadSettings();
+    if (!settings.sound) return;
+    const volume = Math.max(0, Math.min(1, settings.volume / 100));
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    const ctx = new AudioCtx();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.type = 'square';
+    osc.frequency.setValueAtTime(880, ctx.currentTime);
+    osc.frequency.setValueAtTime(440, ctx.currentTime + 0.15);
+    gain.gain.setValueAtTime(0.08 * volume, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + 0.3);
+  } catch (e) {
+    // Audio alert not available
+  }
+}
+
+function showOvertimeNotification() {
+  const settings = loadSettings();
+  if (!settings.notify) return;
+  if (!('Notification' in window)) return;
+  if (Notification.permission === 'granted') {
+    const deviceName = currentDeviceKey.charAt(0).toUpperCase() + currentDeviceKey.slice(1);
+    new Notification('Anthracite Tech Repair — Timer Alert', {
+      body: `${deviceName} repair is now OVERDUE. Elapsed: ${formatTime(timerSeconds)}`,
+      icon: 'favicon.svg',
+      requireInteraction: true
+    });
+  }
+}
+
+function triggerOvertimeAlert() {
+  if (overtimeAlerted) return;
+  overtimeAlerted = true;
+  playAlertSound();
+  showOvertimeNotification();
+}
+
+function requestNotificationPermission() {
+  if ('Notification' in window && Notification.permission === 'default') {
+    Notification.requestPermission();
+  }
+}
+
+const defaultSettings = {
+  schemaVersion: 3,
+  settingsVersion: 1,
+  sound: true,
+  notify: true,
+  volume: 50,
+  autoSavePhotos: true,
+  showWarnings: true,
+  thresholds: {
+    pc: 120,
+    phone: 120,
+    console: 1440,
+    tablet: 120,
+    remote: 1440
+  },
+  warningRatios: {
+    pc: 0.8,
+    phone: 0.8,
+    console: 0.8,
+    tablet: 0.8,
+    remote: 0.8
+  },
+  header: {
+    logo: true,
+    title: true,
+    department: true
+  },
+  footer: {
+    pageNumbers: true,
+    timestamp: true,
+    confidentiality: true
+  }
+};
+
+function migrateSettings(parsed) {
+  const settings = JSON.parse(JSON.stringify(defaultSettings));
+  if (typeof parsed.sound === 'boolean') settings.sound = parsed.sound;
+  if (typeof parsed.notify === 'boolean') settings.notify = parsed.notify;
+  if (typeof parsed.volume === 'number') settings.volume = parsed.volume;
+  if (parsed.thresholds) {
+    ['pc','phone','console','tablet','remote'].forEach(k => {
+      if (typeof parsed.thresholds[k] === 'number') settings.thresholds[k] = parsed.thresholds[k];
+    });
+  }
+  if (parsed.warningRatios) {
+    ['pc','phone','console','tablet','remote'].forEach(k => {
+      if (typeof parsed.warningRatios[k] === 'number') settings.warningRatios[k] = parsed.warningRatios[k];
+    });
+  }
+  if (parsed.header) {
+    if (typeof parsed.header.logo === 'boolean') settings.header.logo = parsed.header.logo;
+    if (typeof parsed.header.title === 'boolean') settings.header.title = parsed.header.title;
+    if (typeof parsed.header.department === 'boolean') settings.header.department = parsed.header.department;
+  }
+  if (parsed.footer) {
+    if (typeof parsed.footer.pageNumbers === 'boolean') settings.footer.pageNumbers = parsed.footer.pageNumbers;
+    if (typeof parsed.footer.timestamp === 'boolean') settings.footer.timestamp = parsed.footer.timestamp;
+    if (typeof parsed.footer.confidentiality === 'boolean') settings.footer.confidentiality = parsed.footer.confidentiality;
+  }
+  if (typeof parsed.autoSavePhotos === 'boolean') settings.autoSavePhotos = parsed.autoSavePhotos;
+  if (typeof parsed.showWarnings === 'boolean') settings.showWarnings = parsed.showWarnings;
+  settings.settingsVersion = typeof parsed.settingsVersion === 'number' ? parsed.settingsVersion : 1;
+  return settings;
+}
+
+function loadSettings() {
+  try {
+    const raw = localStorage.getItem('anthracitetech_settings');
+    if (!raw) return JSON.parse(JSON.stringify(defaultSettings));
+    const parsed = JSON.parse(raw);
+    const parsedVersion = typeof parsed.schemaVersion === 'number' ? parsed.schemaVersion : 0;
+    if (parsedVersion < defaultSettings.schemaVersion) {
+      return migrateSettings(parsed);
+    }
+    return {
+      schemaVersion: parsedVersion,
+      settingsVersion: typeof parsed.settingsVersion === 'number' ? parsed.settingsVersion : 1,
+      sound: parsed.sound !== false,
+      notify: parsed.notify !== false,
+      volume: typeof parsed.volume === 'number' ? parsed.volume : defaultSettings.volume,
+      thresholds: {
+        pc: parsed.thresholds?.pc ?? defaultSettings.thresholds.pc,
+        phone: parsed.thresholds?.phone ?? defaultSettings.thresholds.phone,
+        console: parsed.thresholds?.console ?? defaultSettings.thresholds.console,
+        tablet: parsed.thresholds?.tablet ?? defaultSettings.thresholds.tablet,
+        remote: parsed.thresholds?.remote ?? defaultSettings.thresholds.remote
+      },
+      warningRatios: {
+        pc: parsed.warningRatios?.pc ?? defaultSettings.warningRatios.pc,
+        phone: parsed.warningRatios?.phone ?? defaultSettings.warningRatios.phone,
+        console: parsed.warningRatios?.console ?? defaultSettings.warningRatios.console,
+        tablet: parsed.warningRatios?.tablet ?? defaultSettings.warningRatios.tablet,
+        remote: parsed.warningRatios?.remote ?? defaultSettings.warningRatios.remote
+      },
+      autoSavePhotos: parsed.autoSavePhotos !== false,
+      showWarnings: parsed.showWarnings !== false,
+      header: {
+        logo: parsed.header?.logo !== false,
+        title: parsed.header?.title !== false,
+        department: parsed.header?.department !== false
+      },
+      footer: {
+        pageNumbers: parsed.footer?.pageNumbers !== false,
+        timestamp: parsed.footer?.timestamp !== false,
+        confidentiality: parsed.footer?.confidentiality !== false
+      }
+    };
+  } catch (e) {
+    return JSON.parse(JSON.stringify(defaultSettings));
+  }
+}
+
+function validateNumericSetting(el, min, max, message) {
+  const errorEl = document.getElementById(el.id + '_error');
+  const raw = el.value.trim();
+  const num = parseInt(raw, 10);
+
+  if (raw === '' || isNaN(num)) {
+    el.classList.add('invalid');
+    if (errorEl) errorEl.textContent = message || `Enter a number ${min}–${max}`;
+    return;
+  }
+
+  let clamped = num;
+  if (num < min) clamped = min;
+  if (num > max) clamped = max;
+
+  el.classList.remove('invalid');
+  if (errorEl) errorEl.textContent = '';
+
+  if (clamped !== num) {
+    el.value = clamped;
+  }
+
+  saveSettings();
+}
+
+function validateWarnSetting(el) {
+  validateNumericSetting(el, 1, 100, 'Enter a number 1–100');
+}
+
+function validateThresholdSetting(el) {
+  validateNumericSetting(el, 1, 10080, 'Enter a number 1–10080');
+}
+
+function saveSettings() {
+  const settings = {
+    schemaVersion: defaultSettings.schemaVersion,
+    settingsVersion: defaultSettings.settingsVersion,
+    sound: document.getElementById('settingSound').checked,
+    notify: document.getElementById('settingNotify').checked,
+    volume: parseInt(document.getElementById('settingVolume').value, 10) || defaultSettings.volume,
+    autoSavePhotos: document.getElementById('settingAutoSavePhotos').checked,
+    showWarnings: document.getElementById('settingShowWarnings').checked,
+    thresholds: {
+      pc: parseInt(document.getElementById('threshold_pc').value, 10) || defaultSettings.thresholds.pc,
+      phone: parseInt(document.getElementById('threshold_phone').value, 10) || defaultSettings.thresholds.phone,
+      console: parseInt(document.getElementById('threshold_console').value, 10) || defaultSettings.thresholds.console,
+      tablet: parseInt(document.getElementById('threshold_tablet').value, 10) || defaultSettings.thresholds.tablet,
+      remote: parseInt(document.getElementById('threshold_remote').value, 10) || defaultSettings.thresholds.remote
+    },
+    warningRatios: {
+      pc: (parseInt(document.getElementById('warn_threshold_pc').value, 10) / 100) || defaultSettings.warningRatios.pc,
+      phone: (parseInt(document.getElementById('warn_threshold_phone').value, 10) / 100) || defaultSettings.warningRatios.phone,
+      console: (parseInt(document.getElementById('warn_threshold_console').value, 10) / 100) || defaultSettings.warningRatios.console,
+      tablet: (parseInt(document.getElementById('warn_threshold_tablet').value, 10) / 100) || defaultSettings.warningRatios.tablet,
+      remote: (parseInt(document.getElementById('warn_threshold_remote').value, 10) / 100) || defaultSettings.warningRatios.remote
+    },
+    header: {
+      logo: document.getElementById('settingHeaderLogo').checked,
+      title: document.getElementById('settingHeaderTitle').checked,
+      department: document.getElementById('settingHeaderDepartment').checked
+    },
+    footer: {
+      pageNumbers: document.getElementById('settingFooterPageNumbers').checked,
+      timestamp: document.getElementById('settingFooterTimestamp').checked,
+      confidentiality: document.getElementById('settingFooterConfidentiality').checked
+    }
+  };
+  localStorage.setItem('anthracitetech_settings', JSON.stringify(settings));
+  applySettingsToMap();
+  updatePdfPreview();
+}
+
+function applySettingsToMap() {
+  const settings = loadSettings();
+  turnaroundMap.pc = settings.thresholds.pc * 60;
+  turnaroundMap.phone = settings.thresholds.phone * 60;
+  turnaroundMap.console = settings.thresholds.console * 60;
+  turnaroundMap.tablet = settings.thresholds.tablet * 60;
+  turnaroundMap.remote = settings.thresholds.remote * 60;
+  warningRatioMap.pc = settings.warningRatios.pc;
+  warningRatioMap.phone = settings.warningRatios.phone;
+  warningRatioMap.console = settings.warningRatios.console;
+  warningRatioMap.tablet = settings.warningRatios.tablet;
+  warningRatioMap.remote = settings.warningRatios.remote;
+  updateTimerDisplay();
+}
+
+function updatePdfPreview() {
+  const settings = loadSettings();
+  const pairs = [
+    ['pdfPreviewLogo', 'miniHeaderLogo', settings.header.logo],
+    ['pdfPreviewTitle', 'miniHeaderTitle', settings.header.title],
+    ['pdfPreviewDept', 'miniHeaderDept', settings.header.department],
+    ['pdfPreviewPageNum', 'miniFooterPageNum', settings.footer.pageNumbers],
+    ['pdfPreviewGenerated', 'miniFooterGenerated', settings.footer.timestamp],
+    ['pdfPreviewConfidential', 'miniFooterConfidential', settings.footer.confidentiality]
+  ];
+  pairs.forEach(([mainId, miniId, show]) => {
+    const mainEl = document.getElementById(mainId);
+    const miniEl = document.getElementById(miniId);
+    if (mainEl) mainEl.classList.toggle('pdf-preview-hidden', !show);
+    if (miniEl) miniEl.classList.toggle('pdf-preview-hidden', !show);
+  });
+  [['pdfPreviewMeta', 'miniHeaderMeta']].forEach(([mainId, miniId]) => {
+    const mainEl = document.getElementById(mainId);
+    const miniEl = document.getElementById(miniId);
+    const parts = [];
+    if (settings.footer.timestamp) parts.push('4/27/2026, 8:50 PM');
+    if (settings.footer.pageNumbers) parts.push('Page 1 of 2');
+    [mainEl, miniEl].forEach(el => {
+      if (!el) return;
+      el.textContent = parts.join(' · ');
+      el.classList.toggle('pdf-preview-hidden', parts.length === 0);
+    });
+  });
+}
+
+function populateSettingsUI() {
+  const settings = loadSettings();
+  const soundEl = document.getElementById('settingSound');
+  const notifyEl = document.getElementById('settingNotify');
+  const volEl = document.getElementById('settingVolume');
+  if (soundEl) soundEl.checked = settings.sound;
+  if (notifyEl) notifyEl.checked = settings.notify;
+  if (volEl) volEl.value = settings.volume;
+  const autoSavePhotosEl = document.getElementById('settingAutoSavePhotos');
+  if (autoSavePhotosEl) autoSavePhotosEl.checked = settings.autoSavePhotos;
+  const showWarningsEl = document.getElementById('settingShowWarnings');
+  if (showWarningsEl) showWarningsEl.checked = settings.showWarnings;
+  const ids = ['threshold_pc','threshold_phone','threshold_console','threshold_tablet','threshold_remote'];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const key = id.replace('threshold_','');
+    el.value = settings.thresholds[key] ?? defaultSettings.thresholds[key];
+    el.classList.remove('invalid');
+    const errEl = document.getElementById(id + '_error');
+    if (errEl) errEl.textContent = '';
+  });
+  const warnIds = ['warn_threshold_pc','warn_threshold_phone','warn_threshold_console','warn_threshold_tablet','warn_threshold_remote'];
+  warnIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const key = id.replace('warn_threshold_','');
+    const ratio = settings.warningRatios[key] ?? defaultSettings.warningRatios[key];
+    el.value = Math.round(ratio * 100);
+    el.classList.remove('invalid');
+    const errEl = document.getElementById(id + '_error');
+    if (errEl) errEl.textContent = '';
+  });
+  const headerLogoEl = document.getElementById('settingHeaderLogo');
+  const headerTitleEl = document.getElementById('settingHeaderTitle');
+  const headerDeptEl = document.getElementById('settingHeaderDepartment');
+  if (headerLogoEl) headerLogoEl.checked = settings.header.logo;
+  if (headerTitleEl) headerTitleEl.checked = settings.header.title;
+  if (headerDeptEl) headerDeptEl.checked = settings.header.department;
+  const footerPageEl = document.getElementById('settingFooterPageNumbers');
+  const footerTimeEl = document.getElementById('settingFooterTimestamp');
+  const footerConfEl = document.getElementById('settingFooterConfidentiality');
+  if (footerPageEl) footerPageEl.checked = settings.footer.pageNumbers;
+  if (footerTimeEl) footerTimeEl.checked = settings.footer.timestamp;
+  if (footerConfEl) footerConfEl.checked = settings.footer.confidentiality;
+  updatePdfPreview();
+}
+
+async function resetSettings() {
+  if (!await showConfirmModal('Reset all alert settings to defaults?', 'Reset Settings')) return;
+  localStorage.removeItem('anthracitetech_settings');
+  populateSettingsUI();
+  applySettingsToMap();
+}
+
+function exportSettings() {
+  const raw = localStorage.getItem('anthracitetech_settings');
+  const payload = raw ? JSON.parse(raw) : {};
+  if (typeof payload.schemaVersion !== 'number') {
+    payload.schemaVersion = defaultSettings.schemaVersion;
+  }
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'anthracitetech-settings.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function importSettings(file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    try {
+      const parsed = JSON.parse(e.target.result);
+      if (typeof parsed !== 'object' || parsed === null) throw new Error('Invalid JSON object');
+      const hasKnownKey = ('sound' in parsed) || ('notify' in parsed) || ('volume' in parsed) || ('thresholds' in parsed) || ('warningRatios' in parsed) || ('header' in parsed) || ('footer' in parsed) || ('autoSavePhotos' in parsed) || ('showWarnings' in parsed);
+      if (!hasKnownKey) throw new Error('Unrecognized settings file');
+      if (parsed.schemaVersion && parsed.schemaVersion > defaultSettings.schemaVersion) {
+        throw new Error('Settings file is from a newer version. Please update the guide before importing.');
+      }
+      if (parsed.settingsVersion && parsed.settingsVersion > defaultSettings.settingsVersion) {
+        throw new Error('Settings file is from a newer version. Please update the guide before importing.');
+      }
+      const parsedVersion = typeof parsed.schemaVersion === 'number' ? parsed.schemaVersion : 0;
+      const settingsToSave = parsedVersion < defaultSettings.schemaVersion ? migrateSettings(parsed) : parsed;
+      if (await showConfirmModal('This will overwrite your current alert settings. Continue?', 'Confirm Import')) {
+        localStorage.setItem('anthracitetech_settings', JSON.stringify(settingsToSave));
+        populateSettingsUI();
+        applySettingsToMap();
+      }
+    } catch (err) {
+      await showAlertModal('Import failed: ' + err.message, 'Import Error');
+    }
+  };
+  reader.readAsText(file);
+  const input = document.getElementById('settingsImportInput');
+  if (input) input.value = '';
+}
+
+function toggleSettings() {
+  const card = document.getElementById('settingsCard');
+  const btn = document.getElementById('settingsToggleBtn');
+  if (!card) return;
+  const showing = card.style.display !== 'none';
+  card.style.display = showing ? 'none' : 'block';
+  if (btn) btn.classList.toggle('active', !showing);
+}
+
+function updateTimerDisplay() {
+  const display = document.getElementById('timerDisplay');
+  const status = document.getElementById('timerStatus');
+  const displayWrap = display?.closest('.timer-display');
+  if (!display) return;
+
+  display.textContent = formatTime(timerSeconds);
+
+  // Color coding based on elapsed vs expected
+  const expected = turnaroundMap[currentDeviceKey];
+  display.classList.remove('warning', 'overtime');
+  if (displayWrap) displayWrap.classList.remove('warning', 'overtime');
+  if (expected) {
+    if (timerSeconds > expected) {
+      display.classList.add('overtime');
+      if (displayWrap) displayWrap.classList.add('overtime');
+      if (timerStarted && !timerPaused) {
+        triggerOvertimeAlert();
+      }
+    } else if (timerSeconds > expected * (warningRatioMap[currentDeviceKey] ?? 0.8)) {
+      display.classList.add('warning');
+      if (displayWrap) displayWrap.classList.add('warning');
+    }
+  }
+
+  if (!timerStarted) {
+    status.textContent = 'Idle';
+  } else if (timerPaused) {
+    status.textContent = 'Paused';
+  } else {
+    status.textContent = 'Running';
+  }
+
+  // Update turnaround comparison
+  updateTurnaroundCompare();
+  updateStepTimersUI();
+}
+
+function updateTurnaroundCompare() {
+  const val = document.getElementById('turnaroundValue');
+  const compare = document.getElementById('turnaroundCompare');
+  if (!val || !compare) return;
+
+  const expected = turnaroundMap[currentDeviceKey];
+  if (!expected) {
+    val.textContent = '—';
+    val.className = 'value';
+    return;
+  }
+
+  const expectedText = getTurnaroundText(currentDeviceKey);
+  val.textContent = expectedText || '—';
+
+  if (timerSeconds > expected) {
+    val.className = 'value over';
+    val.textContent = 'OVERDUE';
+  } else if (timerSeconds > expected * 0.8) {
+    val.className = 'value warn';
+  } else {
+    val.className = 'value ok';
+  }
+}
+
+function saveTimerState() {
+  const saved = JSON.parse(localStorage.getItem('anthracitetech_job_' + currentDeviceKey) || '{}');
+  saved.currentStepIndex = currentStepIndex;
+  saved.stepTimes = stepTimes;
+  saved.totalSeconds = timerSeconds;
+  saved.device = currentDeviceKey;
+  const ticketId = document.getElementById('ticketId')?.value?.trim();
+  if (ticketId) saved.ticketId = ticketId;
+  const technician = document.getElementById('technicianName')?.value?.trim();
+  if (technician) saved.technician = technician;
+  localStorage.setItem('anthracitetech_job_' + currentDeviceKey, JSON.stringify(saved));
+}
+
+function nextStep() {
+  const steps = data[currentDeviceKey]?.steps;
+  if (!steps || currentStepIndex >= steps.length - 1) return;
+  currentStepIndex++;
+  updateStepTimersUI();
+  updateStepNavButtons();
+  saveTimerState();
+}
+
+function prevStep() {
+  if (currentStepIndex <= 0) return;
+  currentStepIndex--;
+  updateStepTimersUI();
+  updateStepNavButtons();
+  saveTimerState();
+}
+
+function updateStepNavButtons() {
+  const prevBtn = document.getElementById('prevStepBtn');
+  const nextBtn = document.getElementById('nextStepBtn');
+  if (!prevBtn || !nextBtn) return;
+  const steps = data[currentDeviceKey]?.steps || [];
+  prevBtn.disabled = !timerStarted || currentStepIndex <= 0;
+  nextBtn.disabled = !timerStarted || currentStepIndex >= steps.length - 1;
+}
+
+function startTimer() {
+  if (!timerStarted) {
+    // Fresh start
+    timerSeconds = 0;
+    timerStarted = true;
+    timerPaused = false;
+    overtimeAlerted = false;
+    currentStepIndex = 0;
+    stepTimes = data[currentDeviceKey]?.steps.map(() => 0) || [];
+    const ticketId = document.getElementById('ticketId')?.value?.trim();
+    const technician = document.getElementById('technicianName')?.value?.trim();
+    if (ticketId) {
+      localStorage.setItem('anthracitetech_job_' + currentDeviceKey, JSON.stringify({
+        ticketId, startTime: Date.now(), device: currentDeviceKey, technician
+      }));
+    }
+  }
+
+  timerPaused = false;
+  requestNotificationPermission();
+  timerInterval = setInterval(() => {
+    timerSeconds++;
+    if (stepTimes[currentStepIndex] !== undefined) {
+      stepTimes[currentStepIndex]++;
+    }
+    updateTimerDisplay();
+  }, 1000);
+
+  document.getElementById('startBtn').disabled = true;
+  document.getElementById('pauseBtn').disabled = false;
+  document.getElementById('stopBtn').disabled = false;
+
+  updateStepNavButtons();
+  updateTimerDisplay();
+}
+
+function pauseTimer() {
+  if (timerInterval) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+  timerPaused = true;
+  document.getElementById('startBtn').disabled = false;
+  document.getElementById('pauseBtn').disabled = true;
+  updateTimerDisplay();
+}
+
+function stopTimer() {
+  if (timerInterval) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+
+  // Save final time to localStorage
+  const saved = JSON.parse(localStorage.getItem('anthracitetech_job_' + currentDeviceKey) || '{}');
+  saved.totalSeconds = timerSeconds;
+  saved.endTime = Date.now();
+  saved.stepTimes = stepTimes;
+  const technician = document.getElementById('technicianName')?.value?.trim();
+  if (technician) saved.technician = technician;
+  localStorage.setItem('anthracitetech_job_' + currentDeviceKey, JSON.stringify(saved));
+
+  // Reset UI
+  timerStarted = false;
+  timerPaused = false;
+  overtimeAlerted = false;
+  timerSeconds = 0;
+  currentStepIndex = 0;
+  stepTimes = [];
+  document.getElementById('startBtn').disabled = false;
+  document.getElementById('pauseBtn').disabled = true;
+  document.getElementById('stopBtn').disabled = true;
+  updateStepNavButtons();
+  updateTimerDisplay();
+}
+
+function updateStepTimersUI() {
+  const container = document.getElementById('stepTimers');
+  const matrixContainer = document.getElementById('turnaroundMatrix');
+  if (!container || !data[currentDeviceKey]) return;
+
+  const steps = data[currentDeviceKey].steps;
+  const expectations = stepExpectations[currentDeviceKey] || [];
+
+  // Step times list
+  let html = '<div style="margin-top:.5rem;"><div style="font-size:.75rem;color:var(--muted-foreground);margin-bottom:.5rem;">Step Times</div>';
+
+  steps.forEach((step, i) => {
+    const time = stepTimes[i] || 0;
+    const isCurrent = i === currentStepIndex && timerStarted;
+    const isDone = i < currentStepIndex;
+    html += `
+      <div class="step-timer-row ${isCurrent ? 'current-step' : ''}">
+        <span class="step-name">${i + 1}. ${step.name.substring(0, 20)}</span>
+        <span class="step-time ${isCurrent ? 'active' : isDone ? 'done' : ''}">${formatTime(time)}</span>
+      </div>
+    `;
+  });
+
+  html += '</div>';
+  container.innerHTML = html;
+
+  // Turnaround matrix table
+  if (!matrixContainer || !expectations.length) {
+    if (matrixContainer) matrixContainer.innerHTML = '';
+    return;
+  }
+
+  let totalExpected = 0;
+  let totalActual = 0;
+  let matrixHtml = '<div style="margin-top:1rem;"><div style="font-size:.75rem;color:var(--muted-foreground);margin-bottom:.5rem;">Turnaround Matrix</div>';
+  matrixHtml += '<table class="matrix-table"><thead><tr><th>Step</th><th>Expected</th><th>Actual</th><th>Status</th></tr></thead><tbody>';
+
+  steps.forEach((step, i) => {
+    const expectedMin = expectations[i] || 0;
+    const actualSec = stepTimes[i] || 0;
+    const actualMin = Math.ceil(actualSec / 60);
+    totalExpected += expectedMin;
+    totalActual += actualMin;
+
+    let statusClass = 'matrix-ok';
+    let statusText = 'On Track';
+    if (actualMin > expectedMin) {
+      statusClass = 'matrix-over';
+      statusText = 'Over';
+    } else if (actualMin > expectedMin * 0.8) {
+      statusClass = 'matrix-warn';
+      statusText = 'Close';
+    }
+
+    matrixHtml += `
+      <tr>
+        <td>${i + 1}. ${step.name.substring(0, 14)}</td>
+        <td>${expectedMin}m</td>
+        <td>${actualMin}m</td>
+        <td><span class="matrix-status ${statusClass}">${statusText}</span></td>
+      </tr>
+    `;
+  });
+
+  // Total row
+  let totalStatusClass = 'matrix-ok';
+  let totalStatusText = 'On Track';
+  if (totalActual > totalExpected) {
+    totalStatusClass = 'matrix-over';
+    totalStatusText = 'Over';
+  } else if (totalActual > totalExpected * 0.8) {
+    totalStatusClass = 'matrix-warn';
+    totalStatusText = 'Close';
+  }
+
+  matrixHtml += `
+    <tr class="matrix-total-row">
+      <td>Total</td>
+      <td>${totalExpected}m</td>
+      <td>${totalActual}m</td>
+      <td><span class="matrix-status ${totalStatusClass}">${totalStatusText}</span></td>
+    </tr>
+  </tbody></table></div>`;
+
+  matrixContainer.innerHTML = matrixHtml;
+}
+
+// Restore timer state when switching devices
+function restoreTimerState(key) {
+  const saved = JSON.parse(localStorage.getItem('anthracitetech_job_' + key) || '{}');
+  overtimeAlerted = false;
+  if (saved.totalSeconds && saved.device === key) {
+    timerSeconds = saved.totalSeconds;
+    timerStarted = true;
+    currentStepIndex = saved.currentStepIndex || 0;
+    stepTimes = saved.stepTimes || [];
+    document.getElementById('startBtn').disabled = true;
+    document.getElementById('pauseBtn').disabled = false;
+    document.getElementById('stopBtn').disabled = false;
+    if (saved.ticketId) {
+      document.getElementById('ticketId').value = saved.ticketId;
+    }
+    if (saved.technician) {
+      document.getElementById('technicianName').value = saved.technician;
+    }
+    updateStepNavButtons();
+    updateTimerDisplay();
+    updateStepTimersUI();
+  } else {
+    timerSeconds = 0;
+    timerStarted = false;
+    timerPaused = false;
+    overtimeAlerted = false;
+    currentStepIndex = 0;
+    stepTimes = [];
+    document.getElementById('startBtn').disabled = false;
+    document.getElementById('pauseBtn').disabled = true;
+    document.getElementById('stopBtn').disabled = true;
+    updateStepNavButtons();
+    updateTimerDisplay();
+    updateStepTimersUI();
+  }
+}
+
+// Report Generation
+function generateReport() {
+  const reportWindow = window.open('', '_blank');
+  if (!reportWindow) {
+    showAlertModal('Popup blocked. Please allow popups for this site to generate reports.', 'Popup Blocked');
+    return;
+  }
+  const reportHtml = buildReportHtml();
+  reportWindow.document.open();
+  reportWindow.document.write(reportHtml);
+  reportWindow.document.close();
+}
+
+function downloadReportPdf() {
+  const settings = loadSettings();
+  const reportHtml = buildReportHtml();
+  const container = document.createElement('div');
+  container.style.cssText = 'position:fixed;left:-9999px;top:0;width:900px;z-index:-1;';
+  container.innerHTML = reportHtml;
+  document.body.appendChild(container);
+
+  // Force layout so heights are calculated before we insert spacers
+  void container.offsetHeight;
+
+  const element = container.querySelector('.report-container');
+  const sections = Array.from(element.querySelectorAll('.report-inner > .report-section'));
+
+  // A4 = 595.28 x 841.89 pt. width=565 maps from windowWidth=900, so scale = 565/900.
+  // With 50 pt top + 15 pt bottom margins, usable height = 841.89 - 65 = 776.89 pt.
+  // In source pixels: 776.89 / (565/900) ≈ 1237 px per page.
+  const SCALE = 565 / 900;
+  const PAGE_H_PX = (841.89 - 50 - 15) / SCALE;
+
+  // Controlled page breaks: start every device section on a fresh page.
+  // A full-page spacer pushes the next section to the next PDF page boundary.
+  sections.forEach((section, i) => {
+    if (i > 0) {
+      const spacer = document.createElement('div');
+      spacer.style.cssText = 'height:' + PAGE_H_PX + 'px;';
+      section.parentNode.insertBefore(spacer, section);
+    }
+  });
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF('p', 'pt', 'a4');
+  const ticketId = document.getElementById('ticketId')?.value?.trim() || 'handoff';
+  const generatedAt = new Date().toLocaleString();
+
+  doc.html(element, {
+    callback: function(doc) {
+      const totalPages = doc.internal.getNumberOfPages();
+      for (let i = 1; i <= totalPages; i++) {
+        doc.setPage(i);
+
+        // Branded header bar (slate-900)
+        doc.setFillColor(15, 23, 42);
+        doc.rect(0, 0, 595.28, 44, 'F');
+
+        // Left side: company name + report title + department
+        doc.setTextColor(255, 255, 255);
+        if (settings.header.logo) {
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(14);
+          doc.text('Anthracite Tech Co.', 15, 19);
+        }
+        if (settings.header.title) {
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(9);
+          doc.text('Shift Handoff Report', 15, 32);
+        }
+        if (settings.header.department) {
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(8);
+          doc.setTextColor(148, 163, 184);
+          doc.text('Repair Department', 15, 42);
+        }
+
+        // Right side: ticket id + page numbering
+        doc.setFontSize(8);
+        doc.setTextColor(148, 163, 184);
+        doc.text('Ticket: ' + ticketId, 580, 19, { align: 'right' });
+        const headerParts = [];
+        if (settings.footer.timestamp) headerParts.push(generatedAt);
+        if (settings.footer.pageNumbers) headerParts.push('Page ' + i + ' of ' + totalPages);
+        if (headerParts.length) {
+          doc.text(headerParts.join('  \u00b7  '), 580, 32, { align: 'right' });
+        }
+
+        // Accent underline (blue-500)
+        doc.setDrawColor(59, 130, 246);
+        doc.setLineWidth(1.5);
+        doc.line(15, 44, 580, 44);
+
+        // Branded footer bar
+        const pageH = 841.89;
+        const footerY = pageH - 30;
+        doc.setFillColor(15, 23, 42);
+        doc.rect(0, footerY, 595.28, 30, 'F');
+
+        // Footer accent line
+        doc.setDrawColor(59, 130, 246);
+        doc.setLineWidth(1);
+        doc.line(15, footerY, 580, footerY);
+
+        // Footer text
+        doc.setTextColor(255, 255, 255);
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(9);
+        doc.text('Anthracite Tech Co.', 15, footerY + 13);
+
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(8);
+        doc.setTextColor(148, 163, 184);
+        if (settings.footer.timestamp) {
+          doc.text('Generated: ' + generatedAt, 15, footerY + 23);
+        }
+        if (settings.footer.confidentiality) {
+          doc.text('Confidential — Internal Use Only', 580, footerY + 18, { align: 'right' });
+        }
+
+        // Centered page numbering in footer
+        if (settings.footer.pageNumbers) {
+          doc.setFontSize(9);
+          doc.setTextColor(255, 255, 255);
+          doc.text('Page ' + i + ' of ' + totalPages, 297.64, footerY + 18, { align: 'center' });
+        }
+      }
+      doc.save('Anthracite Tech-' + ticketId + '-report.pdf');
+      document.body.removeChild(container);
+    },
+    x: 15,
+    y: 0,
+    width: 565,
+    windowWidth: 900,
+    margin: [50, 15, 15, 15]
+  });
+}
+
+function getAllLocalStorageData() {
+  const devices = ['universal', 'pc', 'phone', 'console', 'tablet', 'remote'];
+  const result = [];
+  devices.forEach(key => {
+    const checklist = JSON.parse(localStorage.getItem('anthracitetech_guide_' + key) || '[]');
+    const notes = JSON.parse(localStorage.getItem('anthracitetech_guide_notes_' + key) || '{}');
+    const photos = JSON.parse(localStorage.getItem('anthracitetech_guide_photos_' + key) || '{}');
+    const job = JSON.parse(localStorage.getItem('anthracitetech_job_' + key) || '{}');
+    const hasData = checklist.length > 0 || Object.keys(notes).length > 0 || Object.keys(photos).length > 0 || Object.keys(job).length > 0;
+    if (hasData) {
+      result.push({ key, checklist, notes, photos, job });
+    }
+  });
+  return result;
+}
+
+function formatDuration(seconds) {
+  if (!seconds && seconds !== 0) return '—';
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  const s = seconds % 60;
+  if (h > 0) return `${h}h ${m}m ${s}s`;
+  if (m > 0) return `${m}m ${s}s`;
+  return `${s}s`;
+}
+
+function formatDate(ts) {
+  if (!ts) return '—';
+  const d = new Date(ts);
+  return d.toLocaleString();
+}
+
+function buildReportHtml() {
+  const allData = getAllLocalStorageData();
+  const generatedAt = new Date().toLocaleString();
+  const deviceLabels = {
+    universal: 'Universal Workflow',
+    pc: 'PC / Laptop',
+    phone: 'Smartphones',
+    console: 'Game Consoles',
+    tablet: 'Tablets & iPads',
+    remote: 'Remote Services'
+  };
+
+  let devicesHtml = '';
+  if (allData.length === 0) {
+    devicesHtml = `<p class="report-empty">No checklist, note, photo, or timer data found in localStorage.</p>`;
+  } else {
+    allData.forEach(device => {
+      const dInfo = data[device.key];
+      const stepNames = dInfo ? dInfo.steps.map((s, i) => ({ idx: i, name: s.name, checklist: s.checklist })) : [];
+
+      // Checklist by step
+      let checklistHtml = '';
+      stepNames.forEach(step => {
+        const checkedItems = new Set((device.checklist || []).filter(x => x.step === step.idx).map(x => x.item));
+        const itemsHtml = step.checklist.map((item, i) => {
+          const checked = checkedItems.has(i);
+          return `<li class="${checked ? 'checked' : ''}">${escapeHtml(item)}</li>`;
+        }).join('');
+        const notes = device.notes && device.notes[step.idx] ? escapeHtml(device.notes[step.idx]) : null;
+        const stepPhotos = device.photos && device.photos[step.idx] ? device.photos[step.idx] : [];
+        const photosHtml = stepPhotos.length > 0
+          ? `<div class="report-photos">${stepPhotos.map(url => `<div class="report-photo"><img src="${url}" alt="Step photo"></div>`).join('')}</div>`
+          : '';
+        checklistHtml += `
+          <div class="report-step">
+            <div class="report-step-name">Step ${step.idx + 1}: ${escapeHtml(step.name)}</div>
+            <ul class="report-checklist">${itemsHtml}</ul>
+            ${notes ? `<div class="report-notes">${notes}</div>` : ''}
+            ${photosHtml}
+          </div>
+        `;
+      });
+
+      // General notes & photos
+      const generalNotes = device.notes && device.notes.general ? escapeHtml(device.notes.general) : null;
+      const generalPhotos = device.photos && device.photos.general ? device.photos.general : [];
+      const generalHtml = (generalNotes || generalPhotos.length > 0) ? `
+        <div class="report-step" style="background:#eff6ff;border-color:#bfdbfe;">
+          <div class="report-step-name">General Notes & Photos</div>
+          ${generalNotes ? `<div class="report-notes">${generalNotes}</div>` : ''}
+          ${generalPhotos.length > 0 ? `<div class="report-photos">${generalPhotos.map(url => `<div class="report-photo"><img src="${url}" alt="General photo"></div>`).join('')}</div>` : ''}
+        </div>
+      ` : '';
+
+      // Timer data
+      let timerHtml = '';
+      const job = device.job || {};
+      if (job.totalSeconds || job.startTime || job.endTime || (job.stepTimes && job.stepTimes.length)) {
+        const stepTimesHtml = (job.stepTimes || []).map((t, i) => {
+          const stepName = dInfo && dInfo.steps[i] ? dInfo.steps[i].name : `Step ${i + 1}`;
+          return `
+            <div class="report-timer-item">
+              <div class="report-timer-label">${escapeHtml(stepName.substring(0, 22))}</div>
+              <div class="report-timer-value">${formatDuration(t)}</div>
+            </div>
+          `;
+        }).join('');
+        timerHtml = `
+          <div class="report-section">
+            <h3>⏱ Timer Data</h3>
+            <div class="report-meta">
+              <div class="report-meta-item">
+                <div class="report-meta-label">Ticket ID</div>
+                <div class="report-meta-value">${escapeHtml(job.ticketId || '—')}</div>
+              </div>
+              <div class="report-meta-item">
+                <div class="report-meta-label">Technician</div>
+                <div class="report-meta-value">${escapeHtml(job.technician || '—')}</div>
+              </div>
+              <div class="report-meta-item">
+                <div class="report-meta-label">Total Elapsed</div>
+                <div class="report-meta-value">${formatDuration(job.totalSeconds)}</div>
+              </div>
+              <div class="report-meta-item">
+                <div class="report-meta-label">Started</div>
+                <div class="report-meta-value">${formatDate(job.startTime)}</div>
+              </div>
+              <div class="report-meta-item">
+                <div class="report-meta-label">Stopped</div>
+                <div class="report-meta-value">${formatDate(job.endTime)}</div>
+              </div>
+            </div>
+            ${stepTimesHtml ? `<div class="report-timer-grid" style="margin-top:.5rem;">${stepTimesHtml}</div>` : ''}
+          </div>
+        `;
+      }
+
+      // Progress summary
+      const totalItems = stepNames.reduce((sum, s) => sum + s.checklist.length, 0);
+      const checkedCount = (device.checklist || []).length;
+      const pct = totalItems ? Math.round((checkedCount / totalItems) * 100) : 0;
+
+      devicesHtml += `
+        <div class="report-section">
+          <h3>🔧 ${escapeHtml(deviceLabels[device.key] || device.key)} — ${pct}% Complete</h3>
+          <div class="report-meta" style="margin-bottom:.75rem;">
+            <div class="report-meta-item">
+              <div class="report-meta-label">Checklist Items</div>
+              <div class="report-meta-value">${checkedCount} / ${totalItems}</div>
+            </div>
+            <div class="report-meta-item">
+              <div class="report-meta-label">Notes</div>
+              <div class="report-meta-value">${Object.keys(device.notes || {}).length}</div>
+            </div>
+            <div class="report-meta-item">
+              <div class="report-meta-label">Photos</div>
+              <div class="report-meta-value">${Object.values(device.photos || {}).reduce((a, b) => a + b.length, 0)}</div>
+            </div>
+          </div>
+          ${checklistHtml}
+          ${generalHtml}
+          ${timerHtml}
+        </div>
+      `;
+    });
+  }
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Anthracite Tech Shift Handoff Report</title>
+<script src="vendor/jspdf.umd.min.js"></script>
+<script src="vendor/html2canvas.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: #f1f5f9; color: #1e293b; line-height: 1.6;
+    padding: 1.5rem;
+  }
+  .report-container {
+    max-width: 900px; margin: 0 auto;
+    background: #fff; border-radius: .75rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,.08);
+    overflow: hidden;
+  }
+  .report-topbar {
+    background: #0f172a; color: #fff;
+    padding: 1.25rem 1.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .report-topbar h1 {
+    font-size: 1.25rem; font-weight: 700; letter-spacing: -.01em;
+  }
+  .report-topbar .sub {
+    font-size: .8rem; color: #94a3b8; margin-top: .15rem;
+  }
+  .report-topbar button {
+    padding: .4rem 1rem; border-radius: .4rem; border: none;
+    background: #3b82f6; color: #fff; font-weight: 600; font-size: .85rem;
+    cursor: pointer;
+  }
+  .report-topbar button:hover { background: #2563eb; }
+  .report-inner { padding: 1.5rem; }
+  .report-section { margin-bottom: 1.5rem; }
+  .report-section:last-child { margin-bottom: 0; }
+  .report-section h3 {
+    font-size: 1rem; font-weight: 700; color: #0f172a;
+    margin-bottom: .75rem; padding-bottom: .4rem;
+    border-bottom: 2px solid #e2e8f0;
+  }
+  .report-meta {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: .75rem; margin-bottom: 1rem;
+  }
+  .report-meta-item { background: #f8fafc; border-radius: .5rem; padding: .6rem .8rem; }
+  .report-meta-label { font-size: .75rem; color: #64748b; text-transform: uppercase; letter-spacing: .04em; }
+  .report-meta-value { font-weight: 600; color: #0f172a; font-size: .9rem; }
+  .report-step { margin-bottom: 1rem; padding: 1rem; background: #f8fafc; border-radius: .5rem; border: 1px solid #e2e8f0; }
+  .report-step-name { font-weight: 700; color: #0f172a; font-size: .9rem; margin-bottom: .5rem; }
+  .report-checklist { list-style: none; padding: 0; margin: 0 0 .5rem; }
+  .report-checklist li {
+    display: flex; align-items: flex-start; gap: .4rem;
+    padding: .25rem 0; font-size: .85rem; color: #334155;
+  }
+  .report-checklist li::before {
+    content: '☐'; color: #94a3b8; font-size: .9rem; flex-shrink: 0; margin-top: .05rem;
+  }
+  .report-checklist li.checked::before { content: '☑'; color: #16a34a; }
+  .report-notes {
+    background: #fff; border: 1px solid #e2e8f0; border-radius: .4rem;
+    padding: .6rem .8rem; font-size: .85rem; color: #334155; white-space: pre-wrap;
+    margin-top: .5rem;
+  }
+  .report-photos {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: .5rem; margin-top: .5rem;
+  }
+  .report-photo {
+    border-radius: .4rem; overflow: hidden; border: 1px solid #e2e8f0;
+    aspect-ratio: 1; background: #f1f5f9;
+  }
+  .report-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .report-timer-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: .5rem;
+  }
+  .report-timer-item { background: #f8fafc; border-radius: .4rem; padding: .5rem .75rem; }
+  .report-timer-label { font-size: .75rem; color: #64748b; }
+  .report-timer-value { font-weight: 700; color: #0f172a; font-size: .9rem; }
+  .report-empty { font-size: .85rem; color: #94a3b8; font-style: italic; }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .report-container { box-shadow: none; border-radius: 0; }
+    .report-topbar button { display: none; }
+    .report-section { break-inside: avoid; }
+    .report-step { break-inside: avoid; }
+    .report-photo { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+  <div class="report-container">
+    <div class="report-topbar">
+      <div>
+        <h1>Shift Handoff Report</h1>
+        <div class="sub">Anthracite Tech Co. &middot; Generated ${generatedAt}</div>
+      </div>
+      <button onclick="downloadPdf()">Download PDF</button>
+    </div>
+    <div class="report-inner">
+      <div class="report-section">
+        <h3>📋 Summary</h3>
+        <div class="report-meta">
+          <div class="report-meta-item">
+            <div class="report-meta-label">Report Generated</div>
+            <div class="report-meta-value">${generatedAt}</div>
+          </div>
+          <div class="report-meta-item">
+            <div class="report-meta-label">Devices with Data</div>
+            <div class="report-meta-value">${allData.length}</div>
+          </div>
+          <div class="report-meta-item">
+            <div class="report-meta-label">Source</div>
+            <div class="report-meta-value">Local Browser Storage</div>
+          </div>
+        </div>
+      </div>
+      ${devicesHtml}
+    </div>
+  </div>
+<script>
+function downloadPdf() {
+  const element = document.querySelector('.report-container');
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF('p', 'pt', 'a4');
+  doc.html(element, {
+    callback: function(doc) {
+      doc.save('Anthracite Tech-shift-handoff-report.pdf');
+    },
+    x: 15,
+    y: 15,
+    width: 565,
+    windowWidth: 900
+  });
+}
+</script>
+</body>
+</html>`;
+}
+
+function escapeHtml(text) {
+  if (text == null) return '';
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+// Init
+applySettingsToMap();
+populateSettingsUI();
+selectDevice('universal');
+restoreTimerState('universal');
+updatePhotoStorageCard();
+</script>
+</body>
+</html>

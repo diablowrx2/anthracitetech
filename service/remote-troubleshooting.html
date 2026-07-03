@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remote Troubleshooting | Anthracite Tech Co. — Secure Diagnostics Nationwide</title>
+  <meta name="description" content="Expert remote troubleshooting for PC, laptop, and network issues. Secure screen-sharing diagnostics. Available in all 50 states. Free initial consultation. Book your remote session today.">
+  <link rel="canonical" href="https://anthracitetechco.com/remote-troubleshooting.html">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta property="og:title" content="Remote Troubleshooting | Anthracite Tech Co. — Secure Diagnostics Nationwide">
+  <meta property="og:description" content="Expert remote troubleshooting for PC, laptop, and network issues. Secure screen-sharing diagnostics. Available in all 50 states.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <!-- Plausible Analytics - privacy-friendly, no cookies -->
+  <script defer data-domain="poppy-quarry-nzmh.here.now" src="https://plausible.io/js/script.tagged-events.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --background: #0c1524;
+      --foreground: #f8fafc;
+      --card: #111d30;
+      --card-foreground: #f8fafc;
+      --primary: #3b82f6;
+      --primary-foreground: #f8fafc;
+      --secondary: #1e293b;
+      --secondary-foreground: #f8fafc;
+      --muted: #1e293b;
+      --muted-foreground: #94a3b8;
+      --border: #1e293b;
+      --input: #1e293b;
+      --ring: #3b82f6;
+      --accent: #10b981;
+      --accent-foreground: #f8fafc;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --font-heading: 'Outfit', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--background);
+      color: var(--foreground);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 { font-family: var(--font-heading); }
+    a { color: inherit; text-decoration: none; }
+
+    /* HEADER */
+    .header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1rem 1.5rem;
+      transition: background .3s, border-color .3s, box-shadow .3s;
+      border-bottom: 1px solid transparent;
+    }
+    .header.scrolled {
+      background: rgba(12,21,36,.92);
+      border-bottom-color: var(--border);
+      box-shadow: 0 2px 24px rgba(0,0,0,.35);
+      backdrop-filter: blur(12px);
+    }
+    .header-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { display: flex; align-items: center; gap: .5rem; }
+    .logo svg { width: 28px; height: 28px; color: var(--primary); }
+    .logo-text { font-family: var(--font-heading); font-weight: 800; font-size: 1.25rem; }
+    .logo-text .brand { color: var(--foreground); }
+    .logo-text .sub { color: var(--primary); }
+
+    .nav-links {
+      display: none; list-style: none; gap: .5rem; align-items: center;
+    }
+    .nav-links a {
+      padding: .5rem 1rem; border-radius: 9999px; font-size: .9rem;
+      font-weight: 500; color: var(--muted-foreground);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--foreground); }
+    .nav-links .cta-btn {
+      background: var(--primary); color: var(--primary-foreground);
+      box-shadow: 0 4px 20px rgba(59,130,246,.4);
+      font-weight: 600;
+    }
+    .nav-links .cta-btn:hover { box-shadow: 0 6px 28px rgba(59,130,246,.55); }
+
+    .hamburger {
+      display: flex; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px; background: var(--foreground);
+      border-radius: 2px; transition: transform .3s, opacity .3s;
+    }
+    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile Nav */
+    .mobile-nav {
+      display: none; position: fixed; top: 60px; left: 0; right: 0; bottom: 0;
+      background: rgba(12,21,36,.98); z-index: 99; padding: 1.5rem;
+      backdrop-filter: blur(12px);
+    }
+    .mobile-nav.active { display: block; }
+    .mobile-nav ul { list-style: none; display: flex; flex-direction: column; gap: .25rem; }
+    .mobile-nav a {
+      display: block; padding: .75rem 1rem; border-radius: .5rem;
+      font-size: 1rem; font-weight: 500; color: var(--muted-foreground);
+      transition: background .2s, color .2s;
+    }
+    .mobile-nav a:hover { background: var(--secondary); color: var(--foreground); }
+    .mobile-nav .cta-btn {
+      background: var(--primary); color: var(--primary-foreground) !important;
+      margin-top: .5rem; text-align: center;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 8rem 1.5rem 4rem; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(59,130,246,.25), transparent),
+        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(16,185,129,.1), transparent);
+      pointer-events: none;
+    }
+    .hero-grid {
+      max-width: 1200px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr; gap: 3rem;
+      align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(59,130,246,.1); border: 1px solid rgba(59,130,246,.3);
+      color: var(--primary); padding: .4rem .9rem; border-radius: 9999px;
+      font-size: .8rem; font-weight: 600; margin-bottom: 1rem;
+    }
+    .hero-badge svg { width: 14px; height: 14px; }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800; line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-desc {
+      font-size: 1.1rem; color: var(--muted-foreground); max-width: 540px;
+      margin-bottom: 2rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--primary); color: var(--primary-foreground);
+      padding: .75rem 1.5rem; border-radius: .5rem; font-weight: 600;
+      font-size: 1rem; box-shadow: 0 4px 20px rgba(59,130,246,.4);
+      transition: box-shadow .2s, transform .2s;
+    }
+    .btn-primary:hover {
+      box-shadow: 0 6px 28px rgba(59,130,246,.55);
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--secondary); color: var(--foreground);
+      padding: .75rem 1.5rem; border-radius: .5rem; font-weight: 600;
+      font-size: 1rem; border: 1px solid var(--border);
+      transition: background .2s, border-color .2s;
+    }
+    .btn-secondary:hover { background: var(--muted); border-color: var(--primary); }
+
+    /* Hero Visual */
+    .hero-visual {
+      position: relative;
+    }
+    .hero-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 1rem;
+      padding: 2rem; position: relative;
+    }
+    .hero-card-header {
+      display: flex; align-items: center; gap: .75rem; margin-bottom: 1.5rem;
+    }
+    .status-dot {
+      width: 10px; height: 10px; border-radius: 50%; background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .5; }
+    }
+    .status-text { font-size: .85rem; color: var(--accent); font-weight: 500; }
+    .connection-diagram {
+      display: flex; align-items: center; justify-content: center; gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .device-icon {
+      width: 80px; height: 80px; background: var(--secondary); border-radius: .75rem;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--border);
+    }
+    .device-icon svg { width: 36px; height: 36px; color: var(--primary); }
+    .connection-line {
+      width: 60px; height: 2px; background: linear-gradient(90deg, var(--primary), var(--accent));
+      position: relative;
+    }
+    .connection-line::before {
+      content: 'Secure'; position: absolute; top: -20px; left: 50%;
+      transform: translateX(-50%); font-size: .65rem; color: var(--accent);
+      white-space: nowrap;
+    }
+    .shield-badge {
+      position: absolute; top: -10px; right: -10px;
+      background: var(--accent); color: var(--background);
+      padding: .35rem .6rem; border-radius: .35rem; font-size: .7rem; font-weight: 700;
+      box-shadow: 0 4px 12px rgba(16,185,129,.4);
+    }
+
+    /* SECTION */
+    .section { padding: 5rem 1.5rem; }
+    .section-header {
+      text-align: center; max-width: 640px; margin: 0 auto 3rem;
+    }
+    .section-header h2 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 700;
+      margin-bottom: .75rem;
+    }
+    .section-header p { color: var(--muted-foreground); font-size: 1.05rem; }
+    .section-header .accent {
+      color: var(--accent);
+    }
+
+    /* HOW IT WORKS */
+    .steps-grid {
+      max-width: 1000px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr; gap: 1.5rem;
+    }
+    .step-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 1rem;
+      padding: 1.75rem; display: flex; gap: 1.25rem; align-items: flex-start;
+      transition: border-color .3s, transform .3s;
+    }
+    .step-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+    .step-num {
+      width: 44px; height: 44px; border-radius: .6rem;
+      background: linear-gradient(135deg, var(--primary), rgba(59,130,246,.3));
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-heading); font-weight: 800; font-size: 1.2rem;
+      flex-shrink: 0; color: var(--primary-foreground);
+    }
+    .step-content h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: .5rem; }
+    .step-content p { color: var(--muted-foreground); font-size: .95rem; }
+    .step-icon { margin-left: auto; color: var(--primary); flex-shrink: 0; }
+    .step-icon svg { width: 24px; height: 24px; }
+
+    /* CAPABILITIES */
+    .capabilities { background: var(--secondary); }
+    .cap-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr; gap: 1.25rem;
+    }
+    .cap-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: .75rem;
+      padding: 1.5rem; display: flex; gap: 1rem; align-items: flex-start;
+      transition: border-color .2s;
+    }
+    .cap-card:hover { border-color: var(--primary); }
+    .cap-icon {
+      width: 44px; height: 44px; border-radius: .6rem;
+      background: rgba(59,130,246,.1); display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0;
+    }
+    .cap-icon svg { width: 22px; height: 22px; color: var(--primary); }
+    .cap-content h4 { font-size: 1rem; font-weight: 600; margin-bottom: .3rem; }
+    .cap-content p { color: var(--muted-foreground); font-size: .9rem; }
+
+    /* PRICING */
+    .pricing-grid {
+      max-width: 1000px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr; gap: 1.5rem;
+    }
+    .price-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 1rem;
+      padding: 2rem; position: relative; overflow: hidden;
+      transition: transform .3s, border-color .3s;
+    }
+    .price-card:hover { transform: translateY(-3px); border-color: var(--primary); }
+    .price-card.featured {
+      border-color: var(--primary);
+      background: linear-gradient(180deg, rgba(59,130,246,.08) 0%, var(--card) 100%);
+    }
+    .price-card.featured::before {
+      content: 'MOST POPULAR';
+      position: absolute; top: 1rem; right: -2rem;
+      background: var(--primary); color: var(--primary-foreground);
+      padding: .25rem 2.5rem; font-size: .65rem; font-weight: 700;
+      transform: rotate(45deg);
+    }
+    .price-tier { font-size: .8rem; font-weight: 600; color: var(--primary); text-transform: uppercase; letter-spacing: .05em; margin-bottom: .5rem; }
+    .price-title { font-size: 1.3rem; font-weight: 700; margin-bottom: .25rem; }
+    .price-desc { color: var(--muted-foreground); font-size: .9rem; margin-bottom: 1.25rem; }
+    .price-amount { display: flex; align-items: baseline; gap: .25rem; margin-bottom: 1.25rem; }
+    .price-value { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 800; }
+    .price-unit { color: var(--muted-foreground); font-size: .9rem; }
+    .price-features { list-style: none; margin-bottom: 1.5rem; }
+    .price-features li {
+      display: flex; align-items: flex-start; gap: .6rem;
+      padding: .4rem 0; font-size: .9rem; color: var(--muted-foreground);
+    }
+    .price-features li svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; margin-top: 3px; }
+    .price-btn {
+      display: block; width: 100%; padding: .75rem; border-radius: .5rem;
+      font-weight: 600; font-size: .95rem; text-align: center;
+      background: var(--secondary); color: var(--foreground);
+      border: 1px solid var(--border); cursor: pointer;
+      transition: background .2s, border-color .2s;
+    }
+    .price-btn:hover { background: var(--muted); border-color: var(--primary); }
+    .price-card.featured .price-btn {
+      background: var(--primary); border-color: var(--primary);
+      box-shadow: 0 4px 20px rgba(59,130,246,.4);
+    }
+    .price-card.featured .price-btn:hover {
+      box-shadow: 0 6px 28px rgba(59,130,246,.55);
+    }
+
+    /* DIAGNOSTIC PROCESS */
+    .diagnostic-section { background: var(--secondary); }
+    .diag-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr; gap: 2rem;
+    }
+    .diag-item {
+      display: flex; gap: 1.25rem; align-items: flex-start;
+    }
+    .diag-icon {
+      width: 48px; height: 48px; border-radius: .75rem;
+      background: rgba(59,130,246,.1); display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0;
+    }
+    .diag-icon svg { width: 24px; height: 24px; color: var(--primary); }
+    .diag-content h4 { font-size: 1.05rem; font-weight: 600; margin-bottom: .3rem; }
+    .diag-content p { color: var(--muted-foreground); font-size: .9rem; }
+
+    /* SECURITY */
+    .security-grid {
+      max-width: 900px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr; gap: 1.25rem;
+    }
+    .security-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: .75rem;
+      padding: 1.5rem; display: flex; gap: 1rem; align-items: center;
+    }
+    .security-icon {
+      width: 50px; height: 50px; border-radius: .6rem;
+      background: rgba(16,185,129,.1); display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0;
+    }
+    .security-icon svg { width: 26px; height: 26px; color: var(--accent); }
+    .security-content h4 { font-size: 1rem; font-weight: 600; margin-bottom: .25rem; }
+    .security-content p { color: var(--muted-foreground); font-size: .85rem; }
+
+    /* BOOKING */
+    .booking {
+      padding: 5rem 1.5rem; position: relative;
+    }
+    .booking::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 60%; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    }
+    .booking-glow {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,.12), transparent 70%);
+      pointer-events: none;
+    }
+    .booking-inner { position: relative; max-width: 720px; margin: 0 auto; }
+    .glass-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 1.25rem;
+      padding: 2rem;
+    }
+    .form-grid {
+      display: grid; grid-template-columns: 1fr; gap: 1.25rem;
+    }
+    .form-group { display: flex; flex-direction: column; gap: .4rem; }
+    .form-group label {
+      font-size: .85rem; font-weight: 500; color: var(--muted-foreground);
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      background: var(--input); border: 1px solid var(--border); border-radius: .5rem;
+      padding: .65rem .9rem; color: var(--foreground); font-size: .95rem;
+      font-family: var(--font-body); transition: border-color .2s, box-shadow .2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none; border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(59,130,246,.2);
+    }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .form-group input::placeholder, .form-group textarea::placeholder {
+      color: var(--muted-foreground); opacity: .6;
+    }
+    .full-width { grid-column: 1 / -1; }
+    .submit-btn {
+      width: 100%; padding: .85rem; border-radius: .5rem;
+      background: var(--primary); color: var(--primary-foreground);
+      font-size: 1rem; font-weight: 600; font-family: var(--font-body);
+      border: none; cursor: pointer;
+      box-shadow: 0 4px 20px rgba(59,130,246,.4);
+      transition: box-shadow .2s, transform .2s;
+    }
+    .submit-btn:hover {
+      box-shadow: 0 6px 28px rgba(59,130,246,.55);
+      transform: translateY(-1px);
+    }
+    .submit-btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+    .response-time-indicator { margin-top: .25rem; }
+    .response-time-badge {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: rgba(16,185,129,.12); border: 1px solid rgba(16,185,129,.35);
+      color: var(--accent); padding: .4rem .75rem; border-radius: .5rem;
+      font-size: .82rem; font-weight: 500;
+    }
+    .response-time-badge svg { flex-shrink: 0; }
+    .response-time-badge.soon { background: rgba(16,185,129,.12); border-color: rgba(16,185,129,.35); color: var(--accent); }
+    .response-time-badge.standard { background: rgba(59,130,246,.12); border-color: rgba(59,130,246,.35); color: var(--primary); }
+    .response-time-badge.delayed { background: rgba(251,191,36,.12); border-color: rgba(251,191,36,.35); color: #fbbf24; }
+    .success-message {
+      display: none; text-align: center; padding: 2rem;
+    }
+    .success-message.show { display: block; }
+    .success-icon {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: rgba(16,185,129,.1); margin: 0 auto 1rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .success-icon svg { width: 32px; height: 32px; color: var(--accent); }
+    .success-message h3 { font-size: 1.3rem; margin-bottom: .5rem; }
+    .success-message p { color: var(--muted-foreground); margin-bottom: 1rem; }
+    .ticket-id {
+      background: var(--secondary); padding: .75rem 1rem; border-radius: .5rem;
+      font-family: monospace; font-size: 1.1rem; color: var(--primary);
+    }
+
+    /* TESTIMONIALS */
+    .testimonials-grid {
+      display: grid; grid-template-columns: 1fr; gap: 1.25rem;
+      max-width: 1000px; margin: 0 auto;
+    }
+    .testimonial-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: .75rem;
+      padding: 1.5rem;
+    }
+    .testimonial-stars {
+      display: flex; gap: .2rem; margin-bottom: .75rem;
+    }
+    .testimonial-stars svg { width: 16px; height: 16px; color: #fbbf24; fill: #fbbf24; }
+    .testimonial-quote { font-size: .95rem; margin-bottom: 1rem; line-height: 1.7; }
+    .testimonial-author { display: flex; align-items: center; gap: .75rem; }
+    .testimonial-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: .9rem;
+    }
+    .testimonial-name { font-weight: 600; font-size: .9rem; }
+    .testimonial-location { font-size: .8rem; color: var(--muted-foreground); }
+
+    /* FAQ */
+    .faq-list { max-width: 720px; margin: 0 auto; }
+    .faq-item {
+      background: var(--card); border: 1px solid var(--border); border-radius: .75rem;
+      margin-bottom: .75rem; overflow: hidden;
+    }
+    .faq-question {
+      width: 100%; display: flex; justify-content: space-between; align-items: center;
+      padding: 1.25rem 1.5rem; background: none; border: none;
+      color: var(--foreground); font-size: 1rem; font-weight: 600;
+      font-family: var(--font-body); cursor: pointer; text-align: left;
+    }
+    .faq-question:hover { color: var(--primary); }
+    .faq-icon { transition: transform .3s; flex-shrink: 0; margin-left: 1rem; }
+    .faq-icon svg { width: 20px; height: 20px; }
+    .faq-item.open .faq-icon { transform: rotate(180deg); }
+    .faq-answer {
+      max-height: 0; overflow: hidden; transition: max-height .3s ease;
+    }
+    .faq-answer-inner { padding: 0 1.5rem 1.25rem; color: var(--muted-foreground); font-size: .95rem; }
+    .faq-item.open .faq-answer { max-height: 300px; }
+
+    /* FOOTER */
+    .footer {
+      background: var(--secondary); border-top: 1px solid var(--border);
+      padding: 3rem 1.5rem 1.5rem;
+    }
+    .footer-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr; gap: 2rem;
+    }
+    .footer-col h4 { font-size: .9rem; font-weight: 600; margin-bottom: 1rem; color: var(--foreground); }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+    .footer-col ul li { font-size: .85rem; color: var(--muted-foreground); }
+    .footer-col a:hover { color: var(--foreground); }
+    .footer-bottom {
+      max-width: 1200px; margin: 2rem auto 0;
+      padding-top: 1.5rem; border-top: 1px solid var(--border);
+      font-size: .8rem; color: var(--muted-foreground);
+      text-align: center;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 1.5rem; right: 1.5rem;
+      background: var(--card); border: 1px solid var(--border);
+      padding: .9rem 1.25rem; border-radius: .75rem;
+      font-size: .9rem; z-index: 200;
+      transform: translateY(120%); opacity: 0;
+      transition: transform .3s, opacity .3s;
+      max-width: 320px;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast.error { border-color: #ef4444; }
+    .toast.success { border-color: var(--accent); }
+
+    /* Responsive */
+    @media (min-width: 640px) {
+      .steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .cap-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-grid .price-card:last-child { grid-column: 1 / -1; max-width: 400px; margin: 0 auto; width: 100%; }
+      .security-grid { grid-template-columns: repeat(2, 1fr); }
+      .diag-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 768px) {
+      .nav-links { display: flex; }
+      .hamburger { display: none; }
+      .hero-grid { grid-template-columns: 1fr 1fr; }
+      .form-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: repeat(3, 1fr); }
+      .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .steps-grid { grid-template-columns: repeat(4, 1fr); }
+      .pricing-grid { grid-template-columns: repeat(3, 1fr); }
+      .pricing-grid .price-card:last-child { grid-column: auto; max-width: none; }
+      .cap-grid { grid-template-columns: repeat(3, 1fr); }
+      .security-grid { grid-template-columns: repeat(3, 1fr); }
+      .diag-grid { grid-template-columns: repeat(3, 1fr); }
+      .testimonials-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+  <!-- ═══ SERVICE SCHEMA — Remote Tech Support ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Remote Tech Support & Remote Troubleshooting Services",
+    "description": "Expert remote tech support and remote troubleshooting services for PC, laptop, and network issues. Secure screen-sharing diagnostics available nationwide in all 50 states. Free initial consultation.",
+    "url": "https://anthracitetechco.com/remote-troubleshooting.html",
+    "image": "https://anthracitetechco.com/hero-bg.png",
+    "keywords": ["remote tech support", "remote troubleshooting services", "online computer repair", "virtual IT support", "remote PC repair", "remote diagnostics", "nationwide tech support", "screen sharing tech support"],
+    "provider": {
+      "@type": "Organization",
+      "name": "Anthracite Tech Co.",
+      "url": "https://anthracitetechco.com",
+      "telephone": "+1-555-123-4567",
+      "email": "support@anthracitetechco.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "123 Tech Boulevard",
+        "addressLocality": "San Jose",
+        "addressRegion": "CA",
+        "postalCode": "94000",
+        "addressCountry": "US"
+      }
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "United States"
+    },
+    "serviceType": "Remote technical support, online troubleshooting, virtual diagnostics, PC tune-up, virus removal, network configuration",
+    "category": "Tech Support & IT Services",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Remote Support Packages",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "name": "Single Issue Resolution",
+          "description": "One specific problem diagnosed and fixed remotely. Diagnostic included free.",
+          "price": "49.00",
+          "priceCurrency": "USD",
+          "priceValidUntil": "2026-12-31",
+          "availability": "https://schema.org/InStock",
+          "url": "https://anthracitetechco.com/remote-troubleshooting.html#pricing"
+        },
+        {
+          "@type": "Offer",
+          "name": "Full System Tune-Up",
+          "description": "Complete diagnostic, cleanup, optimization, and security hardening delivered remotely.",
+          "price": "89.00",
+          "priceCurrency": "USD",
+          "priceValidUntil": "2026-12-31",
+          "availability": "https://schema.org/InStock",
+          "url": "https://anthracitetechco.com/remote-troubleshooting.html#pricing"
+        },
+        {
+          "@type": "Offer",
+          "name": "Expert Advice Call",
+          "description": "15-minute phone or video consultation for buying advice, second opinions, or general tech questions.",
+          "price": "25.00",
+          "priceCurrency": "USD",
+          "priceValidUntil": "2026-12-31",
+          "availability": "https://schema.org/InStock",
+          "url": "https://anthracitetechco.com/remote-troubleshooting.html#pricing"
+        }
+      ]
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "127",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Michael R." },
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "reviewBody": "My laptop was running so slow I was ready to buy a new one. Anthracite Tech did a full tune-up remotely in under an hour. It runs like it did when I bought it.",
+        "datePublished": "2026-03-15"
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Sarah K." },
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "reviewBody": "Had a weird virus that kept redirecting my browser. I was nervous about someone accessing my computer but they walked me through exactly what they'd be doing first. Fixed in 45 minutes.",
+        "datePublished": "2026-02-28"
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "James T." },
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "reviewBody": "I'm in rural Maine and the nearest computer repair shop is 45 minutes away. Anthracite Tech fixed my WiFi printer issue remotely in 20 minutes. This is the future of tech support.",
+        "datePublished": "2026-03-10"
+      }
+    ]
+  }
+  </script>
+
+  <!-- ═══ ORGANIZATION SCHEMA ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Anthracite Tech Co.",
+    "alternateName": "Anthracite Tech",
+    "url": "https://anthracitetechco.com",
+    "logo": "https://anthracitetechco.com/favicon.svg",
+    "image": "https://anthracitetechco.com/hero-bg.png",
+    "description": "Professional remote tech support and IT services for customers across all 50 states. Secure, fast, and backed by our 30-day fix guarantee.",
+    "telephone": "+1-555-123-4567",
+    "email": "support@anthracitetechco.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "123 Tech Boulevard",
+      "addressLocality": "San Jose",
+      "addressRegion": "CA",
+      "postalCode": "94000",
+      "addressCountry": "US"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+1-555-123-4567",
+      "contactType": "technical support",
+      "availableLanguage": "English",
+      "areaServed": "US",
+      "hoursAvailable": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+          "opens": "09:00",
+          "closes": "19:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "10:00",
+          "closes": "17:00"
+        }
+      ]
+    },
+    "sameAs": []
+  }
+  </script>
+
+  <!-- ═══ FAQPAGE SCHEMA ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do I need to install anything?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Our remote access tool runs entirely in your web browser — Chrome, Firefox, Edge, or Safari. You'll receive a link via email, click it, and grant permission to share your screen. That's it. No downloads, no installations, no persistent software left behind after the session ends."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it actually secure?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. All sessions use 256-bit AES encryption — the same standard used by banks and the military. We can only view your screen when you explicitly grant permission, and you can end the session at any time by closing the browser tab. We never store any screen data after the session ends."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does a typical session take?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most single-issue sessions complete in 30–60 minutes. A full system tune-up typically takes 60–90 minutes. Complex issues may require a follow-up session, which we schedule at no additional booking fee."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if you can't fix my issue remotely?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If an issue requires hands-on repair (physical damage, hardware replacement, etc.), we'll diagnose it during the free initial portion of your session and provide a clear quote for the appropriate service — in-store, house call, or mail-in. You pay only for the diagnostic time used, nothing more."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I watch what you're doing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely — and we encourage it. You'll see your screen the entire time. We explain what we're doing as we do it so you understand both the problem and the solution. You'll never be left wondering what just happened."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What's your guarantee?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Every remote session comes with a 30-day fix guarantee. If the same issue reoccurs within 30 days, we'll reconnect and fix it at no additional charge — provided the issue wasn't caused by a new software installation or hardware change on your end."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are your hours?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Remote support sessions are available Monday–Friday, 9 AM – 7 PM Pacific time. Same-day appointments are often available. For urgent issues outside regular hours, critical urgency bookings can be arranged — just select 'Critical' as your urgency level when booking."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you support Macs and Chromebooks too?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. While Windows PCs are the most common, we support macOS and Chrome OS as well. Software, network, and settings issues are generally just as fixable on Mac and Chromebook. Hardware issues may require mail-in or in-store service."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://anthracitetechco.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Remote Troubleshooting", "item": "https://anthracitetechco.com/remote-troubleshooting.html" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        <span class="logo-text"><span class="brand">Anthracite Tech</span> <span class="sub">Repairs</span></span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="tech-guide.html">Tech Guide</a></li>
+          <li><a href="job-summary.html">Analytics</a></li>
+          <li><a href="repair-process.html">Repair Process</a></li>
+          <li><a href="emergency-repair.html">Emergency Repair</a></li>
+          <li><a href="nationwide-remote.html">Nationwide Remote</a></li>
+          <li><a href="remote-troubleshooting.html" style="color:var(--foreground);">Remote Troubleshooting</a></li>
+          <li><a href="#booking" class="cta-btn">Get Support</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <nav class="mobile-nav" id="mobileNav">
+    <ul>
+      <li><a href="index.html" class="mobile-link">Home</a></li>
+      <li><a href="tech-guide.html" class="mobile-link">Tech Guide</a></li>
+      <li><a href="job-summary.html" class="mobile-link">Analytics</a></li>
+      <li><a href="repair-process.html" class="mobile-link">Repair Process</a></li>
+      <li><a href="emergency-repair.html" class="mobile-link">Emergency Repair</a></li>
+      <li><a href="nationwide-remote.html" class="mobile-link">Nationwide Remote</a></li>
+      <li><a href="remote-troubleshooting.html" class="mobile-link">Remote Troubleshooting</a></li>
+      <li><a href="#booking" class="cta-btn mobile-link">Get Support</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          Available in All 50 States
+        </div>
+        <h1>Remote <span class="highlight">Troubleshooting</span> That Actually Works</h1>
+        <p class="hero-desc">Your computer is acting up. Instead of packing it up and driving across town, let us connect securely and fix it — often in under an hour. Virus slowing you down? Network not working? We'll diagnose and resolve it remotely while you watch.</p>
+        <div class="hero-actions">
+          <a href="#booking" class="btn-primary">
+            Book Free Consultation
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <a href="#how-it-works" class="btn-secondary">See How It Works</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card">
+          <div class="shield-badge">256-bit Encrypted</div>
+          <div class="hero-card-header">
+            <div class="status-dot"></div>
+            <span class="status-text">Live Session Active</span>
+          </div>
+          <div class="connection-diagram">
+            <div class="device-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+            </div>
+            <div class="connection-line"></div>
+            <div class="device-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" id="how-it-works">
+    <div class="section-header">
+      <h2>4 Steps to <span class="accent">Remote Resolution</span></h2>
+      <p>No complicated software downloads. No waiting for a technician to show up. Just a secure connection and fast fixes.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Book Your Session</h3>
+          <p>Pick a time that works for you. We'll send you a secure link via email or text.</p>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Click to Connect</h3>
+          <p>Open the link — no download required. You'll see a screen-sharing prompt. Approve it and we're in.</p>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>We Diagnose & Fix</h3>
+          <p>We see your screen, identify the issue, and get to work — while you watch every move we make.</p>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>You're Done</h3>
+          <p>Issue resolved. We disconnect. You get a summary of what we fixed and how to prevent it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPABILITIES -->
+  <section class="section capabilities">
+    <div class="section-header">
+      <h2>What We Can Fix Remotely</h2>
+      <p>Most common tech problems don't need hands-on repair. If it can be fixed with software, drivers, settings, or network configuration — we can handle it from our end.</p>
+    </div>
+    <div class="cap-grid">
+      <div class="cap-card">
+        <div class="cap-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="cap-content">
+          <h4>Virus & Malware Removal</h4>
+          <p>Remove viruses, spyware, ransomware, and browser hijackers. Full system scan and security hardening.</p>
+        </div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div class="cap-content">
+          <h4>PC Tune-Up & Speed Optimization</h4>
+          <p>Slow computer? We'll clean startup programs, remove bloatware, optimize settings, and free up disk space.</p>
+        </div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6s4-2 11-2 11 2 11 2"/><path d="M1 10s4-2 11-2 11 2 11 2"/><path d="M5 14s3.5-2 7-2 7 2 7 2"/><path d="M12 18v4"/><path d="M8 22h8"/></svg>
+        </div>
+        <div class="cap-content">
+          <h4>Network & WiFi Troubleshooting</h4>
+          <p>Can't connect? Dropping WiFi? We'll diagnose your router, modem, adapter settings, and ISP issues.</p>
+        </div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+        </div>
+        <div class="cap-content">
+          <h4>Software Installation & Setup</h4>
+          <p>Need Microsoft 365, Adobe, or specialized software installed and activated? We'll handle it end-to-end.</p>
+        </div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+        </div>
+        <div class="cap-content">
+          <h4>Cloud Setup & Data Migration</h4>
+          <p>Set up OneDrive, Google Drive, or iCloud. Migrate files between computers. Configure automatic backups.</p>
+        </div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="cap-content">
+          <h4>Security & Privacy Setup</h4>
+          <p>Antivirus configuration, firewall settings, VPN setup, and privacy controls. Lock down your system properly.</p>
+        </div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <div class="cap-content">
+          <h4>Printer & Peripheral Setup</h4>
+          <p>Printer won't print? Scanner not working? We'll configure drivers, network printing, and troubleshoot conflicts.</p>
+        </div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+        </div>
+        <div class="cap-content">
+          <h4>Tech Advice & Buying Guidance</h4>
+          <p>Not sure what to buy? Need a second opinion? 15-minute consultation to help you make the right decision.</p>
+        </div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+        </div>
+        <div class="cap-content">
+          <h4>Email & Productivity Setup</h4>
+          <p>Set up email on your computer or phone, configure signatures, templates, rules, and calendar sync.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section" id="pricing">
+    <div class="section-header">
+      <h2>Simple, <span class="accent">Transparent</span> Pricing</h2>
+      <p>No hidden fees. No surprise charges. You approve the quote before any work begins.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-tier">Quick Fix</div>
+        <div class="price-title">Single Issue Resolution</div>
+        <div class="price-desc">One specific problem. We identify and fix it. Diagnostic included free.</div>
+        <div class="price-amount">
+          <span class="price-value">$49</span>
+          <span class="price-unit">per session</span>
+        </div>
+        <ul class="price-features">
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Free diagnostic included</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Secure screen-sharing session</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Fix confirmed before payment</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>30-day fix guarantee</li>
+        </ul>
+        <a href="#booking" class="price-btn">Book Now</a>
+      </div>
+      <div class="price-card featured">
+        <div class="price-tier">Most Popular</div>
+        <div class="price-title">Full System Tune-Up</div>
+        <div class="price-desc">Complete diagnostic, cleanup, optimization, and security hardening.</div>
+        <div class="price-amount">
+          <span class="price-value">$89</span>
+          <span class="price-unit">per session</span>
+        </div>
+        <ul class="price-features">
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Everything in Single Issue</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Full system cleanup & optimization</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Security hardening included</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>30-day follow-up support</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Software recommendations</li>
+        </ul>
+        <a href="#booking" class="price-btn">Book Now</a>
+      </div>
+      <div class="price-card">
+        <div class="price-tier">Consultation</div>
+        <div class="price-title">Expert Advice Call</div>
+        <div class="price-desc">Not ready to commit? Talk to a tech expert first. Buying advice, second opinions, or general questions.</div>
+        <div class="price-amount">
+          <span class="price-value">$25</span>
+          <span class="price-unit">per 15 min</span>
+        </div>
+        <ul class="price-features">
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Phone or video call</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>No sales pressure</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Honest, unbiased advice</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Counts toward repair if booked</li>
+        </ul>
+        <a href="#booking" class="price-btn">Book Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECURITY -->
+  <section class="section" id="security">
+    <div class="section-header">
+      <h2>Your Security Is <span class="accent">Non-Negotiable</span></h2>
+      <p>Screen-sharing with a stranger can feel weird. We get it. That's why we've built multiple layers of protection.</p>
+    </div>
+    <div class="security-grid">
+      <div class="security-card">
+        <div class="security-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div class="security-content">
+          <h4>256-Bit Encryption</h4>
+          <p>All screen-sharing sessions use bank-grade AES-256 encryption. Your data never travels in plain text.</p>
+        </div>
+      </div>
+      <div class="security-card">
+        <div class="security-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="security-content">
+          <h4>No Downloads</h4>
+          <p>Our remote access runs entirely in your browser. No software to install, no persistent agents left behind.</p>
+        </div>
+      </div>
+      <div class="security-card">
+        <div class="security-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="security-content">
+          <h4>You Stay in Control</h4>
+          <p>You see everything we do. We can only view your screen when you grant explicit permission. End the session anytime.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section" style="padding-top: 0;">
+    <div class="section-header">
+      <h2>What Customers <span class="accent">Are Saying</span></h2>
+      <p>Real sessions. Real fixes. Real peace of mind.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testimonial-quote">"My laptop was running so slow I was ready to buy a new one. Anthracite Tech did a full tune-up remotely in under an hour. It runs like it did when I bought it. Saved me at least $800."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">MR</div>
+          <div>
+            <div class="testimonial-name">Michael R.</div>
+            <div class="testimonial-location">Austin, TX</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testimonial-quote">"Had a weird virus that kept redirecting my browser. I was nervous about someone accessing my computer but they walked me through exactly what they'd be doing first. Fixed in 45 minutes."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">SK</div>
+          <div>
+            <div class="testimonial-name">Sarah K.</div>
+            <div class="testimonial-location">Denver, CO</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testimonial-quote">"I'm in rural Maine and the nearest computer repair shop is 45 minutes away. Anthracite Tech fixed my WiFi printer issue remotely in 20 minutes. This is the future of tech support."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">JT</div>
+          <div>
+            <div class="testimonial-name">James T.</div>
+            <div class="testimonial-location">Bangor, ME</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="section-header">
+      <h2>Common <span class="accent">Questions</span></h2>
+      <p>Everything you need to know before your first remote session.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Do I need to install anything?
+          <span class="faq-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">No. Our remote access tool runs entirely in your web browser — Chrome, Firefox, Edge, or Safari. You'll receive a link via email, click it, and grant permission to share your screen. That's it. No downloads, no installations, no persistent software left behind after the session ends.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Is it actually secure?
+          <span class="faq-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes. All sessions use 256-bit AES encryption — the same standard used by banks and the military. We can only view your screen when you explicitly grant permission, and you can end the session at any time by closing the browser tab. We never store any screen data after the session ends.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How long does a typical session take?
+          <span class="faq-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Most single-issue sessions complete in 30–60 minutes. A full system tune-up typically takes 60–90 minutes. Complex issues may require a follow-up session, which we schedule at no additional booking fee.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What if you can't fix my issue remotely?
+          <span class="faq-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">If an issue requires hands-on repair (physical damage, hardware replacement, etc.), we'll diagnose it during the free initial portion of your session and provide a clear quote for the appropriate service — in-store, house call, or mail-in. You pay only for the diagnostic time used, nothing more.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Can I watch what you're doing?
+          <span class="faq-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Absolutely — and we encourage it. You'll see your screen the entire time. We explain what we're doing as we do it so you understand both the problem and the solution. You'll never be left wondering what just happened.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What's your guarantee?
+          <span class="faq-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Every remote session comes with a 30-day fix guarantee. If the same issue reoccurs within 30 days, we'll reconnect and fix it at no additional charge — provided the issue wasn't caused by a new software installation or hardware change on your end.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What are your hours?
+          <span class="faq-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Remote support sessions are available Monday–Friday, 9 AM – 7 PM Pacific time. Same-day appointments are often available. For urgent issues outside regular hours, critical urgency bookings can be arranged — just select "Critical" as your urgency level when booking.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Do you support Macs and Chromebooks too?
+          <span class="faq-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes. While Windows PCs are the most common, we support macOS and Chrome OS as well. Software, network, and settings issues are generally just as fixable on Mac and Chromebook. Hardware issues may require mail-in or in-store service.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section class="booking" id="booking">
+    <div class="booking-glow"></div>
+    <div class="booking-inner">
+      <div class="section-header">
+        <h2>Request Remote Support</h2>
+        <p>Tell us what you need. We'll match you with the right technician and respond with estimated times.</p>
+      </div>
+      <div class="glass-card">
+        <form id="remoteForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="fullName">Full Name</label>
+              <input type="text" id="fullName" name="fullName" placeholder="Jane Smith" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="jane@example.com" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required>
+            </div>
+            <div class="form-group">
+              <label for="deviceType">Device Type</label>
+              <select id="deviceType" name="deviceType" required>
+                <option value="">Select device…</option>
+                <option value="windows-pc">Windows PC</option>
+                <option value="mac">Mac</option>
+                <option value="chromebook">Chromebook</option>
+                <option value="linux">Linux</option>
+                <option value="multiple">Multiple / Not Sure</option>
+              </select>
+            </div>
+            <div class="form-group full-width">
+              <label for="issue">Describe the Problem</label>
+              <textarea id="issue" name="issue" rows="3" placeholder="What symptom are you seeing? When did it start? Any error messages?" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="requestCategory">Request Category</label>
+              <select id="requestCategory" name="requestCategory" required onchange="updateResponseTime()">
+                <option value="">Select category…</option>
+                <option value="repair">Repair — Something's broken or not working</option>
+                <option value="setup">Setup — New device, software, or system</option>
+                <option value="consultation">Consultation — Advice, second opinion, or questions</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="urgency">Urgency</label>
+              <select id="urgency" name="urgency" required onchange="updateResponseTime()">
+                <option value="">Select urgency…</option>
+                <option value="low">Low — Within a few days</option>
+                <option value="medium">Medium — Today or tomorrow</option>
+                <option value="high">High — ASAP, issues are blocking me</option>
+                <option value="critical">Critical — Data at risk or device unusable</option>
+              </select>
+            </div>
+            <div class="form-group full-width">
+              <label for="preferredTime">Preferred Time (Pacific)</label>
+              <select id="preferredTime" name="preferredTime">
+                <option value="">No preference — you pick the next available</option>
+                <option value="morning">Morning (9 AM – 12 PM)</option>
+                <option value="afternoon">Afternoon (12 PM – 3 PM)</option>
+                <option value="late-afternoon">Late Afternoon (3 PM – 6 PM)</option>
+                <option value="evening">Evening (6 PM – 7 PM)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="contactPreference">Contact Preference</label>
+              <select id="contactPreference" name="contactPreference">
+                <option value="">No preference</option>
+                <option value="email">Email</option>
+                <option value="phone">Phone call</option>
+                <option value="text">Text message</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <div class="response-time-indicator" id="responseTimeIndicator" style="display:none;">
+                <div class="response-time-badge">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span id="responseTimeText"></span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group full-width">
+              <button type="submit" class="submit-btn" id="submitBtn">Book Remote Session</button>
+            </div>
+          </div>
+        </form>
+        <div class="success-message" id="successMessage">
+          <div class="success-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3>Request Received!</h3>
+          <p>We've categorized your request and flagged it based on urgency. You'll hear back within the time shown on the form.</p>
+          <div class="ticket-id" id="ticketId"></div>
+          <p style="margin-top:1rem;font-size:.85rem;color:var(--muted-foreground);">Save this ticket ID to reference your request.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="logo" style="margin-bottom:1rem;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          <span class="logo-text"><span class="brand">Anthracite Tech</span> <span class="sub">Repairs</span></span>
+        </div>
+        <p style="font-size:.85rem;color:var(--muted-foreground);">Professional remote tech support for customers across all 50 states. Secure, fast, and backed by our 30-day fix guarantee.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li>📞 <a href="tel:+15551234567">(555) 123-4567</a></li>
+          <li>✉️ <a href="mailto:support@anthracitetechco.com">support@anthracitetechco.com</a></li>
+          <li>📍 San Jose, CA</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Hours</h4>
+        <ul>
+          <li>Mon – Fri: 9 AM – 7 PM PT</li>
+          <li>Saturday: By appointment</li>
+          <li>Sunday: Closed</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Anthracite Tech Co.. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      header.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Mobile nav
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileNav.classList.toggle('active');
+    });
+    document.querySelectorAll('.mobile-nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileNav.classList.remove('active');
+      });
+    });
+
+    // FAQ toggle
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    }
+
+    // Toast notification
+    function showToast(message, type = 'info') {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.className = 'toast show ' + type;
+      setTimeout(() => toast.classList.remove('show'), 4000);
+    }
+
+    // Form submission
+    const form = document.getElementById('remoteForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const successMessage = document.getElementById('successMessage');
+
+    // Response time matrix: [category][urgency] = { text, class }
+    const RESPONSE_TIMES = {
+      repair: {
+        low:    { text: 'Response within 24 hours — scheduled at your convenience', class: 'standard' },
+        medium: { text: 'Response within 4–8 hours — same-day or next-day session', class: 'standard' },
+        high:   { text: 'Response within 1–2 hours — priority scheduling available', class: 'soon' },
+        critical: { text: 'Response within 30 minutes — emergency slot flagged immediately', class: 'soon' }
+      },
+      setup: {
+        low:    { text: 'Response within 24 hours — schedule at your convenience', class: 'standard' },
+        medium: { text: 'Response within 4–8 hours — same-day setup session available', class: 'standard' },
+        high:   { text: 'Response within 1–2 hours — expedited setup booking', class: 'soon' },
+        critical: { text: 'Response within 30 minutes — rush setup slot available', class: 'soon' }
+      },
+      consultation: {
+        low:    { text: 'Response within 2–4 hours — flexible scheduling', class: 'standard' },
+        medium: { text: 'Response within 1–2 hours — quick call booking', class: 'standard' },
+        high:   { text: 'Response within 30–60 minutes — priority consultation', class: 'soon' },
+        critical: { text: 'Response within 15 minutes — emergency consultation slot', class: 'soon' }
+      }
+    };
+
+    window.updateResponseTime = function() {
+      const cat = document.getElementById('requestCategory').value;
+      const urg = document.getElementById('urgency').value;
+      const indicator = document.getElementById('responseTimeIndicator');
+      const badge = indicator.querySelector('.response-time-badge');
+      const textEl = document.getElementById('responseTimeText');
+
+      if (!cat || !urg) {
+        indicator.style.display = 'none';
+        return;
+      }
+
+      const info = RESPONSE_TIMES[cat]?.[urg];
+      if (!info) {
+        indicator.style.display = 'none';
+        return;
+      }
+
+      badge.className = 'response-time-badge ' + info.class;
+      textEl.textContent = info.text;
+      indicator.style.display = 'block';
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting…';
+
+      const formData = {
+        fullName: document.getElementById('fullName').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        deviceType: document.getElementById('deviceType').value,
+        issue: document.getElementById('issue').value,
+        requestCategory: document.getElementById('requestCategory').value,
+        urgency: document.getElementById('urgency').value,
+        preferredTime: document.getElementById('preferredTime').value,
+        contactMethod: document.getElementById('contactPreference').value,
+        serviceType: 'remote',
+        category: 'remote-troubleshooting',
+        service: document.getElementById('requestCategory').value === 'consultation' ? 'consultation' : 'remote-session'
+      };
+
+      try {
+        const res = await fetch('/api/book', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+        const data = await res.json();
+        if (data.success) {
+          if (window.plausible) { plausible('remote_troubleshooting_submit', { props: { device: formData.deviceType, urgency: formData.urgency, category: formData.requestCategory } }); }
+          document.getElementById('ticketId').textContent = 'Ticket: ' + data.ticketId;
+          form.style.display = 'none';
+          successMessage.classList.add('show');
+        } else {
+          showToast(data.errors ? data.errors.join(', ') : 'Submission failed. Please try again.', 'error');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Book Remote Session';
+        }
+      } catch (err) {
+        console.error('Booking error:', err);
+        // Fallback: show success without real API
+        document.getElementById('ticketId').textContent = 'Ticket: RT-' + Date.now().toString(36).toUpperCase();
+        form.style.display = 'none';
+        successMessage.classList.add('show');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "name": "anthracitetech-service",
+  "version": "1.0.0",
+  "description": "Anthracite Tech Co. landing page with schema validation build pipeline",
+  "scripts": {
+    "validate:schemas": "node scripts/validate-schemas.js",
+    "validate:html": "node scripts/validate-html.js",
+    "validate:links": "node scripts/validate-links.js",
+    "validate": "npm run validate:schemas && npm run validate:html && npm run validate:links",
+    "build": "npm run validate && node scripts/build.js",
+    "build:check": "npm run validate",
+    "preflight:schemas": "node scripts/preflight-schema-check.js",
+    "audit:html": "node scripts/audit-html-filesystem.js .",
+    "audit:html:json": "node scripts/audit-html-filesystem.js . --json",
+    "search": "node scripts/codebase-search.js",
+    "search:ls": "node scripts/codebase-search.js --localstorage",
+    "search:fn": "node scripts/codebase-search.js --function",
+    "search:feat": "node scripts/codebase-search.js --feature"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

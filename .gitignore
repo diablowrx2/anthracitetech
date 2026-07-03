@@ -1,0 +1,7 @@
+.herenow/
+node_modules/
+*.tar.gz
+service/dist/
+
+# Test databases
+service/api/test-validation.db*
