@@ -384,7 +384,7 @@
   <div class="header-inner">
     <a href="index.html" class="logo">
       <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-      <span class="logo-text"><span class="brand">Anthracite Tech</span> <span class="sub">Job Summary</span></span>
+      <span class="logo-text"><span class="brand">Anthracite Tech Co.</span> <span class="sub">Job Summary</span></span>
     </a>
     <nav>
       <ul class="nav-links">
@@ -537,7 +537,7 @@
 </main>
 
 <footer class="footer">
-  <span>© 2026 Anthracite Tech Co.. Internal use only.</span>
+  <span>© 2026 Anthracite Tech Co. Internal use only.</span>
   <span>Data sourced from technician guide localStorage</span>
 </footer>
 
@@ -1742,7 +1742,7 @@ async function exportPDF() {
 </head>
 <body>
   <div class="header">
-    <h1>Anthracite Tech <span class="sub">Technician Comparison Report</span></h1>
+    <h1>Anthracite Tech Co. <span class="sub">Technician Comparison Report</span></h1>
     <div class="meta">
       <span>Period: ${filterLabel}</span>
       <span>Technicians: ${techFilterLabel}</span>
@@ -1901,7 +1901,7 @@ function exportComparisonCSV() {
   const techFilterLabel = selected.includes('all') ? 'All Technicians' : selected.join('; ');
 
   const lines = [];
-  lines.push(['Anthracite Tech Technician Comparison Export'].map(escapeCSV).join(','));
+  lines.push(['Anthracite Tech Co. Technician Comparison Export'].map(escapeCSV).join(','));
   lines.push(['Period', filterLabel].map(escapeCSV).join(','));
   lines.push(['Technicians', techFilterLabel].map(escapeCSV).join(','));
   lines.push(['Exported', new Date().toLocaleDateString()].map(escapeCSV).join(','));

@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Technician Repair Guide | Anthracite Tech Co.</title>
-  <meta name="description" content="Interactive repair workflow guide for Anthracite Tech technicians. Step-by-step diagnostics, repair procedures, and verification checklists for PCs, phones, consoles, and tablets.">
+  <meta name="description" content="Interactive repair workflow guide for Anthracite Tech Co. technicians. Step-by-step diagnostics, repair procedures, and verification checklists for PCs, phones, consoles, and tablets.">
   <link rel="canonical" href="https://anthracitetechco.com/tech-guide.html">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <meta property="og:title" content="Technician Repair Guide | Anthracite Tech Co.">
-  <meta property="og:description" content="Interactive repair workflow guide for Anthracite Tech technicians.">
+  <meta property="og:description" content="Interactive repair workflow guide for Anthracite Tech Co. technicians.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://anthracitetechco.com/tech-guide.html">
   <meta property="og:image" content="https://anthracitetechco.com/hero-bg.png">
@@ -1457,7 +1457,7 @@
   <div class="header-inner">
     <a href="index.html" class="logo">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-      <div class="logo-text"><span class="brand">Anthracite Tech</span><span class="sub">Repair Guide</span></div>
+      <div class="logo-text"><span class="brand">Anthracite Tech Co.</span><span class="sub">Repair Guide</span></div>
     </a>
     <div style="display:flex;align-items:center;gap:.5rem;">
       <ul class="nav-links">
@@ -3664,7 +3664,7 @@ function showOvertimeNotification() {
   if (!('Notification' in window)) return;
   if (Notification.permission === 'granted') {
     const deviceName = currentDeviceKey.charAt(0).toUpperCase() + currentDeviceKey.slice(1);
-    new Notification('Anthracite Tech Repair — Timer Alert', {
+    new Notification('Anthracite Tech Co. Repair — Timer Alert', {
       body: `${deviceName} repair is now OVERDUE. Elapsed: ${formatTime(timerSeconds)}`,
       icon: 'favicon.svg',
       requireInteraction: true
@@ -4455,7 +4455,7 @@ function downloadReportPdf() {
           doc.text('Page ' + i + ' of ' + totalPages, 297.64, footerY + 18, { align: 'center' });
         }
       }
-      doc.save('Anthracite Tech-' + ticketId + '-report.pdf');
+      doc.save('Anthracite Tech Co.-' + ticketId + '-report.pdf');
       document.body.removeChild(container);
     },
     x: 15,
@@ -4629,7 +4629,7 @@ function buildReportHtml() {
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Anthracite Tech Shift Handoff Report</title>
+<title>Anthracite Tech Co. Shift Handoff Report</title>
 <script src="vendor/jspdf.umd.min.js"></script>
 <script src="vendor/html2canvas.min.js"></script>
 <style>
@@ -4757,7 +4757,7 @@ function downloadPdf() {
   const doc = new jsPDF('p', 'pt', 'a4');
   doc.html(element, {
     callback: function(doc) {
-      doc.save('Anthracite Tech-shift-handoff-report.pdf');
+      doc.save('Anthracite Tech Co.-shift-handoff-report.pdf');
     },
     x: 15,
     y: 15,
