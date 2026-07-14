@@ -1,9 +1,47 @@
-# Anthracite Tech Co. Website
+# Anthracite Tech Co.
 
-Static website for **Anthracite Tech Co.** — a tech repair, support, and IT services company.
+Static website and project home for **Anthracite Tech Co.** — a local tech repair, support, and IT services company based in Pottsville, PA.
 
 **Domain:** [anthracitetechco.com](https://anthracitetechco.com)  
-**Repo:** https://github.com/diablowrx2/anthracitetech
+**Repo:** https://github.com/diablowrx2/anthracitetech  
+**Live preview:** https://zen-canyon-6mxd.here.now/
+
+---
+
+## 📋 Business Overview
+
+**Anthracite Tech Co** is a local tech repair and support business serving computers, phones, game systems, and other electronics — with house calls, remote support, and buy/sell of used electronics.
+
+**Phase 1 focus:** Repairs, house calls, remote support, buy/sell.  
+**Phase 2 (future):** Website builds, automation/coding, SEO/AISO services — added once repair is profitable and steady.
+
+---
+
+## 🛠️ Services (Phase 1)
+
+| Service | Description | Typical Price Range |
+|---|---|---|
+| **In-shop repair** | Screen/battery replacement, virus removal, OS reinstall, hardware diagnostics | $60–$250 |
+| **House calls** | On-site setup, troubleshooting, networking, TV/smart home help | $75–$150 + travel fee |
+| **Remote support** | Screen-share fixes for software issues, no travel needed | $40–$80/session |
+| **Buy/sell electronics** | Buy used phones/laptops/consoles, refurbish, resell | Margin-based |
+
+---
+
+## 🎯 Target Customers
+
+- Homeowners and families needing quick, trustworthy local repair
+- Older adults who want in-home help without unplugging and hauling equipment
+- Gamers needing console repair (HDMI ports, drift, disc drives)
+- People wanting cash for old devices instead of leaving them in a drawer
+
+---
+
+## 🏆 What Makes Us Different
+
+- **House calls** — most local repair shops don't offer this
+- **Buy/sell** — creates a second revenue stream and inventory pipeline
+- **Remote support** — near-zero marginal cost, good margins, repeat customer potential
 
 ---
 

@@ -271,7 +271,7 @@ function main() {
 
   let missingAssets = 0;
   assets.forEach(asset => {
-    const assetPath = path.join(baseDir, asset.split('#')[0]);
+    const assetPath = path.join(baseDir, asset.split('#')[0].split('?')[0]);
     const exists = fs.existsSync(assetPath);
     const status = exists ? `${ANSI.green}✓${ANSI.reset}` : `${ANSI.red}✗${ANSI.reset}`;
     if (!exists) {

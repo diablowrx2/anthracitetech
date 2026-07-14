@@ -67,7 +67,7 @@ function copyAssets() {
   const srcDir = path.join(__dirname, '..');
   const destDir = path.join(__dirname, '..', 'dist');
 
-  const files = ['index.html', 'favicon.svg', 'hero-bg.png'];
+  const files = ['index.html', 'favicon.svg', 'hero-bg.png', 'logo.webp', 'logo-header.webp'];
   const dirs = ['js', 'email-templates', 'locations'];
 
   files.forEach(f => {
